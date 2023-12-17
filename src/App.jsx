@@ -23,10 +23,10 @@ function App() {
             />
           </li>
           <CustomLink to="/">Trang chủ</CustomLink>
-          <CustomLink to="/Contact">Giới thiệu</CustomLink>
+          <CustomLink to="/infor">Giới thiệu</CustomLink>
           <CustomLink to="/Daotao">Chương trình đào tạo</CustomLink>
           <CustomLink to="/Tintuc">Tin tức</CustomLink>
-          <CustomLink to="/Lienhe">Liên hệ</CustomLink>
+          <CustomLink to="/Contact">Liên hệ</CustomLink>
           <CustomLink to="/tuyensinh">Tuyển sinh</CustomLink>
           <li className="ml-8">
             <a
