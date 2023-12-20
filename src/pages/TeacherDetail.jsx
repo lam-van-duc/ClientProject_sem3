@@ -17,10 +17,35 @@ const TeacherDetail = () => {
 
   return (
     <div>
+      <div
+        className="w-full h-96 bg-cover"
+        style={{
+          backgroundImage: `url(https://ordainit.com/educate/assets/img/breadcrumb/breadcrumb.jpg)`,
+        }}
+      >
+        <div
+          className="flex h-full flex-col justify-center items-center"
+          style={{
+            backgroundColor: "rgba(0, 0, 139, 0.3)",
+          }}
+        >
+          <div className="text-center font-bold text-5xl text-white">
+            Teacher details
+          </div>
+          <div className="text-white text-base">
+            <a href="/" className="cursor-pointer text-white no-underline">
+              Home
+            </a>
+            <span className="mx-2">//</span>
+            <span> Teacher details</span>
+          </div>
+        </div>
+      </div>
       <Container>
         <div className="flex flex-row flex-wrap p-4 bg-gray-200">
           <div className="p-4 w-80">
             <img src={teacher.image} className="object-contain w-full" />
+            <div className="bg-gray-400 my-5 h-[1px]"></div>
             <div className="my-2 flex flex-row items-center">
               <i
                 class="far fa-phone-volume text-orange-400"
@@ -73,6 +98,9 @@ const TeacherDetail = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div>
+          <div>Teacher other</div>
         </div>
       </Container>
     </div>
