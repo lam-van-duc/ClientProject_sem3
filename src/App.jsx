@@ -1,7 +1,8 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { useState } from "react";
+import { Dropdown } from "react-bootstrap";
 import {
-  Link,
+  NavLink,
   Routes,
   Route,
   useResolvedPath,
@@ -10,8 +11,21 @@ import {
 import Contact from "./pages/Contact";
 import RegisterOnline from "./pages/RegisterOnline";
 import Home from "./pages/Home";
+import Teachers from "./pages/Teachers";
+import TeacherDetail from "./pages/TeacherDetail";
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleItemClick = (item) => {
+    // Handle item click logic
+    console.log(`Clicked on ${item}`);
+    setIsOpen(false); // Close the dropdown after selecting an item
+  };
   return (
     <div className="relative h-full">
       <nav className="h-14 top-0 sticky z-10 bg-white">
@@ -24,6 +38,7 @@ function App() {
           </li>
           <CustomLink to="/">Home</CustomLink>
           <CustomLink to="/infor">Introduction</CustomLink>
+          <CustomLink to="/Teachers">Teachers</CustomLink>
           <CustomLink to="/Daotao">Education program</CustomLink>
           <CustomLink to="/Contact">Contact</CustomLink>
           <li className="ml-8">
@@ -38,13 +53,15 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/Teachers" element={<Teachers />} />
+        <Route path="/TeacherDetail/:id" element={<TeacherDetail />} />
         <Route path="/Contact" element={<Contact />} />
         <Route path="/dang-ky-tuyen-sinh" element={<RegisterOnline />} />
       </Routes>
       <footer>
         <div className="flex flex-row flex-wrap bg-[#f05123] text-white justify-center items-start py-9">
           <div className="flex flex-col flex-1 max-w-xs text-sm  px-2">
-            <div className="text-base font-bold uppercase">Introduction</div>
+            <div className="text-base font-bold uppercase">Introduce</div>
             <b className="bg-gray-200 h-1 w-10 my-3 rounded-md"></b>
             <div>
               FPT Aptech có hơn 25 năm kinh nghiệm đào tạo lập trình viên quốc
@@ -98,17 +115,35 @@ function CustomLink({ to, children, ...props }) {
 
   return (
     <li>
-      <Link
+      <NavLink
+        className={"px-4 py-2 hover:bg-orange-400 hover:text-white"}
+        {...props}
+        to={to}
+      >
+        {children}
+      </NavLink>
+    </li>
+  );
+}
+
+function CustomDropdownLink({ to, name, children, ...props }) {
+  const resolvedPath = useResolvedPath(to);
+  const isActive = useMatch({ path: resolvedPath.pathname, end: true });
+  return (
+    <li>
+      <div
+        class="dropdown"
         className={
           isActive
             ? "px-4 py-2 bg-orange-400 text-white"
             : "px-4 py-2 hover:bg-orange-400 hover:text-white"
         }
-        {...props}
-        to={to}
       >
-        {children}
-      </Link>
+        <button class="dropbtn">{name}</button>
+        <div class="dropdown-content">
+          <CustomLink to="/aaaa">test</CustomLink>
+        </div>
+      </div>
     </li>
   );
 }
