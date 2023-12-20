@@ -24,7 +24,7 @@ const Contact = () => {
       </div>
       <h4 className="flex flex-row items-center justify-center my-6">
         <b className="flex-1 bg-gray-300 h-1"></b>
-        <span className="mx-4">VĂN PHÒNG TƯ VẤN TUYỂN SINH</span>
+        <span className="mx-4">ADMISSION CONSULTING OFFICE</span>
         <b className="flex-1 bg-gray-300 h-1"></b>
       </h4>
       <div className="flex flex-row flex-wrap justify-between">

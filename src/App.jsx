@@ -22,18 +22,16 @@ function App() {
               src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/03/Logo-fpt-aptech.png"
             />
           </li>
-          <CustomLink to="/">Trang chủ</CustomLink>
-          <CustomLink to="/infor">Giới thiệu</CustomLink>
-          <CustomLink to="/Daotao">Chương trình đào tạo</CustomLink>
-          <CustomLink to="/Tintuc">Tin tức</CustomLink>
-          <CustomLink to="/Contact">Liên hệ</CustomLink>
-          <CustomLink to="/tuyensinh">Tuyển sinh</CustomLink>
+          <CustomLink to="/">Home</CustomLink>
+          <CustomLink to="/infor">Introduction</CustomLink>
+          <CustomLink to="/Daotao">Education program</CustomLink>
+          <CustomLink to="/Contact">Contact</CustomLink>
           <li className="ml-8">
             <a
               className="bg-red-800 text-white cursor-pointer py-2 px-4 font-bold rounded-md hover:shadow-xl"
               href="/dang-ky-tuyen-sinh"
             >
-              Đăng ký
+              Admission
             </a>
           </li>
         </ul>
@@ -46,7 +44,7 @@ function App() {
       <footer>
         <div className="flex flex-row flex-wrap bg-[#f05123] text-white justify-center items-start py-9">
           <div className="flex flex-col flex-1 max-w-xs text-sm  px-2">
-            <div className="text-base font-bold">GIỚI THIỆU</div>
+            <div className="text-base font-bold uppercase">Introduction</div>
             <b className="bg-gray-200 h-1 w-10 my-3 rounded-md"></b>
             <div>
               FPT Aptech có hơn 25 năm kinh nghiệm đào tạo lập trình viên quốc
@@ -55,15 +53,26 @@ function App() {
             </div>
           </div>
           <div className="flex flex-col flex-1 max-w-xs text-sm  px-2">
-            <div className="text-base font-bold">LIÊN KẾT NHANH</div>
+            <div className="text-base font-bold uppercase">Quick link</div>
             <b className="bg-gray-200 h-1 w-10 my-3 rounded-md"></b>
-            <a>Học lập trình</a>
-            <a>Khóa học lập trình</a>
-            <a>Ngôn ngữ lập trình</a>
-            <a>Lập trình là gì</a>
+            <a className="text-white pb-2" href="/">
+              Home
+            </a>
+            <a className="text-white pb-2" href="/infor">
+              Introduction
+            </a>
+            <a className="text-white pb-2" href="/Daotao">
+              Education program
+            </a>
+            <a className="text-white pb-2" href="/Contact">
+              Contact
+            </a>
+            <a className="text-white pb-2" href="/dang-ky-tuyen-sinh">
+              Register for admission
+            </a>
           </div>
           <div className="flex flex-col flex-1 max-w-xs text-sm px-2">
-            <div className="text-base font-bold">LIÊN HỆ</div>
+            <div className="text-base font-bold uppercase">CONTACT</div>
             <b className="bg-gray-200 h-1 w-10 my-3 rounded-md"></b>
             <p>(HN) 024 7300 8855 - 0973 111 086</p>
             <p>(HCM) 028 7300 8866 - 0931 313 329</p>
