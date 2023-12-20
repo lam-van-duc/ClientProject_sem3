@@ -76,8 +76,8 @@ const Home = () => {
         </div>
         <Container>
           <div>
-            <p className="text-center text-2xl font-bold text-blue-700 py-7">
-              CHƯƠNG TRÌNH ĐÀO TẠO
+            <p className="text-center text-2xl font-bold text-blue-700 py-7 uppercase">
+              Education program
             </p>
             <div className="flex justify-center items-center">
               <div className="grid grid-cols-3">
@@ -105,60 +105,6 @@ const Home = () => {
                     src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/03/anh-de-muc-game-dev-2.jpg"
                   />
                 </a>
-              </div>
-            </div>
-            <div className="mt-2">
-              <div className="flex flex-row justify-center items-center flex-wrap">
-                <div className="flex flex-row">
-                  <img
-                    className="w-16 h-16"
-                    src="https://aptech.fpt.edu.vn/wp-content/uploads/2020/10/bubble-chart-fill.png"
-                  />
-                  <div className="flex flex-col justify-center items-center px-6">
-                    <div className="font-bold text-base uppercase">
-                      Điều kiện
-                    </div>
-                    <div className="text-base uppercase">Tốt nghiệp thpt</div>
-                  </div>
-                </div>
-                <div className="flex flex-row">
-                  <img
-                    className="w-16 h-16"
-                    src="https://aptech.fpt.edu.vn/wp-content/uploads/2020/10/code-box-fill.png"
-                  />
-                  <div className="flex flex-col justify-center items-center px-6">
-                    <div className="font-bold text-base uppercase">
-                      Thời gian học
-                    </div>
-                    <div className="text-base uppercase">2 năm</div>
-                  </div>
-                </div>
-                <div className="flex flex-row">
-                  <img
-                    className="w-16 h-16"
-                    src="https://aptech.fpt.edu.vn/wp-content/uploads/2020/10/line-chart-line.png"
-                  />
-                  <div className="flex flex-col justify-center items-center px-6">
-                    <div className="font-bold text-base uppercase">
-                      Số học kỳ
-                    </div>
-                    <div className="text-base uppercase">4 học kỳ</div>
-                  </div>
-                </div>
-                <div className="flex flex-row">
-                  <img
-                    className="w-16 h-16"
-                    src="https://aptech.fpt.edu.vn/wp-content/uploads/2020/10/award-fill.png"
-                  />
-                  <div className="flex flex-col justify-center items-center px-6">
-                    <div className="font-bold text-base uppercase">
-                      3 ca học
-                    </div>
-                    <div className="text-base uppercase">
-                      sáng - chiều - tối
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -379,62 +325,7 @@ const Home = () => {
             </div>
           </Container>
         </div>
-        <div>
-          <Container>
-            <div>
-              <h3 className="flex flex-row items-center justify-center my-12">
-                <b className="flex-1 bg-gray-300 h-1"></b>
-                <span className="mx-4">TIN TỨC</span>
-                <b className="flex-1 bg-gray-300 h-1"></b>
-              </h3>
-              <div>
-                <Slide
-                  slidesToShow={4}
-                  infinite={true}
-                  indicators={true}
-                  duration={1500}
-                >
-                  <div className="flex flex-col items-start justify-start w-56 h-72">
-                    <div className="w-72 h-64">
-                      <img
-                        src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/09/nhuoc-diem-cua-saas-768x512.jpg"
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                    <p>Rẽ hướng để theo đuổi ước mở lập trình</p>
-                  </div>
-                  <div className="flex flex-col items-start justify-start w-56 h-72">
-                    <div className="w-72 h-64">
-                      <img
-                        src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/09/ping-la-gi.jpg"
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                    <p>Rẽ hướng để theo đuổi ước mở lập trình</p>
-                  </div>
-                  <div className="flex flex-col items-start justify-start w-56 h-72">
-                    <div className="w-72 h-64">
-                      <img
-                        src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/09/raid-la-gi-768x512.jpg"
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                    <p>Rẽ hướng để theo đuổi ước mở lập trình</p>
-                  </div>
-                  <div className="flex flex-col items-start justify-start w-56 h-72">
-                    <div className="w-72 h-64">
-                      <img
-                        src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/09/tinh-nang-noi-troi-cua-aws-768x615.jpg"
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                    <p>Rẽ hướng để theo đuổi ước mở lập trình</p>
-                  </div>
-                </Slide>
-              </div>
-            </div>
-          </Container>
-        </div>
+
         <div
           className="bg-cover bg-center relative"
           style={{
@@ -449,7 +340,7 @@ const Home = () => {
             style={{ textDecoration: "none" }}
             href="/tuyensinh"
           >
-            Đăng ký ngay
+            Register now
           </a>
         </div>
       </div>

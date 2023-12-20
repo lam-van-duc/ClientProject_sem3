@@ -16,59 +16,90 @@ const RegisterOnline = () => {
             />
           </div>
           <Form>
-            <Form.Group className="mt-3" controlId="exampleForm.ControlInput1">
-              <Form.Label className="font-bold">Họ tên (*)</Form.Label>
-              <Form.Control type="text" />
+            <div className="w-full flex">
+              <div className="w-1/2 pr-2">
+                <Form.Group className="mt-3">
+                  <Form.Label className="font-bold">Full name(*)</Form.Label>
+                  <Form.Control type="text" name="name" />
+                </Form.Group>
+                <Form.Group className="mt-3">
+                  <Form.Label className="font-bold">Birthday(*)</Form.Label>
+                  <Form.Control type="text" name="dob" />
+                </Form.Group>
+              </div>
+              <div className="w-1/2 pl-2">
+                <Form.Group className="mt-3">
+                  <Form.Label className="font-bold">Father name</Form.Label>
+                  <Form.Control type="text" name="fatherName" />
+                </Form.Group>
+                <Form.Group className="mt-3">
+                  <Form.Label className="font-bold">Mother name</Form.Label>
+                  <Form.Control type="text" name="motherName" />
+                </Form.Group>
+              </div>
+            </div>
+
+            <Form.Group className="mt-3">
+              <Form.Label className="font-bold">Gender(*)</Form.Label>
+              <select name="gender" className="form-control">
+                <option selected hidden value={""}>
+                  Choice gender
+                </option>
+                <option value={0}>Male</option>
+                <option value={1}>Female</option>
+              </select>
             </Form.Group>
-            <Form.Group className="mt-3" controlId="exampleForm.ControlInput1">
-              <Form.Label className="font-bold">Số điện thoại (*)</Form.Label>
-              <Form.Control type="text" />
-            </Form.Group>
-            <Form.Group className="mt-3" controlId="exampleForm.ControlInput1">
-              <Form.Label className="font-bold">Địa chỉ email(*)</Form.Label>
-              <Form.Control type="text" />
+            <Form.Group className="mt-3">
+              <Form.Label className="font-bold">
+                Residential address(*)
+              </Form.Label>
+              <Form.Control type="text" name="residentialAddress" />
             </Form.Group>
 
-            <Form.Group className="mt-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mt-3">
+              <Form.Label className="font-bold">Admission for(*)</Form.Label>
+              <Form.Control type="text" name="admissionFor" />
+            </Form.Group>
+            <Form.Group className="mt-3">
+              <Form.Label className="font-bold">university(*)</Form.Label>
+              <Form.Control type="text" name="university" />
+            </Form.Group>
+
+            <Form.Group className="mt-3">
               <Form.Label className="font-bold">
-                Đăng ký chương trình học (*)
+                Enrollment number(*)
               </Form.Label>
-              <Form.Control type="text" />
+              <Form.Control type="text" name="enrollmentNumber" />
             </Form.Group>
-            <Form.Group className="mt-3" controlId="exampleForm.ControlInput1">
-              <Form.Label className="font-bold">Trình độ (*)</Form.Label>
-              <Form.Control type="text" />
+            <Form.Group className="mt-3">
+              <Form.Label className="font-bold">Center(*)</Form.Label>
+              <Form.Control type="text" name="center" />
             </Form.Group>
-            <Form.Group className="mt-3" controlId="exampleForm.ControlInput1">
-              <Form.Label className="font-bold">Họ tên (*)</Form.Label>
-              <Form.Control type="text" />
+            <Form.Group className="mt-3">
+              <Form.Label className="font-bold">Stream(*)</Form.Label>
+              <Form.Control type="text" name="stream" />
+            </Form.Group>
+            <Form.Group className="mt-3">
+              <Form.Label className="font-bold">Field(*)</Form.Label>
+              <Form.Control type="text" name="field" />
+            </Form.Group>
+            <Form.Group className="mt-3">
+              <Form.Label className="font-bold">Mark secured(*)</Form.Label>
+              <Form.Control type="text" name="markSecured" />
+            </Form.Group>
+            <Form.Group className="mt-3">
+              <Form.Label className="font-bold">Out of(*)</Form.Label>
+              <Form.Control type="text" name="outOf" />
+            </Form.Group>
+            <Form.Group className="mt-3">
+              <Form.Label className="font-bold">Class obtained(*)</Form.Label>
+              <Form.Control type="text" name="classObtained" />
             </Form.Group>
           </Form>
           <div>
             <button className="bg-blue-950 text-white font-bold text-base mt-3 px-5 py-2">
-              Đăng ký
+              Submit
             </button>
-          </div>
-        </Col>
-        <Col xs md="3" className="px-2 border-l border-l-gray-200">
-          <div className="pl-4">
-            <div>
-              <h6>TÌM KIẾM</h6>
-              <hr className="bg-gray-500 h-1 w-10 my-3 rounded-md" />
-              <div className="w-full flex flex-row">
-                <input
-                  type="text"
-                  className="flex-1 outline-none px-2 focus:shadow-md border text-sm border-slate-500"
-                  placeholder="Tìm kiếm"
-                />
-                <button className="w-10 h-9 bg-slate-800"></button>
-              </div>
-            </div>
-            <div className="mt-3">
-              <h6>BÀI VIẾT LIÊN QUAN</h6>
-              <hr className="bg-gray-500 h-1 w-10 my-3 rounded-md" />
-              <div></div>
-            </div>
           </div>
         </Col>
       </Row>
