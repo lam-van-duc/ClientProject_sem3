@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const TeacherComponent = (props) => {
   const navigator = useNavigate();
   const showDetailTeacher = (id) => {
-    navigator("/TeacherDetail/" + id);
+    navigator("/TeacherDetails/" + id);
   };
   return (
     <div

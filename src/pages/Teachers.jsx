@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import TeacherComponent from "../components/TeacherComponent";
+import HeaderTitleComponent from "../components/HeaderTitleComponent";
 
+import Pagination from "react-js-pagination";
+import backgroundImageTitle from "../assets/image/backgroundTitle.jpg";
 const Teachers = () => {
+  const [paginationActive, setPaginationActive] = useState(1);
+  const handleChangePage = (page) => {
+    setPaginationActive(page);
+    console.log(page);
+  };
   const ListTeacher = [
     {
       id: 1,
       image: "https://ordainit.com/educate/assets/img/team/team-3-2.jpg",
-      name: "Doctor stranger",
+      name: "Doctor strange",
       birthday: "29-12-1998",
       Position: "Manager",
     },
@@ -42,9 +50,11 @@ const Teachers = () => {
   ];
   return (
     <div className="text-center">
-      <div></div>
-      <Container className="flex justify-center">
-        <div className="flex flex-wrap flex-row items-center my-20">
+      <div>
+        <HeaderTitleComponent name="Teacher"></HeaderTitleComponent>
+      </div>
+      <Container className="flex justify-center my-10">
+        <div className="flex flex-wrap flex-row items-center">
           {ListTeacher.map((item, index) => {
             return (
               <TeacherComponent
@@ -56,6 +66,17 @@ const Teachers = () => {
               ></TeacherComponent>
             );
           })}
+        </div>
+      </Container>
+      <Container>
+        <div>
+          <Pagination
+            activePage={paginationActive}
+            itemsCountPerPage={10}
+            totalItemsCount={450}
+            pageRangeDisplayed={5}
+            onChange={(page) => handleChangePage(page)}
+          />
         </div>
       </Container>
     </div>

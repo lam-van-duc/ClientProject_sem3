@@ -29,6 +29,28 @@ nav > ul > li > .active {
   transform: scale(1.1); /* Scale to lên khi hover */
 }
 
+.pagination li a {
+  text-decoration: none;
+  padding: 7px 15px;
+  color: rgb(251 146 60);
+  border-right: 1px solid rgb(251 146 60);
+  border-bottom: 1px solid rgb(251 146 60);
+  border-top: 1px solid rgb(251 146 60);
+}
+.pagination li:first-child a {
+  border-left: 1px solid rgb(251 146 60);
+}
+
+.pagination li a:hover {
+  background-color: rgb(251 146 60);
+  color: white;
+}
+
+.pagination li.active a {
+  background-color: rgb(251 146 60);
+  color: white;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

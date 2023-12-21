@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import TeacherComponent from "../components/TeacherComponent";
+import HeaderTitleDetailsComponent from "../components/HeaderTitleDetailsComponent";
 import { useParams } from "react-router-dom";
 const TeacherDetail = () => {
   const { id } = useParams();
@@ -17,30 +17,10 @@ const TeacherDetail = () => {
 
   return (
     <div>
-      <div
-        className="w-full h-96 bg-cover"
-        style={{
-          backgroundImage: `url(https://ordainit.com/educate/assets/img/breadcrumb/breadcrumb.jpg)`,
-        }}
-      >
-        <div
-          className="flex h-full flex-col justify-center items-center"
-          style={{
-            backgroundColor: "rgba(0, 0, 139, 0.3)",
-          }}
-        >
-          <div className="text-center font-bold text-5xl text-white">
-            Teacher details
-          </div>
-          <div className="text-white text-base">
-            <a href="/" className="cursor-pointer text-white no-underline">
-              Home
-            </a>
-            <span className="mx-2">//</span>
-            <span> Teacher details</span>
-          </div>
-        </div>
-      </div>
+      <HeaderTitleDetailsComponent
+        name="Teacher details"
+        imageBackground={teacher.image}
+      ></HeaderTitleDetailsComponent>
       <Container>
         <div className="flex flex-row flex-wrap p-4 bg-gray-200">
           <div className="p-4 w-80">
@@ -70,7 +50,7 @@ const TeacherDetail = () => {
           </div>
 
           <div className="p-4 flex-1">
-            <div className="bg-white p-4">
+            <div className="bg-white p-4 min-h-[32rem]">
               <div className="font-bold text-4xl">{teacher.name}</div>
               <div className="text-sm py-2">{teacher.Position}</div>
               <div className="py-2">
