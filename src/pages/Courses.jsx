@@ -90,7 +90,7 @@ const Courses = () => {
         <HeaderTitleComponent name="Course"></HeaderTitleComponent>
       </div>
       <Container className="flex justify-center">
-        <div className="flex flex-wrap flex-row items-center my-10">
+        <div className="flex flex-wrap flex-row justify-center items-center my-10">
           {ListCourse.map((item, index) => {
             return (
               <CourseComponent

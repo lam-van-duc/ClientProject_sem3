@@ -54,7 +54,7 @@ const Teachers = () => {
         <HeaderTitleComponent name="Teacher"></HeaderTitleComponent>
       </div>
       <Container className="flex justify-center my-10">
-        <div className="flex flex-wrap flex-row items-center">
+        <div className="flex flex-wrap flex-row justify-center items-center">
           {ListTeacher.map((item, index) => {
             return (
               <TeacherComponent
