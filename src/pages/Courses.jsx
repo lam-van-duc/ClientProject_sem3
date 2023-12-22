@@ -4,6 +4,7 @@ import { Container } from "react-bootstrap";
 import CourseComponent from "../components/CourseComponent";
 import HeaderTitleComponent from "../components/HeaderTitleComponent";
 import Pagination from "react-js-pagination";
+import TeacherComponent from "../components/TeacherComponent";
 
 const Courses = () => {
   const [paginationActive, setPaginationActive] = useState(1);
@@ -84,13 +85,44 @@ const Courses = () => {
     },
   ];
 
+  const ListTeacher = [
+    {
+      id: 1,
+      image: "https://ordainit.com/educate/assets/img/team/team-3-2.jpg",
+      name: "Doctor strange",
+      birthday: "29-12-1998",
+      Position: "Manager",
+    },
+    {
+      id: 2,
+      image: "https://ordainit.com/educate/assets/img/team/team-3-1.jpg",
+      name: "julien",
+      birthday: "29-12-1998",
+      Position: "employee",
+    },
+    {
+      id: 3,
+      image: "https://ordainit.com/educate/assets/img/team/team-3-3.jpg",
+      name: "rabit",
+      birthday: "29-12-1998",
+      Position: "employee",
+    },
+    {
+      id: 4,
+      image: "https://ordainit.com/educate/assets/img/team/team-3-4.jpg",
+      name: "puppy po",
+      birthday: "29-12-1998",
+      Position: "Head of Education Department",
+    },
+  ];
+
   return (
     <div className="text-center">
       <div>
         <HeaderTitleComponent name="Course"></HeaderTitleComponent>
       </div>
       <Container className="flex justify-center">
-        <div className="flex flex-wrap flex-row items-center my-10">
+        <div className="flex flex-wrap flex-row justify-center items-center my-10">
           {ListCourse.map((item, index) => {
             return (
               <CourseComponent
@@ -104,7 +136,7 @@ const Courses = () => {
         </div>
       </Container>
       <Container>
-        <div>
+        <div className="flex justify-center">
           <Pagination
             activePage={paginationActive}
             itemsCountPerPage={10}
@@ -112,6 +144,34 @@ const Courses = () => {
             pageRangeDisplayed={5}
             onChange={(page) => handleChangePage(page)}
           />
+        </div>
+      </Container>
+      <Container className="mb-5">
+        <h3 className="flex flex-row items-center justify-center mt-5">
+          <b className="flex-1 bg-gray-300 h-1"></b>
+          <span className="mx-4">Teacher</span>
+          <b className="flex-1 bg-gray-300 h-1"></b>
+        </h3>
+        <div className="flex flex-row flex-wrap justify-center items-center mb-10">
+          {ListTeacher.map((item, index) => {
+            return (
+              <TeacherComponent
+                image={item.image}
+                name={item.name}
+                birthday={item.birthday}
+                Position={item.Position}
+                id={item.id}
+              ></TeacherComponent>
+            );
+          })}
+        </div>
+        <div className="text-center">
+          <a
+            href="/Teachers"
+            className="button-outline-app font-bold uppercase"
+          >
+            Show more teacher
+          </a>
         </div>
       </Container>
     </div>
