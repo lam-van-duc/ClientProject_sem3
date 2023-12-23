@@ -8,7 +8,7 @@ const TeacherComponent = (props) => {
   };
   return (
     <div
-      className="h-[30rem] w-72 border mr-4 mt-5 border-gray-300 item-teacher rounded-md hover:bg-orange-400 hover:text-white hover:cursor-pointer"
+      className="h-[30rem] w-72 border mr-4 mt-4 border-gray-300 item-teacher rounded-md hover:bg-orange-400 hover:text-white hover:cursor-pointer"
       onClick={() => showDetailTeacher(props.id)}
     >
       <div className="h-[20rem] overflow-hidden rounded-t-md">

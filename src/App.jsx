@@ -1,61 +1,89 @@
 import "./App.css";
-import { useState } from "react";
-import { Dropdown } from "react-bootstrap";
-import {
-  NavLink,
-  Routes,
-  Route,
-  useResolvedPath,
-  useMatch,
-} from "react-router-dom";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { NavLink, Routes, Route } from "react-router-dom";
+import React from "react";
 import Contact from "./pages/Contact";
 import RegisterOnline from "./pages/RegisterOnline";
 import Home from "./pages/Home";
 import Teachers from "./pages/Teachers";
-import TeacherDetail from "./pages/TeacherDetail";
+import Courses from "./pages/Courses";
+import CourseDetails from "./pages/CourseDetails";
+import TeacherDetails from "./pages/TeacherDetails";
+import Facilities from "./pages/Facilities";
+import FeedBack from "./pages/FeedBack";
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleItemClick = (item) => {
-    // Handle item click logic
-    console.log(`Clicked on ${item}`);
-    setIsOpen(false); // Close the dropdown after selecting an item
-  };
   return (
     <div className="relative h-full">
-      <nav className="h-14 top-0 sticky z-10 bg-white">
-        <ul className="flex flex-row justify-center items-center">
-          <li>
-            <img
-              className="h-14 mr-8"
-              src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/03/Logo-fpt-aptech.png"
-            />
-          </li>
-          <CustomLink to="/">Home</CustomLink>
-          <CustomLink to="/infor">Introduction</CustomLink>
-          <CustomLink to="/Teachers">Teachers</CustomLink>
-          <CustomLink to="/Daotao">Education program</CustomLink>
-          <CustomLink to="/Contact">Contact</CustomLink>
-          <li className="ml-8">
-            <a
-              className="bg-red-800 text-white cursor-pointer py-2 px-4 font-bold rounded-md hover:shadow-xl"
-              href="/dang-ky-tuyen-sinh"
-            >
-              Admission
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <div className="top-0 sticky z-10 bg-white">
+        <Navbar expand="lg" className="bg-body-tertiary shadow-xl">
+          <div className="flex flex-row justify-center items-center w-full">
+            <div className="flex flex-row">
+              <Navbar.Brand href="/">
+                <img
+                  className="h-14 mr-8"
+                  src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/03/Logo-fpt-aptech.png"
+                />
+              </Navbar.Brand>
+              <Navbar.Toggle aria-controls="navbarScroll" />
+              <Navbar.Collapse id="navbarScroll">
+                <Nav
+                  className="me-auto my-2 my-lg-0"
+                  style={{ maxHeight: "100px" }}
+                  navbarScroll
+                >
+                  <CustomLink to="/">Home</CustomLink>
+                  <CustomLink to="/Courses">Courses</CustomLink>
+                  <CustomLink to="/StudentRegistration">
+                    Student registration
+                  </CustomLink>
+                  <CustomLink to="/Department">Department</CustomLink>
+                  <CustomLink to="/Faculty">Faculty</CustomLink>
+
+                  <CustomLinkDropDown displayName={"Facilities"}>
+                    <CustomDropDownLink to="/Facilities/canteen">
+                      canteen
+                    </CustomDropDownLink>
+                    <CustomDropDownLink to="/Facilities/hostel">
+                      hostel
+                    </CustomDropDownLink>
+                    <CustomDropDownLink to="/Facilities/placement-center">
+                      Placement center
+                    </CustomDropDownLink>
+                    <CustomDropDownLink to="/Facilities/college-library">
+                      College library
+                    </CustomDropDownLink>
+                    <CustomDropDownLink to="/Facilities/administrator-office">
+                      administrator office
+                    </CustomDropDownLink>
+                  </CustomLinkDropDown>
+                  <CustomLink to="/Teachers">Teachers</CustomLink>
+                  <CustomLink to="/Contact">Contact us</CustomLink>
+                  <CustomLink to="/Feedback">Feedback</CustomLink>
+                  <a
+                    className="bg-red-800 text-white cursor-pointer py-2 px-4 font-bold rounded-md hover:shadow-xl ml-8"
+                    href="/dang-ky-tuyen-sinh"
+                  >
+                    Admission
+                  </a>
+                </Nav>
+              </Navbar.Collapse>
+            </div>
+          </div>
+        </Navbar>
+      </div>
+
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/Courses" element={<Courses />} />
+        <Route path="/CourseDetails/:id" element={<CourseDetails />} />
         <Route path="/Teachers" element={<Teachers />} />
-        <Route path="/TeacherDetail/:id" element={<TeacherDetail />} />
+        <Route path="/TeacherDetails/:id" element={<TeacherDetails />} />
+        <Route path="/Facilities/:id" element={<Facilities />} />
         <Route path="/Contact" element={<Contact />} />
+        <Route path="/FeedBack" element={<FeedBack />} />
+
         <Route path="/dang-ky-tuyen-sinh" element={<RegisterOnline />} />
       </Routes>
       <footer>
@@ -64,9 +92,9 @@ function App() {
             <div className="text-base font-bold uppercase">Introduce</div>
             <b className="bg-gray-200 h-1 w-10 my-3 rounded-md"></b>
             <div>
-              FPT Aptech có hơn 25 năm kinh nghiệm đào tạo lập trình viên quốc
-              tế tại Việt Nam, và luôn là sự lựa chọn ưu tiên của các sinh viên
-              và nhà tuyển dụng.
+              ITM college has more than 25 years of experience training
+              international programmers in Vietnam, and is always the preferred
+              choice of students and employers.
             </div>
           </div>
           <div className="flex flex-col flex-1 max-w-xs text-sm  px-2">
@@ -110,13 +138,24 @@ function App() {
 }
 
 function CustomLink({ to, children, ...props }) {
-  const resolvedPath = useResolvedPath(to);
-  const isActive = useMatch({ path: resolvedPath.pathname, end: true });
+  return (
+    <NavLink
+      className={"px-4 py-2 hover:bg-orange-400 hover:text-white"}
+      {...props}
+      to={to}
+    >
+      {children}
+    </NavLink>
+  );
+}
 
+function CustomDropDownLink({ to, children, ...props }) {
   return (
     <li>
       <NavLink
-        className={"px-4 py-2 hover:bg-orange-400 hover:text-white"}
+        className={
+          "min-w-[10rem] block no-underline px-2 py-2 hover:bg-orange-400 hover:text-white"
+        }
         {...props}
         to={to}
       >
@@ -126,25 +165,14 @@ function CustomLink({ to, children, ...props }) {
   );
 }
 
-function CustomDropdownLink({ to, name, children, ...props }) {
-  const resolvedPath = useResolvedPath(to);
-  const isActive = useMatch({ path: resolvedPath.pathname, end: true });
+function CustomLinkDropDown({ displayName, to, children, ...props }) {
   return (
-    <li>
-      <div
-        class="dropdown"
-        className={
-          isActive
-            ? "px-4 py-2 bg-orange-400 text-white"
-            : "px-4 py-2 hover:bg-orange-400 hover:text-white"
-        }
-      >
-        <button class="dropbtn">{name}</button>
-        <div class="dropdown-content">
-          <CustomLink to="/aaaa">test</CustomLink>
-        </div>
-      </div>
-    </li>
+    <div className="dropDownMenu hover:bg-orange-400 hover:text-white px-4 py-2 cursor-pointer">
+      <div className="relative">{displayName}</div>
+      <ul className="absolute p-0 bg-white z-10 border border-gray-400 top-14">
+        {children}
+      </ul>
+    </div>
   );
 }
 

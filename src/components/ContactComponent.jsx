@@ -1,51 +1,33 @@
 import React from "react";
+import propTypes from "prop-types";
 
-const ContactComponent = (props) => {
+const ContactComponent = ({ name, content1, content2, content3, icon }) => {
   return (
-    <div className="w-[49%] mb-5">
-      <div className="h-96">
-        <img src={props.image} className="w-full h-full object-cover" />
+    <div className="w-96 h-48 my-2 relative text-center shadow-xl border border-slate-50-50 rounded">
+      <div
+        className="absolute top-0 left-1/2"
+        style={{
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <div className="bg-orange-200 p-3 w-16 h-16 flex justify-center items-center rounded-full text-4xl">
+          {icon}
+        </div>
       </div>
-      <div className="py-2">
-        <div className="text-blue-700 font-bold text-sm">{props.name}</div>
-        <ul>
-          <li className="list-disc">
-            <span className="font-bold">Địa chỉ: </span>
-            <span>{props.address}</span>
-          </li>
-          <li className="list-disc">
-            <span className="font-bold">Phòng Tuyển sinh: </span>
-            <span>{props.phoneNumberAdmissions}</span>
-          </li>
-
-          <li className="list-disc">
-            <span className="font-bold">Hotline: </span>
-            <span>{props.hotLine}</span>
-          </li>
-          <li className="list-disc">
-            <span className="font-bold">Phòng đào tạo: </span>
-            <span>{props.phoneNumberTrainningDepartment}</span>
-          </li>
-          <li className="list-disc">
-            <span className="font-bold">Phòng quan hệ doanh nghiệp: </span>
-            <span>{props.phoneNumberBusinessRelations}</span>
-          </li>
-          <li className="list-disc">
-            <span className="font-bold">Email: </span>
-            <span>{props.email}</span>
-          </li>
-        </ul>
-      </div>
-      <div>
-        <iframe
-          src={props.iframe}
-          className="w-full"
-          height="450"
-          loading="lazy"
-        ></iframe>
+      <div className="p-5">
+        <h4>{name}</h4>
+        <p>{content1}</p>
+        <p>{content2}</p>
+        <p>{content3}</p>
       </div>
     </div>
   );
 };
-
+ContactComponent.propTypes = {
+  name: propTypes.string,
+  content1: propTypes.string,
+  content2: propTypes.string,
+  content3: propTypes.string,
+  icon: propTypes.any,
+};
 export default ContactComponent;

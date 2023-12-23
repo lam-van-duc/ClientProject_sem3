@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Col, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -18,38 +18,27 @@ const Home = () => {
           <Slide
             slidesToShow={1}
             infinite={true}
-            duration={1500}
+            duration={2500}
             className="h-[100]"
           >
-            <div className="each-slide-effect">
-              <div className="h-full">
-                <img
-                  src={`${images[0]}`}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </div>
-            <div className="each-slide-effect">
-              <div className="h-full">
-                <img
-                  src={`${images[1]}`}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </div>
-            <div className="each-slide-effect">
-              <div className="h-full">
-                <img
-                  src={`${images[2]}`}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </div>
+            {images.map((item) => {
+              return (
+                <div className="each-slide-effect">
+                  <div className="h-full z-10">
+                    <img
+                      src={`${item}`}
+                      className="w-full object-cover select-none z-0"
+                      style={{ pointerEvents: "none" }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </Slide>
         </div>
         <div className="mt-1 pb-4 bg-[#ee661c]">
           <div className="text-center mb-6 pt-4 text-3xl font-bold text-white z">
-            HỌC LẬP TRÌNH - TẠI SAO NÊN CHỌN FPT APTECH?
+            WHY SHOULD YOU CHOOSE ITM COLLEGE?
           </div>
           <div className="flex justify-center items-center">
             <img
