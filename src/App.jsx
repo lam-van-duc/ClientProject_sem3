@@ -11,6 +11,7 @@ import Courses from "./pages/Courses";
 import CourseDetails from "./pages/CourseDetails";
 import TeacherDetails from "./pages/TeacherDetails";
 import Facilities from "./pages/Facilities";
+import FeedBack from "./pages/FeedBack";
 
 function App() {
   return (
@@ -81,6 +82,8 @@ function App() {
         <Route path="/TeacherDetails/:id" element={<TeacherDetails />} />
         <Route path="/Facilities/:id" element={<Facilities />} />
         <Route path="/Contact" element={<Contact />} />
+        <Route path="/FeedBack" element={<FeedBack />} />
+
         <Route path="/dang-ky-tuyen-sinh" element={<RegisterOnline />} />
       </Routes>
       <footer>

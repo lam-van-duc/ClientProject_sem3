@@ -80,7 +80,18 @@ const Teachers = () => {
       <div>
         <HeaderTitleComponent name="Teacher"></HeaderTitleComponent>
       </div>
-      <Container className="flex justify-center my-10">
+      <Container className="mt-4">
+        <div className="text-right">
+          <select className="border py-2 px-4 focus-visible:outline-none ">
+            <option selected hidden value="">
+              Sort by
+            </option>
+            <option value="Latest date">Latest date</option>
+            <option value="Oldest date">Oldest date</option>
+          </select>
+        </div>
+      </Container>
+      <Container className="flex justify-center mb-10">
         <div className="flex flex-wrap flex-row justify-center items-center">
           {ListTeacher.map((item, index) => {
             return (
