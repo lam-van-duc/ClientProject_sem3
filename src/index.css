@@ -128,3 +128,4 @@ option:hover {
 @tailwind components;
 @tailwind utilities;
 @import "react-slideshow-image/dist/styles.css";
+@import "react-toastify/dist/ReactToastify.css";

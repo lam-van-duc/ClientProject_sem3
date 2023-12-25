@@ -12,7 +12,8 @@ import CourseDetails from "./pages/CourseDetails";
 import TeacherDetails from "./pages/TeacherDetails";
 import Facilities from "./pages/Facilities";
 import FeedBack from "./pages/FeedBack";
-
+import LogoColor from "./assets/image/logoITM-color.png";
+import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <div className="relative h-full">
@@ -21,10 +22,7 @@ function App() {
           <div className="flex flex-row justify-center items-center w-full">
             <div className="flex flex-row">
               <Navbar.Brand href="/">
-                <img
-                  className="h-14 mr-8"
-                  src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/03/Logo-fpt-aptech.png"
-                />
+                <img className="h-16 mr-8" src={LogoColor} />
               </Navbar.Brand>
               <Navbar.Toggle aria-controls="navbarScroll" />
               <Navbar.Collapse id="navbarScroll">
@@ -133,6 +131,7 @@ function App() {
           </div>
         </div>
       </footer>
+      <ToastContainer />
     </div>
   );
 }
