@@ -14,8 +14,8 @@ const schema = yup.object({
   name: yup.string().required("please enter your name !"),
   fatherName: yup.string(),
   motherName: yup.string(),
-  dob: yup.date().required("Tên không thể để trống"),
-  gender: yup.string().required("Please choice gender !"),
+  dob: yup.date().required("Please choice dob !"),
+  gender: yup.number().required("Please choice gender !"),
   // .oneOf(["male", "female"], "Bạn chỉ được chọn Nam or Nữ"),
   residentialAddress: yup
     .string()
@@ -32,7 +32,8 @@ const schema = yup.object({
   outOf: yup.string().required("please enter outOf !"),
   dob: yup.string().required("please enter dob !"),
 
-  classObtained: yup.string().required("please enter classObtained !"),
+  classObtained: yup.string().required("please enter Class obtained !"),
+  SportDetail: yup.string().required("please enter Sport detail !"),
 
   // passwordConfirm: yup
   //   .string()
@@ -66,7 +67,7 @@ const RegisterOnline = () => {
 
   return (
     <div>
-      <HeaderTitleComponent name="Register online"></HeaderTitleComponent>
+      <HeaderTitleComponent name="Register online" />
       <Container className="py-3">
         <Row>
           <Col className="px-5 border-r border-r-gray-200">
@@ -100,8 +101,8 @@ const RegisterOnline = () => {
                       <option selected hidden value={""}>
                         Choice gender
                       </option>
-                      <option value="M">Male</option>
-                      <option value="F">Female</option>
+                      <option value={0}>Male</option>
+                      <option value={1}>Female</option>
                     </select>
                     <ErrorText text={errors.gender?.message} />
                   </Form.Group>
@@ -226,6 +227,15 @@ const RegisterOnline = () => {
                   name="classObtained"
                 />
                 <ErrorText text={errors.classObtained?.message} />
+              </Form.Group>
+              <Form.Group className="mt-3">
+                <Form.Label className="font-bold">Sport detail(*)</Form.Label>
+                <Form.Control
+                  {...register("SportDetail")}
+                  type="text"
+                  name="SportDetail"
+                />
+                <ErrorText text={errors.SportDetail?.message} />
               </Form.Group>
               <div>
                 <button className="button-outline-app font-bold text-base mt-3 px-5 py-2">

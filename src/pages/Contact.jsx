@@ -1,8 +1,44 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import ContactComponent from "../components/ContactComponent";
+import ErrorText from "../components/ErrorText";
+import axiosConfig from "../config/axiosConfig";
+import { toast } from "react-toastify";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
+const schema = yup.object({
+  Fullname: yup.string().required("Please enter your full name !"),
+  Email: yup.string().email("Invalid email !").required("Please enter email !"),
+  PhoneNumber: yup
+    .string()
+    .matches(/^\+?[0-9\s.-]+$/, "Invalid phone number")
+    .required("Please enter phone number"),
+  Comment: yup.string(),
+});
 const Contact = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onSubmit",
+  });
+  const HandleSubmitFrom = async (data) => {
+    // await axiosConfig
+    //   .post("/api/Admission", data)
+    //   .then((res) => {
+    //     console.log(res.response);
+    //     toast.success("Submit form success");
+    //   })
+    //   .catch((res) => {
+    //     toast.error(res.response.data.title);
+    //   });
+    toast.success("Submit contact success");
+  };
+
   return (
     <Container className="mb-5">
       <div
@@ -10,7 +46,7 @@ const Contact = () => {
         style={{
           height: "25rem",
           backgroundImage: `url(
-              https://aptech.fpt.edu.vn/wp-content/uploads/2022/12/BANNER-CHI-TIEU-TRANG-CHU-DESKTOP-fat.jpg
+            https://bcp.cdnchinhphu.vn/334894974524682240/2022/10/24/tuyen-sinh-2021-166314089134113137076500-16665993252601357979429.jpg
             )`,
         }}
       >
@@ -54,27 +90,36 @@ const Contact = () => {
             sure there isn't anything embarrang hidden in the middle of text.
           </p>
           <div>
-            <div className="form-input">
-              <label>Full name: </label>
-              <input type="text" className="" />
-            </div>
-            <div className="form-input">
-              <label>Phone number: </label>
-              <input type="email" />
-            </div>
-            <div className="form-input">
-              <label>Email: </label>
-              <input type="text" />
-            </div>
-            <div className="form-input">
-              <label>Comment: </label>
-              <textarea cols="30" rows="10"></textarea>
-            </div>
-            <div>
-              <button className="button-outline-app py-2 font-bold">
-                Submit
-              </button>
-            </div>
+            <form onSubmit={handleSubmit(HandleSubmitFrom)}>
+              <div className="form-input">
+                <label>Full name: </label>
+                <input type="text" {...register("Fullname")} />
+                <ErrorText text={errors.Fullname?.message} />
+              </div>
+              <div className="form-input">
+                <label>Phone number: </label>
+                <input type="text" {...register("PhoneNumber")} />
+                <ErrorText text={errors.PhoneNumber?.message} />
+              </div>
+              <div className="form-input">
+                <label>Email: </label>
+                <input type="text" {...register("Email")} />
+                <ErrorText text={errors.Email?.message} />
+              </div>
+              <div className="form-input">
+                <label>Comment: </label>
+                <textarea
+                  cols="30"
+                  rows="10"
+                  {...register("Comment")}
+                ></textarea>
+              </div>
+              <div>
+                <button className="button-outline-app py-2 font-bold">
+                  Submit
+                </button>
+              </div>
+            </form>
           </div>
         </div>
         <div className="flex-1 pl-4">
