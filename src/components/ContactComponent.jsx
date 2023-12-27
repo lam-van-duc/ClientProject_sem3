@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 
 const ContactComponent = ({ name, content1, content2, content3, icon }) => {
   return (
-    <div className="w-96 h-48 my-2 relative text-center shadow-xl border border-slate-50-50 rounded">
+    <div className="h-48 my-2 relative text-center shadow-xl border border-slate-50-50 rounded">
       <div
         className="absolute top-0 left-1/2"
         style={{

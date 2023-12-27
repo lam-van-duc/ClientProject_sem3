@@ -121,7 +121,7 @@ const Courses = () => {
       <div>
         <HeaderTitleComponent name="Course"></HeaderTitleComponent>
       </div>
-      <Container className="my-4">
+      <Container className="my-2">
         <div className="text-right">
           <select className="border py-2 px-4 focus-visible:outline-none ">
             <option selected hidden value="">
@@ -132,38 +132,43 @@ const Courses = () => {
           </select>
         </div>
       </Container>
-      <Container className="flex justify-center">
-        <div className="grid gap-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
-          {ListCourse.map((item, index) => {
-            return (
-              <CourseComponent
-                id={item.id}
-                name={item.name}
-                image={item.image}
-                title={item.title}
-              ></CourseComponent>
-            );
-          })}
-        </div>
-      </Container>
+
       <Container>
         <div className="flex justify-center">
-          <Pagination
-            activePage={paginationActive}
-            itemsCountPerPage={10}
-            totalItemsCount={450}
-            pageRangeDisplayed={5}
-            onChange={(page) => handleChangePage(page)}
-          />
+          <div className="grid gap-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
+            {ListCourse.map((item, index) => {
+              return (
+                <CourseComponent
+                  id={item.id}
+                  name={item.name}
+                  image={item.image}
+                  title={item.title}
+                ></CourseComponent>
+              );
+            })}
+          </div>
+        </div>
+        <div className="block mt-4">
+          <div className="flex justify-center">
+            <div>
+              <Pagination
+                activePage={paginationActive}
+                itemsCountPerPage={10}
+                totalItemsCount={450}
+                pageRangeDisplayed={5}
+                onChange={(page) => handleChangePage(page)}
+              />
+            </div>
+          </div>
         </div>
       </Container>
-      <Container fluid="md" className="mb-5">
-        <h3 className="flex flex-row items-center justify-center mt-5">
+      <Container className="mb-4">
+        <h3 className="flex flex-row items-center justify-center">
           <b className="flex-1 bg-gray-300 h-1"></b>
           <span className="mx-4">Teacher</span>
           <b className="flex-1 bg-gray-300 h-1"></b>
         </h3>
-        <div className="flex flex-row flex-wrap justify-center items-center mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2  gap-4 mb-4">
           {ListTeacher.map((item, index) => {
             return (
               <TeacherComponent
@@ -177,12 +182,14 @@ const Courses = () => {
           })}
         </div>
         <div className="text-center">
-          <a
-            href="/Teachers"
-            className="button-outline-app font-bold uppercase"
-          >
-            Show more teacher
-          </a>
+          <div>
+            <a
+              href="/Teachers"
+              className="button-outline-app font-bold uppercase"
+            >
+              Show more teacher
+            </a>
+          </div>
         </div>
       </Container>
     </div>

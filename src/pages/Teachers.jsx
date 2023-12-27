@@ -80,19 +80,9 @@ const Teachers = () => {
       <div>
         <HeaderTitleComponent name="Teacher"></HeaderTitleComponent>
       </div>
-      <Container className="mt-4">
-        <div className="text-right">
-          <select className="border py-2 px-4 focus-visible:outline-none ">
-            <option selected hidden value="">
-              Sort by
-            </option>
-            <option value="Latest date">Latest date</option>
-            <option value="Oldest date">Oldest date</option>
-          </select>
-        </div>
-      </Container>
-      <Container className="flex justify-center mb-10">
-        <div className="flex flex-wrap flex-row justify-center items-center">
+
+      <Container className="flex justify-center mt-3">
+        <div className="grid gap-3 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
           {ListTeacher.map((item, index) => {
             return (
               <TeacherComponent
@@ -107,7 +97,7 @@ const Teachers = () => {
         </div>
       </Container>
       <Container>
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-3">
           <Pagination
             activePage={paginationActive}
             itemsCountPerPage={10}
@@ -117,13 +107,13 @@ const Teachers = () => {
           />
         </div>
       </Container>
-      <Container className="mb-5">
-        <h3 className="flex flex-row items-center justify-center mt-5">
+      <Container className="mb-3">
+        <h3 className="flex flex-row items-center justify-center mt-3">
           <b className="flex-1 bg-gray-300 h-1"></b>
           <span className="mx-4">Course</span>
           <b className="flex-1 bg-gray-300 h-1"></b>
         </h3>
-        <div className="flex flex-wrap flex-row justify-center items-center my-10">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-12 justify-center items-center my-3">
           {ListCourse.map((item, index) => {
             return (
               <CourseComponent

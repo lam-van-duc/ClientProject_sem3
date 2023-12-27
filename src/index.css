@@ -53,6 +53,7 @@ nav > div > div > div > .navbar-nav > .active,
 
 /* ======================  pagination ================================*/
 .pagination li a {
+  display: block;
   text-decoration: none;
   padding: 7px 15px;
   color: rgb(251 146 60);
@@ -78,6 +79,7 @@ nav > div > div > div > .navbar-nav > .active,
 
 /* ======================  button ================================*/
 .button-outline-app {
+  display: inline-block;
   color: rgb(251 146 60);
   border: 1px solid rgb(251 146 60);
   border-radius: 5px;
@@ -85,10 +87,12 @@ nav > div > div > div > .navbar-nav > .active,
   text-decoration: none;
   transition: transform 0.3s ease;
 }
+button.button-outline-app:focus-visible {
+  outline: none;
+}
 .button-outline-app:hover {
   color: white;
   background-color: rgb(251 146 60);
-  transform: scale(1.1);
 }
 
 /* ======================  end button ================================*/

@@ -11,11 +11,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
 const schema = yup.object({
-  Fullname: yup.string().required("please enter your full name !"),
-  Email: yup.string().email("Invalid email !").required("please enter email !"),
-  FristQuestion: yup.string().required("Please enter first question !"),
-  SecondQuestion: yup.string().required("Please enter second question !"),
-  OrhterQestion: yup.string(),
+  fullName: yup.string().required("please enter your full name !"),
+  email: yup.string().email("Invalid email !").required("please enter email !"),
+  firstQuestion: yup.string().required("Please enter first question !"),
+  secondQuestion: yup.string().required("Please enter second question !"),
+  otherQuestion: yup.string(),
 });
 const FeedBack = () => {
   const {
@@ -27,16 +27,15 @@ const FeedBack = () => {
     mode: "onChange",
   });
   const HandleSubmitFrom = async (data) => {
-    // await axiosConfig
-    //   .post("/api/Admission", data)
-    //   .then((res) => {
-    //     console.log(res.response);
-    //     toast.success("Submit form success");
-    //   })
-    //   .catch((res) => {
-    //     toast.error(res.response.data.title);
-    //   });
-    toast.success("Submit feedback success");
+    await axiosConfig
+      .post("/api/Feedback", data)
+      .then((res) => {
+        console.log(res.response);
+        toast.success("Submit form success");
+      })
+      .catch((res) => {
+        toast.error(res.response.data.title);
+      });
   };
   return (
     <div>
@@ -49,13 +48,13 @@ const FeedBack = () => {
           <div className="flex  flex-wrap justify-center">
             <div className="form-input flex-1 mr-2">
               <label>Full name:</label>
-              <input type="text" {...register("Fullname")} />
-              <ErrorText text={errors.Fullname?.message} />
+              <input type="text" {...register("fullName")} />
+              <ErrorText text={errors.fullName?.message} />
             </div>
             <div className="form-input flex-1 ml-2">
               <label>Email:</label>
-              <input type="email" {...register("Email")} />
-              <ErrorText text={errors.Email?.message} />
+              <input type="email" {...register("email")} />
+              <ErrorText text={errors.email?.message} />
             </div>
           </div>
           <div className="form-input">
@@ -63,7 +62,7 @@ const FeedBack = () => {
             <textarea
               placeholder="Type here"
               rows="10"
-              {...register("FristQuestion")}
+              {...register("firstQuestion")}
             ></textarea>
           </div>
           <div className="form-input">
@@ -71,7 +70,7 @@ const FeedBack = () => {
             <textarea
               placeholder="Type here"
               rows="10"
-              {...register("SecondQuestion")}
+              {...register("secondQuestion")}
             ></textarea>
           </div>
 
@@ -80,7 +79,7 @@ const FeedBack = () => {
             <textarea
               placeholder="Type here"
               rows="10"
-              {...register("OrhterQestion")}
+              {...register("otherQuestion")}
             ></textarea>
           </div>
         </Container>
