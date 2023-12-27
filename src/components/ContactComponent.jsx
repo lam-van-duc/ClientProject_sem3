@@ -16,9 +16,9 @@ const ContactComponent = ({ name, content1, content2, content3, icon }) => {
       </div>
       <div className="p-5">
         <h4>{name}</h4>
-        <p>{content1}</p>
-        <p>{content2}</p>
-        <p>{content3}</p>
+        <p className="m-0">{content1}</p>
+        <p className="m-0">{content2}</p>
+        <p className="m-0">{content3}</p>
       </div>
     </div>
   );

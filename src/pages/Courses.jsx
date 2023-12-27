@@ -133,7 +133,7 @@ const Courses = () => {
         </div>
       </Container>
       <Container className="flex justify-center">
-        <div className="flex flex-wrap flex-row justify-center items-center mb-10">
+        <div className="grid gap-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
           {ListCourse.map((item, index) => {
             return (
               <CourseComponent
@@ -157,7 +157,7 @@ const Courses = () => {
           />
         </div>
       </Container>
-      <Container className="mb-5">
+      <Container fluid="md" className="mb-5">
         <h3 className="flex flex-row items-center justify-center mt-5">
           <b className="flex-1 bg-gray-300 h-1"></b>
           <span className="mx-4">Teacher</span>

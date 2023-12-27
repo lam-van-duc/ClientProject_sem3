@@ -8,7 +8,7 @@ const CourseComponent = (props) => {
   };
   return (
     <div
-      className="courseItem w-96 h-96 px-3 my-3"
+      className="courseItem"
       onClick={() => {
         showDetailTeacher(props.id);
       }}
