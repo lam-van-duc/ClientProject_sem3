@@ -19,7 +19,7 @@ const CourseDetails = () => {
         name="Course details"
         imageBackground={course.image}
       ></HeaderTitleDetailsComponent>
-      <Container className="my-10">{parse(htmlCkeditor)}</Container>
+      <Container className="my-2">{parse(htmlCkeditor)}</Container>
     </div>
   );
 };

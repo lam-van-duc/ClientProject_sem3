@@ -15,7 +15,7 @@ const schema = yup.object({
   fatherName: yup.string(),
   motherName: yup.string(),
   dob: yup.date().required("Please choice dob !"),
-  gender: yup.number().required("Please choice gender !"),
+  gender: yup.string().required("Please choice gender !"),
   // .oneOf(["male", "female"], "Bạn chỉ được chọn Nam or Nữ"),
   residentialAddress: yup
     .string()
@@ -54,15 +54,20 @@ const RegisterOnline = () => {
   });
 
   const HandleSubmitFrom = async (data) => {
-    await axiosConfig
-      .post("/api/Admission", data)
-      .then((res) => {
-        console.log(res.response);
-        toast.success("Submit form success !");
-      })
-      .catch((res) => {
-        toast.error(res.response.data.title);
-      });
+    try {
+      await axiosConfig
+        .post("/api/Admission", data)
+        .then((res) => {
+          console.log(res.response);
+          toast.success("Submit form success !");
+        })
+        .catch((res) => {
+          console.log(res);
+          toast.error(res.message);
+        });
+    } catch (error) {
+      toast.error("Submit form error !");
+    }
   };
 
   return (
@@ -70,7 +75,7 @@ const RegisterOnline = () => {
       <HeaderTitleComponent name="Register online" />
       <Container className="py-3">
         <Row>
-          <Col className="px-5 border-r border-r-gray-200">
+          <Col className="px-5">
             <h5 className="font-bold py-4">REGISTER ONLINE</h5>
             {/* <div className="bg-cover bg-center h-80">
               <img
@@ -79,19 +84,38 @@ const RegisterOnline = () => {
               />
             </div> */}
             <Form onSubmit={handleSubmit(HandleSubmitFrom)}>
-              <div className="w-full flex flex-row">
-                <div className="w-1/2 pr-2">
-                  <Form.Group className="mt-3">
+              <div className="w-full">
+                <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3">
+                  <Form.Group>
                     <Form.Label className="font-bold">Full name(*)</Form.Label>
                     <Form.Control type="text" {...register("name")} />
                     <ErrorText text={errors.name?.message} />
                   </Form.Group>
-                  <Form.Group className="mt-3">
+                  <Form.Group>
+                    <Form.Label className="font-bold">Father name</Form.Label>
+                    <Form.Control
+                      {...register("fatherName")}
+                      type="text"
+                      name="fatherName"
+                    />
+                    <ErrorText text={errors.fatherName?.message} />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label className="font-bold">Mother name</Form.Label>
+                    <Form.Control
+                      {...register("motherName")}
+                      type="text"
+                      name="motherName"
+                    />
+                    <ErrorText text={errors.motherName?.message} />
+                  </Form.Group>
+
+                  <Form.Group>
                     <Form.Label className="font-bold">Birthday(*)</Form.Label>
                     <Form.Control {...register("dob")} type="date" name="dob" />
                     <ErrorText text={errors.dob?.message} />
                   </Form.Group>
-                  <Form.Group className="mt-3">
+                  <Form.Group>
                     <Form.Label className="font-bold">Gender(*)</Form.Label>
                     <select
                       name="gender"
@@ -101,32 +125,12 @@ const RegisterOnline = () => {
                       <option selected hidden value={""}>
                         Choice gender
                       </option>
-                      <option value={0}>Male</option>
-                      <option value={1}>Female</option>
+                      <option value={"0"}>Male</option>
+                      <option value={"1"}>Female</option>
                     </select>
                     <ErrorText text={errors.gender?.message} />
                   </Form.Group>
-                </div>
-                <div className="w-1/2 pl-2">
-                  <Form.Group className="mt-3">
-                    <Form.Label className="font-bold">Father name</Form.Label>
-                    <Form.Control
-                      {...register("fatherName")}
-                      type="text"
-                      name="fatherName"
-                    />
-                    <ErrorText text={errors.fatherName?.message} />
-                  </Form.Group>
-                  <Form.Group className="mt-3">
-                    <Form.Label className="font-bold">Mother name</Form.Label>
-                    <Form.Control
-                      {...register("motherName")}
-                      type="text"
-                      name="motherName"
-                    />
-                    <ErrorText text={errors.motherName?.message} />
-                  </Form.Group>
-                  <Form.Group className="mt-3">
+                  <Form.Group>
                     <Form.Label className="font-bold">
                       Admission for(*)
                     </Form.Label>
@@ -138,105 +142,125 @@ const RegisterOnline = () => {
                     <ErrorText text={errors.admissionFor?.message} />
                   </Form.Group>
                 </div>
-              </div>
-              <Form.Group className="mt-3">
-                <Form.Label className="font-bold">
-                  Residential address(*)
-                </Form.Label>
-                <Form.Control
-                  {...register("residentialAddress")}
-                  type="text"
-                  name="residentialAddress"
-                />
-                <ErrorText text={errors.residentialAddress?.message} />
-              </Form.Group>
-              <Form.Group className="mt-3">
-                <Form.Label className="font-bold">
-                  Permanent address(*)
-                </Form.Label>
-                <Form.Control
-                  {...register("permanentAddress")}
-                  type="text"
-                  name="permanentAddress"
-                />
-                <ErrorText text={errors.permanentAddress?.message} />
-              </Form.Group>
+                <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-3">
+                  <Form.Group>
+                    <Form.Label className="font-bold">
+                      Residential address(*)
+                    </Form.Label>
+                    <Form.Control
+                      {...register("residentialAddress")}
+                      type="text"
+                      name="residentialAddress"
+                    />
+                    <ErrorText text={errors.residentialAddress?.message} />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label className="font-bold">
+                      Permanent address(*)
+                    </Form.Label>
+                    <Form.Control
+                      {...register("permanentAddress")}
+                      type="text"
+                      name="permanentAddress"
+                    />
+                    <ErrorText text={errors.permanentAddress?.message} />
+                  </Form.Group>
+                </div>
 
-              <Form.Group className="mt-3">
-                <Form.Label className="font-bold">university(*)</Form.Label>
-                <Form.Control
-                  {...register("university")}
-                  type="text"
-                  name="university"
-                />
-                <ErrorText text={errors.university?.message} />
-              </Form.Group>
-              <Form.Group className="mt-3">
-                <Form.Label className="font-bold">
-                  Enrollment number(*)
-                </Form.Label>
-                <Form.Control
-                  {...register("enrollmentNumber")}
-                  type="text"
-                  name="enrollmentNumber"
-                />
-                <ErrorText text={errors.enrollmentNumber?.message} />
-              </Form.Group>
-              <Form.Group className="mt-3">
-                <Form.Label className="font-bold">Center(*)</Form.Label>
-                <Form.Control
-                  {...register("center")}
-                  type="text"
-                  name="center"
-                />
-                <ErrorText text={errors.center?.message} />
-              </Form.Group>
-              <Form.Group className="mt-3">
-                <Form.Label className="font-bold">Stream(*)</Form.Label>
-                <Form.Control
-                  {...register("stream")}
-                  type="text"
-                  name="stream"
-                />
-                <ErrorText text={errors.stream?.message} />
-              </Form.Group>
-              <Form.Group className="mt-3">
-                <Form.Label className="font-bold">Field(*)</Form.Label>
-                <Form.Control {...register("field")} type="text" name="field" />
-                <ErrorText text={errors.field?.message} />
-              </Form.Group>
-              <Form.Group className="mt-3">
-                <Form.Label className="font-bold">Mark secured(*)</Form.Label>
-                <Form.Control
-                  {...register("markSecured")}
-                  type="text"
-                  name="markSecured"
-                />
-                <ErrorText text={errors.markSecured?.message} />
-              </Form.Group>
-              <Form.Group className="mt-3">
-                <Form.Label className="font-bold">Out of(*)</Form.Label>
-                <Form.Control {...register("outOf")} type="text" name="outOf" />
-                <ErrorText text={errors.outOf?.message} />
-              </Form.Group>
-              <Form.Group className="mt-3">
-                <Form.Label className="font-bold">Class obtained(*)</Form.Label>
-                <Form.Control
-                  {...register("classObtained")}
-                  type="text"
-                  name="classObtained"
-                />
-                <ErrorText text={errors.classObtained?.message} />
-              </Form.Group>
-              <Form.Group className="mt-3">
-                <Form.Label className="font-bold">Sport detail(*)</Form.Label>
-                <Form.Control
-                  {...register("SportDetail")}
-                  type="text"
-                  name="SportDetail"
-                />
-                <ErrorText text={errors.SportDetail?.message} />
-              </Form.Group>
+                <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3">
+                  <Form.Group>
+                    <Form.Label className="font-bold">university(*)</Form.Label>
+                    <Form.Control
+                      {...register("university")}
+                      type="text"
+                      name="university"
+                    />
+                    <ErrorText text={errors.university?.message} />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label className="font-bold">
+                      Enrollment number(*)
+                    </Form.Label>
+                    <Form.Control
+                      {...register("enrollmentNumber")}
+                      type="text"
+                      name="enrollmentNumber"
+                    />
+                    <ErrorText text={errors.enrollmentNumber?.message} />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label className="font-bold">Center(*)</Form.Label>
+                    <Form.Control
+                      {...register("center")}
+                      type="text"
+                      name="center"
+                    />
+                    <ErrorText text={errors.center?.message} />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label className="font-bold">Stream(*)</Form.Label>
+                    <Form.Control
+                      {...register("stream")}
+                      type="text"
+                      name="stream"
+                    />
+                    <ErrorText text={errors.stream?.message} />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label className="font-bold">Field(*)</Form.Label>
+                    <Form.Control
+                      {...register("field")}
+                      type="text"
+                      name="field"
+                    />
+                    <ErrorText text={errors.field?.message} />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label className="font-bold">
+                      Mark secured(*)
+                    </Form.Label>
+                    <Form.Control
+                      {...register("markSecured")}
+                      type="text"
+                      name="markSecured"
+                    />
+                    <ErrorText text={errors.markSecured?.message} />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label className="font-bold">Out of(*)</Form.Label>
+                    <Form.Control
+                      {...register("outOf")}
+                      type="text"
+                      name="outOf"
+                    />
+                    <ErrorText text={errors.outOf?.message} />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label className="font-bold">
+                      Class obtained(*)
+                    </Form.Label>
+                    <Form.Control
+                      {...register("classObtained")}
+                      type="text"
+                      name="classObtained"
+                    />
+                    <ErrorText text={errors.classObtained?.message} />
+                  </Form.Group>
+                </div>
+                <Form.Group>
+                  <Form.Label className="font-bold">Sport detail(*)</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    {...register("SportDetail")}
+                    type="text"
+                    name="SportDetail"
+                  />
+                  <ErrorText text={errors.SportDetail?.message} />
+                </Form.Group>
+              </div>
+
               <div>
                 <button className="button-outline-app font-bold text-base mt-3 px-5 py-2">
                   Submit

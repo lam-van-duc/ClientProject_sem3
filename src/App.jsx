@@ -1,8 +1,8 @@
 import "./App.css";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import { Nav, Navbar, Modal, Button } from "react-bootstrap";
+
 import { NavLink, Routes, Route } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import Contact from "./pages/Contact";
 import RegisterOnline from "./pages/RegisterOnline";
 import Home from "./pages/Home";
@@ -14,7 +14,18 @@ import Facilities from "./pages/Facilities";
 import FeedBack from "./pages/FeedBack";
 import LogoColor from "./assets/image/logoITM-color.png";
 import { ToastContainer } from "react-toastify";
+import LoginComponent from "./components/LoginComponent";
+import RegisterAccountComponent from "./components/ResgiterAccountComponent";
+
 function App() {
+  const [showFromLogin, setShowFromLogin] = useState(false);
+  const [showFromType, setShowFromType] = useState("Login");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordRegister, setShowPasswordRegister] = useState(false);
+
+  const handleCloseFromLogin = () => setShowFromLogin(false);
+  const handleShowFromLogin = () => setShowFromLogin(true);
+
   return (
     <div className="relative h-full">
       <div className="top-0 sticky z-10 bg-white">
@@ -61,9 +72,9 @@ function App() {
                   <CustomLink to="/Feedback">Feedback</CustomLink>
                   <a
                     className="bg-red-800 text-white cursor-pointer py-2 px-4 font-bold rounded-md hover:shadow-xl ml-8"
-                    href="/dang-ky-tuyen-sinh"
+                    onClick={handleShowFromLogin}
                   >
-                    Admission
+                    Đăng nhập
                   </a>
                 </Nav>
               </Navbar.Collapse>
@@ -81,8 +92,7 @@ function App() {
         <Route path="/Facilities/:id" element={<Facilities />} />
         <Route path="/Contact" element={<Contact />} />
         <Route path="/FeedBack" element={<FeedBack />} />
-
-        <Route path="/dang-ky-tuyen-sinh" element={<RegisterOnline />} />
+        <Route path="/StudentRegistration" element={<RegisterOnline />} />
       </Routes>
       <footer>
         <div className="flex flex-row flex-wrap bg-[#f05123] text-white justify-center items-start py-9">
@@ -101,17 +111,29 @@ function App() {
             <a className="text-white pb-2" href="/">
               Home
             </a>
-            <a className="text-white pb-2" href="/infor">
-              Introduction
+            <a className="text-white pb-2" href="/Courses">
+              Courses
             </a>
-            <a className="text-white pb-2" href="/Daotao">
-              Education program
+            <a className="text-white pb-2" href="/StudentRegistration">
+              Student registration
+            </a>
+            <a className="text-white pb-2" href="/Department">
+              Department
+            </a>
+            <a className="text-white pb-2" href="/Faculty">
+              Faculty
+            </a>
+            <a className="text-white pb-2" href="/Facilities">
+              Facilities
+            </a>
+            <a className="text-white pb-2" href="/Teachers">
+              Teachers
             </a>
             <a className="text-white pb-2" href="/Contact">
               Contact
             </a>
-            <a className="text-white pb-2" href="/dang-ky-tuyen-sinh">
-              Register for admission
+            <a className="text-white pb-2" href="/Feedback">
+              Feedback
             </a>
           </div>
           <div className="flex flex-col flex-1 max-w-xs text-sm px-2">
@@ -132,6 +154,58 @@ function App() {
         </div>
       </footer>
       <ToastContainer />
+
+      <Modal show={showFromLogin} onHide={handleCloseFromLogin}>
+        <Modal.Header closeButton>
+          <Modal.Title>{showFromType}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {showFromType == "Login" ? (
+            <LoginComponent></LoginComponent>
+          ) : (
+            <RegisterAccountComponent></RegisterAccountComponent>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          {showFromType == "Login" ? (
+            <div className="w-full text-center font-bold text-base">
+              Don't have an account?
+              <span
+                className="text-orange-400 hover:underline cursor-pointer select-none"
+                onClick={() => {
+                  setShowFromType("Register");
+                }}
+              >
+                {" Register."}
+              </span>
+            </div>
+          ) : (
+            <div className="w-full text-center font-bold text-base">
+              Already have an account?
+              <span
+                className="text-orange-400 hover:underline cursor-pointer select-none"
+                onClick={() => {
+                  setShowFromType("Login");
+                }}
+              >
+                {" Login."}
+              </span>
+            </div>
+          )}
+          {
+            /* <Button variant="secondary" onClick={handleCloseFromLogin}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleCloseFromLogin}>
+            Save Changes
+          </Button> */
+            //          "email": "string",
+            // "password": "string",
+            // "confirmPassword": "string",
+            // "studentCode": "string"
+          }
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

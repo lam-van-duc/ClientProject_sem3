@@ -1,8 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 import HeaderTitleComponent from "../components/HeaderTitleComponent";
-
 import ErrorText from "../components/ErrorText";
 import axiosConfig from "../config/axiosConfig";
 import { toast } from "react-toastify";
@@ -27,15 +25,19 @@ const FeedBack = () => {
     mode: "onChange",
   });
   const HandleSubmitFrom = async (data) => {
-    await axiosConfig
-      .post("/api/Feedback", data)
-      .then((res) => {
-        console.log(res.response);
-        toast.success("Submit form success");
-      })
-      .catch((res) => {
-        toast.error(res.response.data.title);
-      });
+    try {
+      await axiosConfig
+        .post("/api/Feedback", data)
+        .then((res) => {
+          console.log(res.response);
+          toast.success("Submit form success");
+        })
+        .catch((res) => {
+          toast.error(res.message);
+        });
+    } catch (error) {
+      toast.error("Submit form error !");
+    }
   };
   return (
     <div>

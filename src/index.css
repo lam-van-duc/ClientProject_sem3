@@ -95,6 +95,26 @@ button.button-outline-app:focus-visible {
   background-color: rgb(251 146 60);
 }
 
+.button-app {
+  display: inline-block;
+  color: white;
+  border: 1px solid rgb(251 146 60);
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-decoration: none;
+  background-color: rgb(251 146 60) !important;
+  transition: transform 0.3s ease;
+}
+button.button-app:focus-visible {
+  outline: none;
+}
+
+.button-app:active {
+  transform: scale(1.03);
+}
+.btn-close {
+  box-shadow: 0 0 0 0 !important;
+}
 /* ======================  end button ================================*/
 
 .form-input > input,
