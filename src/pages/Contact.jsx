@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import ContactComponent from "../components/ContactComponent";
 import ErrorText from "../components/ErrorText";
 import axiosConfig from "../config/axiosConfig";
@@ -40,7 +39,7 @@ const Contact = () => {
   };
 
   return (
-    <Container className="mb-5">
+    <div className="container mb-5">
       <div
         className="bg-cover bg-center relative"
         style={{
@@ -132,7 +131,7 @@ const Contact = () => {
           ></iframe>
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 export default Contact;

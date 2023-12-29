@@ -35,6 +35,7 @@ function App() {
                   ? "md:block sm:block block"
                   : "md:hidden sm:hidden hidden"
               }`}
+              style={{ transition: "all 0.2s ease" }}
             >
               <ul
                 className="flex max-h-40 overflow-auto flex-col justify-start items-start border-[1px]  border-blue-400
@@ -174,7 +175,7 @@ function App() {
           setOpenModalLogin(false);
         }}
       >
-        <div className="text-4xl font-bold text-center">Login</div>
+        <div className="text-4xl font-bold text-center">{showFromType}</div>
         {showFromType == "Login" ? (
           <LoginComponent
             onMoveLogin={() => {

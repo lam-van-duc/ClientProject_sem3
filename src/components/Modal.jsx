@@ -5,13 +5,13 @@ import propTypes from "prop-types";
 const Modal = ({ open, onClose, children }) => {
   return (
     <div
-      className={`fixed inset-0 flex justify-center items-center transition-colors ${
+      className={`fixed inset-0 flex justify-center items-center transition-colors z-50 ${
         open ? "visible bg-black/20" : "invisible"
       }`}
       onClick={onClose}
     >
       <div
-        className={`bg-white rounded-lg shadow p-6 transition-all max-w-xl w-100 min-h-[25rem] ${
+        className={`bg-white rounded-lg shadow p-6 transition-all max-w-xl w-100 min-h-[25rem] max-h-[95%] overflow-auto ${
           open ? "scale-100 opacity-100" : "scale-110 opacity-0"
         }`}
         onClick={(e) => e.stopPropagation()}
