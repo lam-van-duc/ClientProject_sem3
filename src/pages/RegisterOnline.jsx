@@ -166,87 +166,113 @@ const RegisterOnline = () => {
                     <ErrorText text={errors.permanentAddress?.message} />
                   </Form.Group>
                 </div>
+                <div>
+                  <fieldset className="border border-solid border-gray-400 p-3">
+                    <legend className="text-sm">In tabular format</legend>
+                    <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3">
+                      <Form.Group>
+                        <Form.Label className="font-bold">
+                          university(*)
+                        </Form.Label>
+                        <Form.Control
+                          {...register("university")}
+                          type="text"
+                          name="university"
+                        />
+                        <ErrorText text={errors.university?.message} />
+                      </Form.Group>
+                      <Form.Group>
+                        <Form.Label className="font-bold">
+                          Enrollment number(*)
+                        </Form.Label>
+                        <Form.Control
+                          {...register("enrollmentNumber")}
+                          type="text"
+                          name="enrollmentNumber"
+                        />
+                        <ErrorText text={errors.enrollmentNumber?.message} />
+                      </Form.Group>
+                      <Form.Group>
+                        <Form.Label className="font-bold">Center(*)</Form.Label>
+                        <Form.Control
+                          {...register("center")}
+                          type="text"
+                          name="center"
+                        />
+                        <ErrorText text={errors.center?.message} />
+                      </Form.Group>
 
-                <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3">
-                  <Form.Group>
-                    <Form.Label className="font-bold">university(*)</Form.Label>
-                    <Form.Control
-                      {...register("university")}
-                      type="text"
-                      name="university"
-                    />
-                    <ErrorText text={errors.university?.message} />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label className="font-bold">
-                      Enrollment number(*)
-                    </Form.Label>
-                    <Form.Control
-                      {...register("enrollmentNumber")}
-                      type="text"
-                      name="enrollmentNumber"
-                    />
-                    <ErrorText text={errors.enrollmentNumber?.message} />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label className="font-bold">Center(*)</Form.Label>
-                    <Form.Control
-                      {...register("center")}
-                      type="text"
-                      name="center"
-                    />
-                    <ErrorText text={errors.center?.message} />
-                  </Form.Group>
-
-                  <Form.Group>
-                    <Form.Label className="font-bold">Stream(*)</Form.Label>
-                    <Form.Control
-                      {...register("stream")}
-                      type="text"
-                      name="stream"
-                    />
-                    <ErrorText text={errors.stream?.message} />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label className="font-bold">Field(*)</Form.Label>
-                    <Form.Control
-                      {...register("field")}
-                      type="text"
-                      name="field"
-                    />
-                    <ErrorText text={errors.field?.message} />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label className="font-bold">
-                      Mark secured(*)
-                    </Form.Label>
-                    <Form.Control
-                      {...register("markSecured")}
-                      type="text"
-                      name="markSecured"
-                    />
-                    <ErrorText text={errors.markSecured?.message} />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label className="font-bold">Out of(*)</Form.Label>
-                    <Form.Control
-                      {...register("outOf")}
-                      type="text"
-                      name="outOf"
-                    />
-                    <ErrorText text={errors.outOf?.message} />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label className="font-bold">
-                      Class obtained(*)
-                    </Form.Label>
-                    <Form.Control
-                      {...register("classObtained")}
-                      type="text"
-                      name="classObtained"
-                    />
-                    <ErrorText text={errors.classObtained?.message} />
-                  </Form.Group>
+                      <Form.Group>
+                        <Form.Label className="font-bold">Stream(*)</Form.Label>
+                        <Form.Control
+                          {...register("stream")}
+                          type="text"
+                          name="stream"
+                        />
+                        <ErrorText text={errors.stream?.message} />
+                      </Form.Group>
+                      <Form.Group>
+                        <Form.Label className="font-bold">Field(*)</Form.Label>
+                        <Form.Control
+                          {...register("field")}
+                          type="text"
+                          name="field"
+                        />
+                        <ErrorText text={errors.field?.message} />
+                      </Form.Group>
+                      <Form.Group>
+                        <Form.Label className="font-bold">
+                          Mark secured(*)
+                        </Form.Label>
+                        <Form.Control
+                          {...register("markSecured")}
+                          type="text"
+                          name="markSecured"
+                        />
+                        <ErrorText text={errors.markSecured?.message} />
+                      </Form.Group>
+                      <Form.Group>
+                        <Form.Label className="font-bold">Out of(*)</Form.Label>
+                        <Form.Control
+                          {...register("outOf")}
+                          type="text"
+                          name="outOf"
+                        />
+                        <ErrorText text={errors.outOf?.message} />
+                      </Form.Group>
+                      <Form.Group>
+                        <Form.Label className="font-bold">
+                          Class obtained(*)
+                        </Form.Label>
+                        <Form.Control
+                          {...register("classObtained")}
+                          type="text"
+                          name="classObtained"
+                        />
+                        <ErrorText text={errors.classObtained?.message} />
+                      </Form.Group>
+                    </div>
+                  </fieldset>
+                  <form>
+                    <fieldset className="border-spacing-2 border-gray-950">
+                      <legend className="w-auto m-5">Information</legend>
+                      <div className="form-group row">
+                        <label
+                          htmlFor="myId"
+                          className="col-md-2 col-form-label label-form"
+                        >
+                          Name
+                        </label>
+                        <div className="col-md-10">
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="myId"
+                          />
+                        </div>
+                      </div>
+                    </fieldset>
+                  </form>
                 </div>
                 <Form.Group>
                   <Form.Label className="font-bold">Sport detail(*)</Form.Label>

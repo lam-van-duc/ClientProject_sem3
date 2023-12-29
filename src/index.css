@@ -18,21 +18,23 @@ nav > div > div > div > .navbar-nav > a {
 }
 
 nav > div > div > div > .navbar-nav > .active,
-.dropDownMenu > ul > li a.active {
+.dropDownMenu ul li a.active {
   background-color: rgb(251 146 60) !important;
   color: white;
 }
-.dropDownMenu > ul > li {
+.dropDownMenu ul li {
   list-style: none;
-  border-bottom: 1px solid rgb(229 231 235 / var(--tw-border-opacity));
+  /* border-bottom: 1px solid rgb(229 231 235 / var(--tw-border-opacity)); */
 }
 
-.dropDownMenu > ul > li:last-child {
+.dropDownMenu ul li:last-child {
   list-style: none;
   border-bottom: none;
 }
-.dropDownMenu > ul > li a {
+.dropDownMenu ul li a {
   color: black;
+  text-decoration: none;
+  display: block;
 }
 
 .dropDownMenu > ul {

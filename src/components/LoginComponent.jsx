@@ -5,13 +5,14 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import propTypes from "prop-types";
 
 const schema = yup.object({
   email: yup.string().email("Invalid email !").required("please enter email !"),
   password: yup.string().required("please enter password !"),
 });
 
-const LoginComponent = () => {
+const LoginComponent = ({ onMoveLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -35,40 +36,50 @@ const LoginComponent = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(HandleSubmitFrom)}>
-      <div className="px-5 w-full">
-        <div className="form-input">
-          <label>Email</label>
-          <input type="email" {...register("email")} />
-          <ErrorText text={errors.email?.message}></ErrorText>
+    <div>
+      <form onSubmit={handleSubmit(HandleSubmitFrom)}>
+        <div className="px-5 w-full">
+          <div className="form-input">
+            <label>Email</label>
+            <input type="email" {...register("email")} />
+            <ErrorText text={errors.email?.message}></ErrorText>
+          </div>
+          <div className="form-input">
+            <label>Password</label>
+            <input
+              type={showPassword ? "text" : "password"}
+              {...register("password")}
+            />
+            <ErrorText text={errors.password?.message}></ErrorText>
+          </div>
+          <div className="flex flex-row items-center justify-start mb-3">
+            <input
+              className="w-4 h-4"
+              type="checkbox"
+              name="showPasswordLogin"
+              checked={showPassword}
+              onChange={(e) => setShowPassword(!showPassword)}
+            />
+            <label className="text-sm ml-2">Show password</label>
+          </div>
+          <button
+            className="button-app w-full font-bold py-2 rounded-full"
+            type="submit"
+          >
+            Login
+          </button>
         </div>
-        <div className="form-input">
-          <label>Password</label>
-          <input
-            type={showPassword ? "text" : "password"}
-            {...register("password")}
-          />
-          <ErrorText text={errors.password?.message}></ErrorText>
-        </div>
-        <div className="flex flex-row items-center justify-start mb-3">
-          <input
-            className="w-4 h-4"
-            type="checkbox"
-            name="showPasswordLogin"
-            checked={showPassword}
-            onChange={(e) => setShowPassword(!showPassword)}
-          />
-          <label className="text-sm ml-2">Show password</label>
-        </div>
-        <button
-          className="button-app w-full font-bold py-2 rounded-full"
-          type="submit"
-        >
-          Login
-        </button>
+      </form>
+      <div className="w-full text-center font-bold text-base mt-2">
+        Don't have an account?
+        <span onClick={onMoveLogin} className="text-orange-400 cursor-pointer">
+          {" Register."}
+        </span>
       </div>
-    </form>
+    </div>
   );
 };
-
+LoginComponent.propTypes = {
+  onMoveLogin: propTypes.func,
+};
 export default LoginComponent;
