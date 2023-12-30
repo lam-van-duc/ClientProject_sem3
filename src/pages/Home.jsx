@@ -1,8 +1,8 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ButtonOnTopComponent from "../components/ButtonOnTopComponent";
 
 const Home = () => {
   const images = [
@@ -63,7 +63,7 @@ const Home = () => {
             />
           </div>
         </div>
-        <Container>
+        <div className="container mx-auto">
           <div>
             <p className="text-center text-2xl font-bold text-blue-700 py-7 uppercase">
               Education program
@@ -233,9 +233,9 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </Container>
+        </div>
         <div className="bg-[#fff6ea]">
-          <Container>
+          <div className="container mx-auto">
             <div>
               <h3 className="flex flex-row items-center justify-center my-12">
                 <b className="flex-1 bg-gray-300 h-1"></b>
@@ -312,7 +312,7 @@ const Home = () => {
                 </Slide>
               </div>
             </div>
-          </Container>
+          </div>
         </div>
 
         <div
@@ -333,6 +333,7 @@ const Home = () => {
           </a>
         </div>
       </div>
+      <ButtonOnTopComponent></ButtonOnTopComponent>
     </div>
   );
 };

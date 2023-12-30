@@ -112,7 +112,7 @@ button.button-app:focus-visible {
 }
 
 .button-app:active {
-  transform: scale(1.03);
+  transform: scale(0.96);
 }
 .btn-close {
   box-shadow: 0 0 0 0 !important;
@@ -144,7 +144,7 @@ button.button-app:focus-visible {
 .form-input > label {
   display: block;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 500;
 }
 option:hover {
   background-color: rgb(251 146 60) !important;

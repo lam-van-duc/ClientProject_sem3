@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
 import HeaderTitleDetailsComponent from "../components/HeaderTitleDetailsComponent";
@@ -19,7 +18,7 @@ const CourseDetails = () => {
         name="Course details"
         imageBackground={course.image}
       ></HeaderTitleDetailsComponent>
-      <Container className="my-2">{parse(htmlCkeditor)}</Container>
+      <div className="container mx-auto my-2">{parse(htmlCkeditor)}</div>
     </div>
   );
 };

@@ -21,21 +21,22 @@ const Contact = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onSubmit",
   });
+
   const HandleSubmitFrom = async (data) => {
-    // await axiosConfig
-    //   .post("/api/Admission", data)
-    //   .then((res) => {
-    //     console.log(res.response);
-    //     toast.success("Submit form success");
-    //   })
-    //   .catch((res) => {
-    //     toast.error(res.response.data.title);
-    //   });
-    toast.success("Submit contact success");
+    await axiosConfig
+      .post("/api/ContactUs", data)
+      .then((res) => {
+        reset();
+        toast.success("Submit contact success");
+      })
+      .catch((res) => {
+        toast.error(res.data.response);
+      });
   };
 
   return (

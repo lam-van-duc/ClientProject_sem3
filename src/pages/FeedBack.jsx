@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import HeaderTitleComponent from "../components/HeaderTitleComponent";
 import ErrorText from "../components/ErrorText";
 import axiosConfig from "../config/axiosConfig";
@@ -20,6 +19,7 @@ const FeedBack = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
@@ -29,7 +29,7 @@ const FeedBack = () => {
       await axiosConfig
         .post("/api/Feedback", data)
         .then((res) => {
-          console.log(res.response);
+          reset();
           toast.success("Submit form success");
         })
         .catch((res) => {
@@ -46,7 +46,7 @@ const FeedBack = () => {
         Community Education Feedback
       </div>
       <form onSubmit={handleSubmit(HandleSubmitFrom)}>
-        <Container className="my-4">
+        <div className="container mx-auto my-4">
           <div className="flex  flex-wrap justify-center">
             <div className="form-input flex-1 mr-2">
               <label>Full name:</label>
@@ -84,7 +84,7 @@ const FeedBack = () => {
               {...register("otherQuestion")}
             ></textarea>
           </div>
-        </Container>
+        </div>
         <div className="border-t border-gray-20 mt-10 py-10">
           <div className="text-center font-bold text-6xl mb-10 text-orange-400 0">
             Thank you !

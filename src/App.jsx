@@ -72,7 +72,7 @@ function App() {
                 <CustomLink to="/Contact">Contact us</CustomLink>
                 <CustomLink to="/Feedback">Feedback</CustomLink>
                 <a
-                  className="bg-red-800 text-white cursor-pointer py-2 px-4 font-bold rounded-md hover:shadow-xl ml-0 lg:ml-8 block"
+                  className="bg-red-800 text-white cursor-pointer py-2 px-4 font-bold rounded-md hover:shadow-xl ml-0 lg:ml-8 block no-underline"
                   onClick={() => {
                     setOpenModalLogin(true);
                   }}
@@ -110,7 +110,7 @@ function App() {
         <Route path="/StudentRegistration" element={<RegisterOnline />} />
       </Routes>
       <footer>
-        <div className="flex flex-row flex-wrap bg-[#f05123] text-white justify-center items-start py-9">
+        <div className="flex flex-row flex-wrap bg-[#fb923c] text-white justify-center items-start py-9">
           <div className="flex flex-col flex-1 max-w-xs text-sm  px-2">
             <div className="text-base font-bold uppercase">Introduce</div>
             <b className="bg-gray-200 h-1 w-10 my-3 rounded-md"></b>
@@ -154,16 +154,10 @@ function App() {
           <div className="flex flex-col flex-1 max-w-xs text-sm px-2">
             <div className="text-base font-bold uppercase">CONTACT</div>
             <b className="bg-gray-200 h-1 w-10 my-3 rounded-md"></b>
-            <p>(HN) 024 7300 8855 - 0973 111 086</p>
-            <p>(HCM) 028 7300 8866 - 0931 313 329</p>
+            <p>024 7300 8855 - 0973 111 086</p>
             <p>
               aptech.fpt@fe.edu.vn Số 8, Tôn Thất Thuyết, Mỹ Đình, Từ Liêm, Hà
               Nội
-            </p>
-            <p>
-              590, CMT8, Phường 11, Q.3, Tp. Hồ Chí Minh 391A Nam Kỳ Khởi Nghĩa,
-              P. Võ Thị Sáu, Q.3, Tp. Hồ Chí Minh 62 Đường số 36, KDC Vạn Phúc,
-              P. Hiệp Bình Phước, Tp. Thủ Đức
             </p>
           </div>
         </div>
@@ -190,54 +184,6 @@ function App() {
           ></RegisterAccountComponent>
         )}
       </Modal>
-
-      {/* <Modal show={showFromLogin} onHide={handleCloseFromLogin}>
-        <Modal.Header closeButton>
-          <Modal.Title>{showFromType}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-         
-        </Modal.Body>
-        <Modal.Footer>
-          {showFromType == "Login" ? (
-            <div className="w-full text-center font-bold text-base">
-              Don't have an account?
-              <span
-                className="text-orange-400 hover:underline cursor-pointer select-none"
-                onClick={() => {
-                  setShowFromType("Register");
-                }}
-              >
-                {" Register."}
-              </span>
-            </div>
-          ) : (
-            <div className="w-full text-center font-bold text-base">
-              Already have an account?
-              <span
-                className="text-orange-400 hover:underline cursor-pointer select-none"
-                onClick={() => {
-                  setShowFromType("Login");
-                }}
-              >
-                {" Login."}
-              </span>
-            </div>
-          )} */}
-      {
-        /* <Button variant="secondary" onClick={handleCloseFromLogin}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleCloseFromLogin}>
-            Save Changes
-          </Button> */
-        //          "email": "string",
-        // "password": "string",
-        // "confirmPassword": "string",
-        // "studentCode": "string"
-      }
-      {/* </Modal.Footer>
-      </Modal> */}
     </div>
   );
 }
@@ -276,7 +222,7 @@ function CustomLinkDropDown({ displayName, to, children, ...props }) {
   return (
     <div className="dropDownMenu hover:bg-orange-400 hover:text-white px-4 py-2 cursor-pointer">
       <div className="relative">{displayName}</div>
-      <ul className="absolute p-0 bg-white z-10 border border-gray-400 top-0">
+      <ul className="absolute p-0 bg-white z-10 border border-gray-400 top-[55%]">
         {children}
       </ul>
     </div>

@@ -11,9 +11,12 @@ const Modal = ({ open, onClose, children }) => {
       onClick={onClose}
     >
       <div
-        className={`bg-white rounded-lg shadow p-6 transition-all max-w-xl w-100 min-h-[25rem] max-h-[95%] overflow-auto ${
+        className={`bg-white rounded-lg p-6 transition-all max-w-xl w-100 min-h-[25rem] max-h-[95%] overflow-auto ${
           open ? "scale-100 opacity-100" : "scale-110 opacity-0"
         }`}
+        style={{
+          boxShadow: "5px 5px 15px 0 #555555",
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         <button

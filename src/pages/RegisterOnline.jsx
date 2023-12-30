@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Container, Col, Row, Form } from "react-bootstrap";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import * as yup from "yup";
@@ -48,6 +47,7 @@ const RegisterOnline = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
@@ -58,7 +58,7 @@ const RegisterOnline = () => {
       await axiosConfig
         .post("/api/Admission", data)
         .then((res) => {
-          console.log(res.response);
+          reset();
           toast.success("Submit form success !");
         })
         .catch((res) => {
@@ -73,229 +73,187 @@ const RegisterOnline = () => {
   return (
     <div>
       <HeaderTitleComponent name="Register online" />
-      <Container className="py-3">
-        <Row>
-          <Col className="px-5">
-            <h5 className="font-bold py-4">REGISTER ONLINE</h5>
-            {/* <div className="bg-cover bg-center h-80">
+      <div className="container mx-auto py-3">
+        <div className="px-5">
+          <h5 className="font-bold py-4">REGISTER ONLINE</h5>
+          {/* <div className="bg-cover bg-center h-80">
               <img
                 src="https://aptech.fpt.edu.vn/wp-content/uploads/2022/12/banner.jpg"
                 className="object-cover h-full w-full"
               />
             </div> */}
-            <Form onSubmit={handleSubmit(HandleSubmitFrom)}>
-              <div className="w-full">
-                <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3">
-                  <Form.Group>
-                    <Form.Label className="font-bold">Full name(*)</Form.Label>
-                    <Form.Control type="text" {...register("name")} />
-                    <ErrorText text={errors.name?.message} />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label className="font-bold">Father name</Form.Label>
-                    <Form.Control
-                      {...register("fatherName")}
-                      type="text"
-                      name="fatherName"
-                    />
-                    <ErrorText text={errors.fatherName?.message} />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label className="font-bold">Mother name</Form.Label>
-                    <Form.Control
-                      {...register("motherName")}
-                      type="text"
-                      name="motherName"
-                    />
-                    <ErrorText text={errors.motherName?.message} />
-                  </Form.Group>
-
-                  <Form.Group>
-                    <Form.Label className="font-bold">Birthday(*)</Form.Label>
-                    <Form.Control {...register("dob")} type="date" name="dob" />
-                    <ErrorText text={errors.dob?.message} />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label className="font-bold">Gender(*)</Form.Label>
-                    <select
-                      name="gender"
-                      className="form-control"
-                      {...register("gender")}
-                    >
-                      <option selected hidden value={""}>
-                        Choice gender
-                      </option>
-                      <option value={"0"}>Male</option>
-                      <option value={"1"}>Female</option>
-                    </select>
-                    <ErrorText text={errors.gender?.message} />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label className="font-bold">
-                      Admission for(*)
-                    </Form.Label>
-                    <Form.Control
-                      {...register("admissionFor")}
-                      type="text"
-                      name="admissionFor"
-                    />
-                    <ErrorText text={errors.admissionFor?.message} />
-                  </Form.Group>
+          <form onSubmit={handleSubmit(HandleSubmitFrom)}>
+            <div className="w-full">
+              <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3">
+                <div className="form-input">
+                  <label className="font-bold">Full name(*)</label>
+                  <input type="text" {...register("name")} />
+                  <ErrorText text={errors.name?.message} />
                 </div>
-                <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-3">
-                  <Form.Group>
-                    <Form.Label className="font-bold">
-                      Residential address(*)
-                    </Form.Label>
-                    <Form.Control
-                      {...register("residentialAddress")}
-                      type="text"
-                      name="residentialAddress"
-                    />
-                    <ErrorText text={errors.residentialAddress?.message} />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label className="font-bold">
-                      Permanent address(*)
-                    </Form.Label>
-                    <Form.Control
-                      {...register("permanentAddress")}
-                      type="text"
-                      name="permanentAddress"
-                    />
-                    <ErrorText text={errors.permanentAddress?.message} />
-                  </Form.Group>
-                </div>
-                <div>
-                  <fieldset className="border border-solid border-gray-400 p-3">
-                    <legend className="text-sm">In tabular format</legend>
-                    <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3">
-                      <Form.Group>
-                        <Form.Label className="font-bold">
-                          university(*)
-                        </Form.Label>
-                        <Form.Control
-                          {...register("university")}
-                          type="text"
-                          name="university"
-                        />
-                        <ErrorText text={errors.university?.message} />
-                      </Form.Group>
-                      <Form.Group>
-                        <Form.Label className="font-bold">
-                          Enrollment number(*)
-                        </Form.Label>
-                        <Form.Control
-                          {...register("enrollmentNumber")}
-                          type="text"
-                          name="enrollmentNumber"
-                        />
-                        <ErrorText text={errors.enrollmentNumber?.message} />
-                      </Form.Group>
-                      <Form.Group>
-                        <Form.Label className="font-bold">Center(*)</Form.Label>
-                        <Form.Control
-                          {...register("center")}
-                          type="text"
-                          name="center"
-                        />
-                        <ErrorText text={errors.center?.message} />
-                      </Form.Group>
-
-                      <Form.Group>
-                        <Form.Label className="font-bold">Stream(*)</Form.Label>
-                        <Form.Control
-                          {...register("stream")}
-                          type="text"
-                          name="stream"
-                        />
-                        <ErrorText text={errors.stream?.message} />
-                      </Form.Group>
-                      <Form.Group>
-                        <Form.Label className="font-bold">Field(*)</Form.Label>
-                        <Form.Control
-                          {...register("field")}
-                          type="text"
-                          name="field"
-                        />
-                        <ErrorText text={errors.field?.message} />
-                      </Form.Group>
-                      <Form.Group>
-                        <Form.Label className="font-bold">
-                          Mark secured(*)
-                        </Form.Label>
-                        <Form.Control
-                          {...register("markSecured")}
-                          type="text"
-                          name="markSecured"
-                        />
-                        <ErrorText text={errors.markSecured?.message} />
-                      </Form.Group>
-                      <Form.Group>
-                        <Form.Label className="font-bold">Out of(*)</Form.Label>
-                        <Form.Control
-                          {...register("outOf")}
-                          type="text"
-                          name="outOf"
-                        />
-                        <ErrorText text={errors.outOf?.message} />
-                      </Form.Group>
-                      <Form.Group>
-                        <Form.Label className="font-bold">
-                          Class obtained(*)
-                        </Form.Label>
-                        <Form.Control
-                          {...register("classObtained")}
-                          type="text"
-                          name="classObtained"
-                        />
-                        <ErrorText text={errors.classObtained?.message} />
-                      </Form.Group>
-                    </div>
-                  </fieldset>
-                  <form>
-                    <fieldset className="border-spacing-2 border-gray-950">
-                      <legend className="w-auto m-5">Information</legend>
-                      <div className="form-group row">
-                        <label
-                          htmlFor="myId"
-                          className="col-md-2 col-form-label label-form"
-                        >
-                          Name
-                        </label>
-                        <div className="col-md-10">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="myId"
-                          />
-                        </div>
-                      </div>
-                    </fieldset>
-                  </form>
-                </div>
-                <Form.Group>
-                  <Form.Label className="font-bold">Sport detail(*)</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    {...register("SportDetail")}
+                <div className="form-input">
+                  <label className="font-bold">Father name</label>
+                  <input
+                    {...register("fatherName")}
                     type="text"
-                    name="SportDetail"
+                    name="fatherName"
                   />
-                  <ErrorText text={errors.SportDetail?.message} />
-                </Form.Group>
-              </div>
+                  <ErrorText text={errors.fatherName?.message} />
+                </div>
+                <div className="form-input">
+                  <label className="font-bold">Mother name</label>
+                  <input
+                    {...register("motherName")}
+                    type="text"
+                    name="motherName"
+                  />
+                  <ErrorText text={errors.motherName?.message} />
+                </div>
 
-              <div>
-                <button className="button-outline-app font-bold text-base mt-3 px-5 py-2">
-                  Submit
-                </button>
+                <div className="form-input">
+                  <label className="font-bold">Birthday(*)</label>
+                  <input {...register("dob")} type="date" name="dob" />
+                  <ErrorText text={errors.dob?.message} />
+                </div>
+                <div className="form-input">
+                  <label className="font-bold">Gender(*)</label>
+                  <select
+                    name="gender"
+                    className="form-control"
+                    {...register("gender")}
+                  >
+                    <option selected hidden value={""}>
+                      Choice gender
+                    </option>
+                    <option value={"0"}>Male</option>
+                    <option value={"1"}>Female</option>
+                  </select>
+                  <ErrorText text={errors.gender?.message} />
+                </div>
+                <div className="form-input">
+                  <label className="font-bold">Admission for(*)</label>
+                  <input
+                    {...register("admissionFor")}
+                    type="text"
+                    name="admissionFor"
+                  />
+                  <ErrorText text={errors.admissionFor?.message} />
+                </div>
               </div>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
+              <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-3">
+                <div className="form-input">
+                  <label className="font-bold">Residential address(*)</label>
+                  <input
+                    {...register("residentialAddress")}
+                    type="text"
+                    name="residentialAddress"
+                  />
+                  <ErrorText text={errors.residentialAddress?.message} />
+                </div>
+                <div className="form-input">
+                  <label className="font-bold">Permanent address(*)</label>
+                  <input
+                    {...register("permanentAddress")}
+                    type="text"
+                    name="permanentAddress"
+                  />
+                  <ErrorText text={errors.permanentAddress?.message} />
+                </div>
+              </div>
+              <div>
+                <div className="border-[2px] border-solid border-gray-300 p-3 rounded-md mb-3 relative">
+                  <span className="text-xl font-bold absolute top-[-17px] bg-white px-2 left-4">
+                    In tabular format
+                  </span>
+                  <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3">
+                    <div className="form-input">
+                      <label className="font-bold">university(*)</label>
+                      <input
+                        {...register("university")}
+                        type="text"
+                        name="university"
+                      />
+                      <ErrorText text={errors.university?.message} />
+                    </div>
+                    <div className="form-input">
+                      <label className="font-bold">Enrollment number(*)</label>
+                      <input
+                        {...register("enrollmentNumber")}
+                        type="text"
+                        name="enrollmentNumber"
+                      />
+                      <ErrorText text={errors.enrollmentNumber?.message} />
+                    </div>
+                    <div className="form-input">
+                      <label className="font-bold">Center(*)</label>
+                      <input
+                        {...register("center")}
+                        type="text"
+                        name="center"
+                      />
+                      <ErrorText text={errors.center?.message} />
+                    </div>
+
+                    <div className="form-input">
+                      <label className="font-bold">Stream(*)</label>
+                      <input
+                        {...register("stream")}
+                        type="text"
+                        name="stream"
+                      />
+                      <ErrorText text={errors.stream?.message} />
+                    </div>
+                    <div className="form-input">
+                      <label className="font-bold">Field(*)</label>
+                      <input {...register("field")} type="text" name="field" />
+                      <ErrorText text={errors.field?.message} />
+                    </div>
+                    <div className="form-input">
+                      <label className="font-bold">Mark secured(*)</label>
+                      <input
+                        {...register("markSecured")}
+                        type="text"
+                        name="markSecured"
+                      />
+                      <ErrorText text={errors.markSecured?.message} />
+                    </div>
+                    <div className="form-input">
+                      <label className="font-bold">Out of(*)</label>
+                      <input {...register("outOf")} type="text" name="outOf" />
+                      <ErrorText text={errors.outOf?.message} />
+                    </div>
+                    <div className="form-input">
+                      <label className="font-bold">Class obtained(*)</label>
+                      <input
+                        {...register("classObtained")}
+                        type="text"
+                        name="classObtained"
+                      />
+                      <ErrorText text={errors.classObtained?.message} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="form-input">
+                <label className="font-bold">Sport detail(*)</label>
+                <input
+                  as="textarea"
+                  rows={3}
+                  {...register("SportDetail")}
+                  type="text"
+                  name="SportDetail"
+                />
+                <ErrorText text={errors.SportDetail?.message} />
+              </div>
+            </div>
+
+            <div>
+              <button className="button-outline-app font-bold text-base mt-3 px-5 py-2">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

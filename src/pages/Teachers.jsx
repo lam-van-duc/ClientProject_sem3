@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
 import TeacherComponent from "../components/TeacherComponent";
 import HeaderTitleComponent from "../components/HeaderTitleComponent";
 import CourseComponent from "../components/CourseComponent";
@@ -81,7 +80,7 @@ const Teachers = () => {
         <HeaderTitleComponent name="Teacher"></HeaderTitleComponent>
       </div>
 
-      <Container className="flex justify-center mt-3">
+      <div className="container mx-auto flex justify-center mt-3">
         <div className="grid gap-3 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
           {ListTeacher.map((item, index) => {
             return (
@@ -95,8 +94,8 @@ const Teachers = () => {
             );
           })}
         </div>
-      </Container>
-      <Container>
+      </div>
+      <div className="container mx-auto">
         <div className="flex justify-center mt-3">
           <Pagination
             activePage={paginationActive}
@@ -106,8 +105,8 @@ const Teachers = () => {
             onChange={(page) => handleChangePage(page)}
           />
         </div>
-      </Container>
-      <Container className="mb-3">
+      </div>
+      <div className="container mx-auto mb-3">
         <h3 className="flex flex-row items-center justify-center mt-3">
           <b className="flex-1 bg-gray-300 h-1"></b>
           <span className="mx-4">Course</span>
@@ -130,7 +129,7 @@ const Teachers = () => {
             Show more Course
           </a>
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

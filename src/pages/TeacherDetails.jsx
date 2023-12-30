@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import HeaderTitleDetailsComponent from "../components/HeaderTitleDetailsComponent";
 import { useParams } from "react-router-dom";
 const TeacherDetail = () => {
@@ -21,7 +20,7 @@ const TeacherDetail = () => {
         name="Teacher details"
         imageBackground={teacher.image}
       ></HeaderTitleDetailsComponent>
-      <Container>
+      <div className="container mx-auto">
         <div className="flex flex-row flex-wrap p-4 bg-gray-200">
           <div className="p-4 w-80">
             <img src={teacher.image} className="object-contain w-full" />
@@ -82,7 +81,7 @@ const TeacherDetail = () => {
         <div>
           <div>Teacher other</div>
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

@@ -1,89 +1,112 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../style/Courses.css";
-import { Container } from "react-bootstrap";
 import CourseComponent from "../components/CourseComponent";
 import HeaderTitleComponent from "../components/HeaderTitleComponent";
 import Pagination from "react-js-pagination";
 import TeacherComponent from "../components/TeacherComponent";
-
+import axiosConfig from "../config/axiosConfig";
+import { toast } from "react-toastify";
 const Courses = () => {
   const [paginationActive, setPaginationActive] = useState(1);
+  const [ListCourse, setListCourse] = useState([]);
+
   const handleChangePage = (page) => {
     setPaginationActive(page);
-    console.log(page);
   };
-  const ListCourse = [
-    {
-      id: 1,
-      image:
-        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-1.jpg",
-      name: "Biochemistry",
-      title:
-        "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-    },
-    {
-      id: 2,
-      image:
-        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-2.jpg",
-      name: "Major in Economics",
-      title:
-        "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-    },
-    {
-      id: 3,
-      image:
-        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-3.jpg",
-      name: "Business Media",
-      title:
-        "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-    },
-    {
-      id: 4,
-      image:
-        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-4.jpg",
-      name: "Biotechnology",
-      title:
-        "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-    },
-    {
-      id: 5,
-      image:
-        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-6.jpg",
-      name: "Corporate Finance",
-      title: "Seamlessly visualize quality ",
-    },
-    {
-      id: 2,
-      image:
-        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-2.jpg",
-      name: "Major in Economics",
-      title:
-        "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-    },
-    {
-      id: 3,
-      image:
-        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-3.jpg",
-      name: "Business Media",
-      title:
-        "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-    },
-    {
-      id: 4,
-      image:
-        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-4.jpg",
-      name: "Biotechnology",
-      title:
-        "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-    },
-    {
-      id: 5,
-      image:
-        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-6.jpg",
-      name: "Corporate Finance",
-      title: "Seamlessly visualize quality ",
-    },
-  ];
+
+  const HandleSubmitFrom = async () => {
+    try {
+      await axiosConfig
+        .get("/api/Course")
+        .then((res) => {
+          console.log(res.data.response);
+          setListCourse(res.data.response);
+          toast.success("Submit form success");
+        })
+        .catch((res) => {
+          toast.error(res.message);
+        });
+    } catch (error) {
+      toast.error("Submit form error !");
+    }
+  };
+
+  useEffect(() => {
+    HandleSubmitFrom();
+  }, []);
+
+  // const ListCourse = [
+  //   {
+  //     id: 1,
+  //     image:
+  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-1.jpg",
+  //     name: "Biochemistry",
+  //     title:
+  //       "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
+  //   },
+  //   {
+  //     id: 2,
+  //     image:
+  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-2.jpg",
+  //     name: "Major in Economics",
+  //     title:
+  //       "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
+  //   },
+  //   {
+  //     id: 3,
+  //     image:
+  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-3.jpg",
+  //     name: "Business Media",
+  //     title:
+  //       "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
+  //   },
+  //   {
+  //     id: 4,
+  //     image:
+  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-4.jpg",
+  //     name: "Biotechnology",
+  //     title:
+  //       "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
+  //   },
+  //   {
+  //     id: 5,
+  //     image:
+  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-6.jpg",
+  //     name: "Corporate Finance",
+  //     title: "Seamlessly visualize quality ",
+  //   },
+  //   {
+  //     id: 2,
+  //     image:
+  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-2.jpg",
+  //     name: "Major in Economics",
+  //     title:
+  //       "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
+  //   },
+  //   {
+  //     id: 3,
+  //     image:
+  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-3.jpg",
+  //     name: "Business Media",
+  //     title:
+  //       "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
+  //   },
+  //   {
+  //     id: 4,
+  //     image:
+  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-4.jpg",
+  //     name: "Biotechnology",
+  //     title:
+  //       "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
+  //   },
+  //   {
+  //     id: 5,
+  //     image:
+  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-6.jpg",
+  //     name: "Corporate Finance",
+  //     title: "Seamlessly visualize quality ",
+  //   },
+  // ];
 
   const ListTeacher = [
     {
@@ -121,7 +144,7 @@ const Courses = () => {
       <div>
         <HeaderTitleComponent name="Course"></HeaderTitleComponent>
       </div>
-      <Container className="my-2">
+      <div className="my-2 container mx-auto">
         <div className="text-right">
           <select className="border py-2 px-4 focus-visible:outline-none ">
             <option selected hidden value="">
@@ -131,9 +154,9 @@ const Courses = () => {
             <option value="Oldest date">Oldest date</option>
           </select>
         </div>
-      </Container>
+      </div>
 
-      <Container>
+      <div className="container mx-auto">
         <div className="flex justify-center">
           <div className="grid gap-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
             {ListCourse.map((item, index) => {
@@ -161,8 +184,8 @@ const Courses = () => {
             </div>
           </div>
         </div>
-      </Container>
-      <Container className="mb-4">
+      </div>
+      <div className="container mx-auto mb-4">
         <h3 className="flex flex-row items-center justify-center">
           <b className="flex-1 bg-gray-300 h-1"></b>
           <span className="mx-4">Teacher</span>
@@ -191,7 +214,7 @@ const Courses = () => {
             </a>
           </div>
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

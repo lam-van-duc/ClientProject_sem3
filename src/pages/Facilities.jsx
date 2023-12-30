@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
-import { Container } from "react-bootstrap";
 import HeaderTitleComponent from "../components/HeaderTitleComponent";
+import ButtonOnTopComponent from "../components/ButtonOnTopComponent";
 const Facilities = () => {
   const { id } = useParams();
   const htmlCkeditor = `<p><strong>The First Canteen</strong></p>
@@ -227,7 +227,8 @@ const Facilities = () => {
       <div>
         <HeaderTitleComponent name="Tutorial facilities"></HeaderTitleComponent>
       </div>
-      <Container className="my-5">{parse(htmlCkeditor)}</Container>
+      <div className="container mx-auto my-5">{parse(htmlCkeditor)}</div>
+      <ButtonOnTopComponent></ButtonOnTopComponent>
     </div>
   );
 };
