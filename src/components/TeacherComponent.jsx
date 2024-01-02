@@ -17,7 +17,7 @@ const TeacherComponent = (props) => {
       <div className="h-[6rem] p-2">
         <div className="text-center text-base font-bold pb-2">{props.name}</div>
         <div className="text-sm line-clamp-2 overflow-ellipsis">
-          {props.Position}
+          Department: {props.Position}
         </div>
       </div>
     </div>

@@ -18,6 +18,7 @@ import Department from "./pages/Department";
 
 import Modal from "./components/Modal";
 import RegisterAccountComponent from "./components/ResgiterAccountComponent";
+import FooterAppComponent from "./components/FooterAppComponent";
 
 function App() {
   const [openModalLogin, setOpenModalLogin] = useState(false);
@@ -30,18 +31,30 @@ function App() {
           <div>
             <img className="h-16 mr-8" src={LogoColor} />
           </div>
-          <div className="flex flex-row justify-between">
+          <div
+            className={`flex flex-row justify-between transition-all lg:translate-x-0 lg:h-full md:h-0 sm:h-0 h-0  ${
+              isMenuOpen
+                ? "translate-x-0 md:translate-x-0 sm:translate-x-0"
+                : "translate-x-[80%] md:translate-x-[80%] sm:translate-x-[80%]"
+            }`}
+          >
             <div
-              className={` lg:block ${
-                isMenuOpen
-                  ? "md:block sm:block block"
-                  : "md:hidden sm:hidden hidden"
-              }`}
-              style={{ transition: "all 0.2s ease" }}
+              className="lg:hidden md:block sm:block block mr-2"
+              onClick={() => {
+                setIsMenuOpen(!isMenuOpen);
+              }}
             >
+              <div className="flex flex-col mx-2 w-10">
+                <span className="h-1 bg-gray-400 my-1 rounded-full"></span>
+                <span className="h-1 bg-gray-400 my-1 rounded-full"></span>
+                <span className="h-1 bg-gray-400 my-1 rounded-full"></span>
+              </div>
+            </div>
+            <div className="">
               <ul
                 className="
-                flex max-h-40 flex-col justify-start items-start border-[1px]  border-orange-400
+                bg-white
+                flex flex-col justify-start items-start border-[1px]  border-orange-400
                 sm:flex-col sm:justify-start sm:items-start sm:border-[1px] 
                 md:flex-col md:justify-start md:items-start md:border-[1px] 
                 lg:flex-row lg:flex-wrap lg:justify-center lg:items-center lg:border-[0]"
@@ -86,19 +99,6 @@ function App() {
                 </a>
               </ul>
             </div>
-
-            <div
-              className="lg:hidden md:block sm:block block"
-              onClick={() => {
-                setIsMenuOpen(!isMenuOpen);
-              }}
-            >
-              <div className="h-20 flex flex-col mx-2 w-10">
-                <span className="h-1 bg-gray-400 my-1 rounded-full"></span>
-                <span className="h-1 bg-gray-400 my-1 rounded-full"></span>
-                <span className="h-1 bg-gray-400 my-1 rounded-full"></span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -115,63 +115,7 @@ function App() {
         <Route path="/FeedBack" element={<FeedBack />} />
         <Route path="/StudentRegistration" element={<RegisterOnline />} />
       </Routes>
-      <footer className="bg-[#fb923c] text-white">
-        <div className="flex flex-row flex-wrap  justify-center items-start py-3">
-          <div className="flex flex-col flex-1 max-w-xs text-sm  px-2">
-            <div className="text-base font-bold uppercase">
-              About ITM College
-            </div>
-            <b className="bg-gray-200 h-1 w-10 my-3 rounded-md"></b>
-            <div>
-              ITM College is dedicated to providing quality education and
-              fostering innovation in technology.
-            </div>
-          </div>
-          <div className="flex flex-col flex-1 max-w-xs text-sm  px-2">
-            <div className="text-base font-bold uppercase">Quick link</div>
-            <b className="bg-gray-200 h-1 w-10 my-3 rounded-md"></b>
-            <a className="text-white pb-2" href="/">
-              Home
-            </a>
-            <a className="text-white pb-2" href="/Courses">
-              Courses
-            </a>
-            <a className="text-white pb-2" href="/StudentRegistration">
-              Student registration
-            </a>
-            <a className="text-white pb-2" href="/Department">
-              Department
-            </a>
-            <a className="text-white pb-2" href="/Faculty">
-              Faculty
-            </a>
-            <a className="text-white pb-2" href="/Facilities">
-              Facilities
-            </a>
-            <a className="text-white pb-2" href="/Teachers">
-              Teachers
-            </a>
-            <a className="text-white pb-2" href="/Contact">
-              Contact
-            </a>
-            <a className="text-white pb-2" href="/Feedback">
-              Feedback
-            </a>
-          </div>
-          <div className="flex flex-col flex-1 max-w-xs text-sm px-2">
-            <div className="text-base font-bold uppercase">CONTACT</div>
-            <b className="bg-gray-200 h-1 w-10 my-3 rounded-md"></b>
-            <p>024 7300 8855 - 0973 111 086</p>
-            <p>
-              aptech.fpt@fe.edu.vn Số 8, Tôn Thất Thuyết, Mỹ Đình, Từ Liêm, Hà
-              Nội
-            </p>
-          </div>
-        </div>
-        <div className="text-center py-3 border-t border-white">
-          <span>&copy; 2023 ITM College. All rights reserved.</span>
-        </div>
-      </footer>
+      <FooterAppComponent></FooterAppComponent>
       <ToastContainer />
       <Modal
         open={openModalLogin}
@@ -230,8 +174,13 @@ function CustomChildrenDropDown({ to, children, ...props }) {
 
 function CustomLinkDropDown({ displayName, to, children, ...props }) {
   return (
-    <div className="dropDownMenu hover:bg-orange-400 relative hover:text-white px-4 py-2 cursor-pointer z-10">
-      <a href={to}>{displayName}</a>
+    <div className="dropDownMenu relative z-10">
+      <a
+        href={to}
+        className="hover:bg-orange-400 hover:text-white px-4 py-2 cursor-pointer"
+      >
+        {displayName}
+      </a>
       <ul className="absolute p-0 bg-white z-10 border border-gray-400 top-full block">
         {children}
       </ul>
