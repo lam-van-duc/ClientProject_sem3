@@ -77,57 +77,70 @@ const Teachers = () => {
   return (
     <div className="text-center">
       <div>
-        <HeaderTitleComponent name="Teacher"></HeaderTitleComponent>
+        <HeaderTitleComponent name="Faculty"></HeaderTitleComponent>
       </div>
 
-      <div className="container mx-auto flex justify-center mt-3">
-        <div className="grid gap-3 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-          {ListTeacher.map((item, index) => {
-            return (
-              <TeacherComponent
-                image={item.image}
-                name={item.name}
-                birthday={item.birthday}
-                Position={item.Position}
-                id={item.id}
-              ></TeacherComponent>
-            );
-          })}
+      <div className="container mx-auto flex flex-row">
+        <div className="w-10/12 border-r">
+          <div className="container mx-auto flex justify-center mt-3">
+            <div className="grid gap-3 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 sm:px-5 md:px-0 lg:px-0">
+              {ListTeacher.map((item, index) => {
+                return (
+                  <TeacherComponent
+                    image={item.image}
+                    name={item.name}
+                    Position={item.Position}
+                    id={item.id}
+                  ></TeacherComponent>
+                );
+              })}
+            </div>
+          </div>
+          <div>
+            <div className="flex justify-center mt-3">
+              <Pagination
+                activePage={paginationActive}
+                itemsCountPerPage={10}
+                totalItemsCount={450}
+                pageRangeDisplayed={5}
+                onChange={(page) => handleChangePage(page)}
+              />
+            </div>
+          </div>
+          <div className="mb-3 px-3">
+            <h3 className="flex flex-row items-center justify-center mt-3">
+              <b className="flex-1 bg-gray-300 h-1"></b>
+              <span className="mx-4">Course</span>
+              <b className="flex-1 bg-gray-300 h-1"></b>
+            </h3>
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-12 justify-center items-center my-3">
+              {ListCourse.map((item, index) => {
+                return (
+                  <CourseComponent
+                    id={item.id}
+                    name={item.name}
+                    image={item.image}
+                    title={item.title}
+                  ></CourseComponent>
+                );
+              })}
+            </div>
+            <div className="text-center">
+              <a
+                href="/Courses"
+                className="button-outline-app font-bold uppercase"
+              >
+                Show more Course
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="container mx-auto">
-        <div className="flex justify-center mt-3">
-          <Pagination
-            activePage={paginationActive}
-            itemsCountPerPage={10}
-            totalItemsCount={450}
-            pageRangeDisplayed={5}
-            onChange={(page) => handleChangePage(page)}
-          />
-        </div>
-      </div>
-      <div className="container mx-auto mb-3">
-        <h3 className="flex flex-row items-center justify-center mt-3">
-          <b className="flex-1 bg-gray-300 h-1"></b>
-          <span className="mx-4">Course</span>
-          <b className="flex-1 bg-gray-300 h-1"></b>
-        </h3>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-12 justify-center items-center my-3">
-          {ListCourse.map((item, index) => {
-            return (
-              <CourseComponent
-                id={item.id}
-                name={item.name}
-                image={item.image}
-                title={item.title}
-              ></CourseComponent>
-            );
-          })}
-        </div>
-        <div className="text-center">
-          <a href="/Courses" className="button-outline-app font-bold uppercase">
-            Show more Course
-          </a>
+
+        <div className="flex-1 p-3">
+          <div className="form-input">
+            <label>Tìm kiếm</label>
+            <input type="text" />
+          </div>
         </div>
       </div>
     </div>

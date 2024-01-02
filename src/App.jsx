@@ -14,6 +14,8 @@ import FeedBack from "./pages/FeedBack";
 import LogoColor from "./assets/image/logoITM-color.png";
 import { ToastContainer } from "react-toastify";
 import LoginComponent from "./components/LoginComponent";
+import Department from "./pages/Department";
+
 import Modal from "./components/Modal";
 import RegisterAccountComponent from "./components/ResgiterAccountComponent";
 
@@ -38,37 +40,40 @@ function App() {
               style={{ transition: "all 0.2s ease" }}
             >
               <ul
-                className="flex max-h-40 overflow-auto flex-col justify-start items-start border-[1px]  border-blue-400
-              sm:flex-col sm:justify-start sm:items-start sm:border-[3px]
-              md:flex-col md:justify-start md:items-start md:border-[2px]
-              lg:flex-row lg:flex-wrap lg:justify-center lg:items-center lg:border-[0]
-             "
+                className="
+                flex max-h-40 flex-col justify-start items-start border-[1px]  border-orange-400
+                sm:flex-col sm:justify-start sm:items-start sm:border-[1px] 
+                md:flex-col md:justify-start md:items-start md:border-[1px] 
+                lg:flex-row lg:flex-wrap lg:justify-center lg:items-center lg:border-[0]"
               >
                 <CustomLink to="/">Home</CustomLink>
                 <CustomLink to="/Courses">Courses</CustomLink>
                 <CustomLink to="/StudentRegistration">
                   Student registration
                 </CustomLink>
-                <CustomLink to="/Department">Department</CustomLink>
-                <CustomLink to="/Faculty">Faculty</CustomLink>
-                <CustomLinkDropDown displayName={"Facilities"}>
-                  <CustomDropDownLink to="/Facilities/canteen">
+                <CustomLinkDropDown displayName={"Department"} to="/Department">
+                  <CustomChildrenDropDown to="/Facilities/canteen">
                     canteen
-                  </CustomDropDownLink>
-                  <CustomDropDownLink to="/Facilities/hostel">
-                    hostel
-                  </CustomDropDownLink>
-                  <CustomDropDownLink to="/Facilities/placement-center">
-                    Placement center
-                  </CustomDropDownLink>
-                  <CustomDropDownLink to="/Facilities/college-library">
-                    College library
-                  </CustomDropDownLink>
-                  <CustomDropDownLink to="/Facilities/administrator-office">
-                    administrator office
-                  </CustomDropDownLink>
+                  </CustomChildrenDropDown>
                 </CustomLinkDropDown>
-                <CustomLink to="/Teachers">Teachers</CustomLink>
+                <CustomLink to="/Teachers">Faculty</CustomLink>
+                <CustomLinkDropDown displayName={"Facilities"}>
+                  <CustomChildrenDropDown to="/Facilities/canteen">
+                    canteen
+                  </CustomChildrenDropDown>
+                  <CustomChildrenDropDown to="/Facilities/hostel">
+                    hostel
+                  </CustomChildrenDropDown>
+                  <CustomChildrenDropDown to="/Facilities/placement-center">
+                    Placement center
+                  </CustomChildrenDropDown>
+                  <CustomChildrenDropDown to="/Facilities/college-library">
+                    College library
+                  </CustomChildrenDropDown>
+                  <CustomChildrenDropDown to="/Facilities/administrator-office">
+                    administrator office
+                  </CustomChildrenDropDown>
+                </CustomLinkDropDown>
                 <CustomLink to="/Contact">Contact us</CustomLink>
                 <CustomLink to="/Feedback">Feedback</CustomLink>
                 <a
@@ -102,6 +107,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/Courses" element={<Courses />} />
         <Route path="/CourseDetails/:id" element={<CourseDetails />} />
+        <Route path="/Department" element={<Department />} />
         <Route path="/Teachers" element={<Teachers />} />
         <Route path="/TeacherDetails/:id" element={<TeacherDetails />} />
         <Route path="/Facilities/:id" element={<Facilities />} />
@@ -109,15 +115,16 @@ function App() {
         <Route path="/FeedBack" element={<FeedBack />} />
         <Route path="/StudentRegistration" element={<RegisterOnline />} />
       </Routes>
-      <footer>
-        <div className="flex flex-row flex-wrap bg-[#fb923c] text-white justify-center items-start py-9">
+      <footer className="bg-[#fb923c] text-white">
+        <div className="flex flex-row flex-wrap  justify-center items-start py-3">
           <div className="flex flex-col flex-1 max-w-xs text-sm  px-2">
-            <div className="text-base font-bold uppercase">Introduce</div>
+            <div className="text-base font-bold uppercase">
+              About ITM College
+            </div>
             <b className="bg-gray-200 h-1 w-10 my-3 rounded-md"></b>
             <div>
-              ITM college has more than 25 years of experience training
-              international programmers in Vietnam, and is always the preferred
-              choice of students and employers.
+              ITM College is dedicated to providing quality education and
+              fostering innovation in technology.
             </div>
           </div>
           <div className="flex flex-col flex-1 max-w-xs text-sm  px-2">
@@ -161,6 +168,9 @@ function App() {
             </p>
           </div>
         </div>
+        <div className="text-center py-3 border-t border-white">
+          <span>&copy; 2023 ITM College. All rights reserved.</span>
+        </div>
       </footer>
       <ToastContainer />
       <Modal
@@ -202,7 +212,7 @@ function CustomLink({ to, children, ...props }) {
   );
 }
 
-function CustomDropDownLink({ to, children, ...props }) {
+function CustomChildrenDropDown({ to, children, ...props }) {
   return (
     <li>
       <NavLink
@@ -220,9 +230,9 @@ function CustomDropDownLink({ to, children, ...props }) {
 
 function CustomLinkDropDown({ displayName, to, children, ...props }) {
   return (
-    <div className="dropDownMenu hover:bg-orange-400 hover:text-white px-4 py-2 cursor-pointer">
-      <div className="relative">{displayName}</div>
-      <ul className="absolute p-0 bg-white z-10 border border-gray-400 top-[55%]">
+    <div className="dropDownMenu hover:bg-orange-400 relative hover:text-white px-4 py-2 cursor-pointer z-10">
+      <a href={to}>{displayName}</a>
+      <ul className="absolute p-0 bg-white z-10 border border-gray-400 top-full block">
         {children}
       </ul>
     </div>

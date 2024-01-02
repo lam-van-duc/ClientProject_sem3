@@ -14,25 +14,23 @@ const Courses = () => {
     setPaginationActive(page);
   };
 
-  const HandleSubmitFrom = async () => {
+  const Func_GetDataCourse = async () => {
     try {
       await axiosConfig
         .get("/api/Course")
         .then((res) => {
-          console.log(res.data.response);
           setListCourse(res.data.response);
-          toast.success("Submit form success");
         })
         .catch((res) => {
           toast.error(res.message);
         });
     } catch (error) {
-      toast.error("Submit form error !");
+      toast.error(error.message);
     }
   };
 
   useEffect(() => {
-    HandleSubmitFrom();
+    Func_GetDataCourse();
   }, []);
 
   // const ListCourse = [
@@ -113,28 +111,24 @@ const Courses = () => {
       id: 1,
       image: "https://ordainit.com/educate/assets/img/team/team-3-2.jpg",
       name: "Doctor strange",
-      birthday: "29-12-1998",
       Position: "Manager",
     },
     {
       id: 2,
       image: "https://ordainit.com/educate/assets/img/team/team-3-1.jpg",
       name: "julien",
-      birthday: "29-12-1998",
       Position: "employee",
     },
     {
       id: 3,
       image: "https://ordainit.com/educate/assets/img/team/team-3-3.jpg",
       name: "rabit",
-      birthday: "29-12-1998",
       Position: "employee",
     },
     {
       id: 4,
       image: "https://ordainit.com/educate/assets/img/team/team-3-4.jpg",
       name: "puppy po",
-      birthday: "29-12-1998",
       Position: "Head of Education Department",
     },
   ];
@@ -197,7 +191,6 @@ const Courses = () => {
               <TeacherComponent
                 image={item.image}
                 name={item.name}
-                birthday={item.birthday}
                 Position={item.Position}
                 id={item.id}
               ></TeacherComponent>

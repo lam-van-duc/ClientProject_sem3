@@ -8,18 +8,17 @@ const TeacherComponent = (props) => {
   };
   return (
     <div
-      className="h-[30rem] border border-gray-300 item-teacher rounded-md hover:bg-orange-400 hover:text-white hover:cursor-pointer"
+      className="border border-gray-300 item-teacher rounded-md hover:bg-orange-400 hover:text-white hover:cursor-pointer"
       onClick={() => showDetailTeacher(props.id)}
     >
-      <div className="h-[20rem] overflow-hidden rounded-t-md">
+      <div className="h-[15rem] overflow-hidden rounded-t-md">
         <img src={props.image} className="object-contain w-full" />
       </div>
-      <div className="px-2">
-        <div className="align-middle text-center py-3 font-bold text-xl ">
-          {props.name}
+      <div className="h-[6rem] p-2">
+        <div className="text-center text-base font-bold pb-2">{props.name}</div>
+        <div className="text-sm line-clamp-2 overflow-ellipsis">
+          {props.Position}
         </div>
-        <div className="text-center">{props.birthday}</div>
-        <div className="text-center">{props.Position}</div>
       </div>
     </div>
   );
