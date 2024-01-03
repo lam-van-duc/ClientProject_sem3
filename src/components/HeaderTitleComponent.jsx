@@ -16,7 +16,7 @@ const HeaderTitleComponent = ({ name }) => {
           backgroundColor: "rgba(0, 0, 139, 0.5)",
         }}
       >
-        <div className="text-center font-bold text-6xl text-white tracking-wider">
+        <div className="text-center font-bold text-6xl text-white tracking-wider p-2">
           {name}
         </div>
         <div className="text-white text-xl">

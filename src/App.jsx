@@ -26,7 +26,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <div className="relative h-full">
-      <div className="top-0 sticky z-10 bg-white cursor-pointer shadow-md dropDownMenu py-2">
+      <div className="top-0 sticky z-50 bg-white cursor-pointer shadow-md dropDownMenu py-2">
         <div className="flex flex-row lg:justify-center md:justify-between sm:justify-between justify-between lg:items-center md:items-start sm:items-start">
           <div>
             <img className="h-16 mr-8" src={LogoColor} />
@@ -174,11 +174,8 @@ function CustomChildrenDropDown({ to, children, ...props }) {
 
 function CustomLinkDropDown({ displayName, to, children, ...props }) {
   return (
-    <div className="dropDownMenu relative z-10">
-      <a
-        href={to}
-        className="hover:bg-orange-400 hover:text-white px-4 py-2 cursor-pointer"
-      >
+    <div className="dropDownMenu relative z-10 hover:bg-orange-400 hover:text-white">
+      <a href={to} className="px-4 py-2 cursor-pointer">
         {displayName}
       </a>
       <ul className="absolute p-0 bg-white z-10 border border-gray-400 top-full block">

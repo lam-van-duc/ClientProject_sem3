@@ -3,12 +3,161 @@ import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ButtonOnTopComponent from "../components/ButtonOnTopComponent";
+import ErrorText from "../components/ErrorText";
+import axiosConfig from "../config/axiosConfig";
+import { toast } from "react-toastify";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+
+const schema = yup.object({
+  Fullname: yup.string().required("Please enter your full name !"),
+  Email: yup.string().email("Invalid email !").required("Please enter email !"),
+  PhoneNumber: yup
+    .string()
+    .matches(/^\+?[0-9\s.-]+$/, "Invalid phone number")
+    .required("Please enter phone number"),
+  Comment: yup.string(),
+});
 
 const Home = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onSubmit",
+  });
+
+  const HandleSubmitFrom = async (data) => {
+    await axiosConfig
+      .post("/api/ContactUs", data)
+      .then((res) => {
+        reset();
+        toast.success("Submit contact success");
+      })
+      .catch((res) => {
+        toast.error(res.data.response);
+      });
+  };
+
   const images = [
-    "https://aptech.fpt.edu.vn/wp-content/uploads/2022/12/BANNER-CHI-TIEU-TRANG-CHU-DESKTOP-fat.jpg",
-    "https://aptech.fpt.edu.vn/wp-content/uploads/2022/12/Banner-trang-chu-TS-FAT-GAME-desktop.png",
-    "https://aptech.fpt.edu.vn/wp-content/uploads/2023/01/hoc-bong-bo-doi_banner-web-destop-2048x685.jpg",
+    "https://kodeforest.net/html/uoe/extra-images/slider1.jpg",
+    "http://kodeforest.net/html/uoe/extra-images/slider2.jpg",
+    "http://kodeforest.net/html/uoe/extra-images/slider3.jpg",
+  ];
+
+  const departmentList = [
+    {
+      id: 1,
+      thumbnail:
+        "https://daihoc.fpt.edu.vn/wp-content/uploads/2022/03/homepage/course_8.png",
+      name: "Department of Computer Science",
+      information: "Information about the Computer Science department",
+    },
+    {
+      id: 2,
+      thumbnail:
+        "https://daihoc.fpt.edu.vn/wp-content/uploads/2022/03/homepage/course_11056.png",
+      name: "Department of Physics",
+      information: "Information about the Physics department",
+    },
+    {
+      id: 3,
+      thumbnail:
+        "https://daihoc.fpt.edu.vn/wp-content/uploads/2022/03/homepage/course_27.png",
+      name: "Department of Literature",
+      information: "Information about the Literature department",
+    },
+    {
+      id: 4,
+      thumbnail:
+        "https://daihoc.fpt.edu.vn/wp-content/uploads/2022/03/homepage/course_28.png",
+      name: "Mathematics Professor",
+      information: "Information about the Mathematics Professor",
+    },
+  ];
+
+  const ListCourse = [
+    {
+      id: 1,
+      image:
+        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-1.jpg",
+      name: "Biochemistry",
+      title:
+        "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
+    },
+    {
+      id: 2,
+      image:
+        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-2.jpg",
+      name: "Major in Economics",
+      title:
+        "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
+    },
+    {
+      id: 3,
+      image:
+        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-3.jpg",
+      name: "Business Media",
+      title:
+        "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
+    },
+    {
+      id: 4,
+      image:
+        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-4.jpg",
+      name: "Biotechnology",
+      title:
+        "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
+    },
+    {
+      id: 5,
+      image:
+        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-6.jpg",
+      name: "Corporate Finance",
+      title: "Seamlessly visualize quality ",
+    },
+  ];
+
+  const ListTeacher = [
+    {
+      id: 1,
+      image: "https://ordainit.com/educate/assets/img/team/team-3-2.jpg",
+      name: "Doctor strange",
+      birthday: "29-12-1998",
+      Position: "Manager",
+    },
+    {
+      id: 2,
+      image: "https://ordainit.com/educate/assets/img/team/team-3-1.jpg",
+      name: "julien",
+      birthday: "29-12-1998",
+      Position: "English teacher",
+    },
+    {
+      id: 3,
+      image: "https://ordainit.com/educate/assets/img/team/team-3-3.jpg",
+      name: "rabit",
+      birthday: "29-12-1998",
+      Position: "Health teacher",
+    },
+    {
+      id: 4,
+      image: "https://ordainit.com/educate/assets/img/team/team-3-4.jpg",
+      name: "puppy po",
+      birthday: "29-12-1998",
+      Position: "Head of Education Department",
+    },
+    {
+      id: 5,
+      image: "https://ordainit.com/educate/assets/img/team/team-1-7.jpg",
+      name: "wan kanda",
+      birthday: "29-12-1998",
+      Position: "Health teacher",
+    },
   ];
 
   return (
@@ -24,7 +173,7 @@ const Home = () => {
             {images.map((item) => {
               return (
                 <div className="each-slide-effect">
-                  <div className="h-full z-10">
+                  <div className="z-10">
                     <img
                       src={`${item}`}
                       className="w-full object-cover select-none z-0"
@@ -37,10 +186,10 @@ const Home = () => {
           </Slide>
         </div>
         <div className="mt-1 pb-4 bg-[#ee661c]">
-          <div className="text-center mb-6 pt-4 text-3xl font-bold text-white z">
+          <div className="text-center py-6 lg:text-3xl md:text-2xl sm:text-xl text-base font-bold text-white z">
             WHY SHOULD YOU CHOOSE ITM COLLEGE?
           </div>
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center flex-wrap">
             <img
               className="h-56 px-4"
               src="https://aptech.fpt.edu.vn/wp-content/uploads/2022/12/icon-ma%CC%80u-01.png"
@@ -63,45 +212,80 @@ const Home = () => {
             />
           </div>
         </div>
+
         <div className="container mx-auto">
-          <div>
-            <p className="text-center text-2xl font-bold text-blue-700 py-7 uppercase">
-              Education program
+          <div className="my-6">
+            <p className="text-center lg:text-3xl md:text-2xl sm:text-xl text-base font-bold text-orange-400 uppercase m-0">
+              Learn about departments
             </p>
-            <div className="flex justify-center items-center">
-              <div className="grid grid-cols-3">
-                <a className="h-56 w-72 m-3">
-                  <img
-                    className="object-cover w-full h-full"
-                    src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/03/anh-de-muc-ADSE-1.jpg"
-                  />
-                </a>
-                <a className="h-56 w-72 m-3">
-                  <img
-                    className="object-cover w-full h-full"
-                    src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/03/anh-de-muc-FrontEnd-1.jpg"
-                  />
-                </a>
-                <a className="h-56 w-72 m-3">
-                  <img
-                    className="object-cover w-full h-full"
-                    src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/03/anh-de-muc-BackEnd-2.jpg"
-                  />
-                </a>
-                <a className="h-56 w-72 m-3">
-                  <img
-                    className="object-cover w-full h-full"
-                    src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/03/anh-de-muc-game-dev-2.jpg"
-                  />
-                </a>
-              </div>
+            <div className="flex justify-center items-center flex-wrap gap-3">
+              {departmentList.map((item, index) => {
+                return (
+                  <a
+                    key={index}
+                    href={`DepartmentDetail/${item.id}`}
+                    className="h-56 w-72 no-underline"
+                  >
+                    <div>
+                      <div className="h-44 ">
+                        <img
+                          className="object-contain h-full mx-auto"
+                          src={item.thumbnail}
+                        />
+                      </div>
+                      <div className="text-black font-bold text-center py-2">
+                        {item.name}
+                      </div>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+            <div className="text-center mt-3">
+              <a href="/Department" className="button-outline-app py-2">
+                Load More Department
+              </a>
             </div>
           </div>
-          <div>
+
+          <div className="my-6">
+            <h3 className="flex flex-row items-center justify-center mb-6">
+              <b className="flex-1 bg-gray-300 h-1"></b>
+              <span className="mx-4">Course</span>
+              <b className="flex-1 bg-gray-300 h-1"></b>
+            </h3>
             <div>
-              <h3 className="flex flex-row items-center justify-center my-12">
+              <Slide
+                slidesToShow={3}
+                infinite={true}
+                indicators={true}
+                duration={1500}
+              >
+                {ListCourse.map((item, index) => {
+                  return (
+                    <div className="flex flex-col items-start justify-start w-80 h-72 px-3">
+                      <div className="w-80 h-64">
+                        <img
+                          src={item.image}
+                          className="object-cover h-full mx-auto"
+                        />
+                      </div>
+                      <p className="m-0 font-bold py-2 line-clamp-2">
+                        {item.name}
+                      </p>
+                    </div>
+                  );
+                })}
+              </Slide>
+            </div>
+          </div>
+        </div>
+        <div className="bg-[#fff6ea] py-6 w-full">
+          <div className="container">
+            <div className="my-6">
+              <h3 className="flex flex-row items-center justify-center mb-6">
                 <b className="flex-1 bg-gray-300 h-1"></b>
-                <span className="mx-4">TIN NỔI BẬT</span>
+                <span className="mx-4">Faculty memmer</span>
                 <b className="flex-1 bg-gray-300 h-1"></b>
               </h3>
               <div>
@@ -111,216 +295,35 @@ const Home = () => {
                   indicators={true}
                   duration={1500}
                 >
-                  <div className="flex flex-col items-start justify-start relative w-80 h-72">
-                    <div className="w-80 h-64">
-                      <img
-                        src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/05/image001.jpg"
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                    <p>
-                      NÓNG: FPT Aptech mở đơn đăng ký lớp học Lập trình website
-                      miễn phí #2
-                    </p>
-                    <div
-                      className="absolute z-10 bg-white border-blue-600 border-2 w-12 h-12 top-8"
-                      style={{ left: "-1rem" }}
-                    >
-                      <div className="font-bold text-lg text-center text-blue-600">
-                        11
+                  {ListTeacher.map((item, index) => {
+                    return (
+                      <div className="flex flex-col items-center justify-start p-2">
+                        <div className="">
+                          <img
+                            src={item.image}
+                            className="object-cover w-full mx-auto"
+                          />
+                        </div>
+                        <p className="m-0 text-xl font-bold text-orange-400 py-2 line-clamp-2 text-center">
+                          {item.name}
+                        </p>
+                        <p className="m-0 text-base font-[400] line-clamp-2">
+                          {item.Position}
+                        </p>
                       </div>
-                      <div className="font-bold text-xs text-center text-blue-600">
-                        Th5
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-start justify-start relative w-80 h-72">
-                    <div className="w-80 h-64">
-                      <img
-                        src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/05/image001.jpg"
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                    <p>
-                      NÓNG: FPT Aptech mở đơn đăng ký lớp học Lập trình website
-                      miễn phí #2
-                    </p>
-                    <div
-                      className="absolute z-10 bg-white border-blue-600 border-2 w-12 h-12 top-8"
-                      style={{ left: "-1rem" }}
-                    >
-                      <div className="font-bold text-lg text-center text-blue-600">
-                        11
-                      </div>
-                      <div className="font-bold text-xs text-center text-blue-600">
-                        Th5
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col items-start justify-start relative w-80 h-72">
-                    <div className="w-80 h-64">
-                      <img
-                        src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/05/image001.jpg"
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                    <p>
-                      NÓNG: FPT Aptech mở đơn đăng ký lớp học Lập trình website
-                      miễn phí #2
-                    </p>
-                    <div
-                      className="absolute z-10 bg-white border-blue-600 border-2 w-12 h-12 top-8"
-                      style={{ left: "-1rem" }}
-                    >
-                      <div className="font-bold text-lg text-center text-blue-600">
-                        11
-                      </div>
-                      <div className="font-bold text-xs text-center text-blue-600">
-                        Th5
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col items-start justify-start relative w-80 h-72">
-                    <div className="w-80 h-64">
-                      <img
-                        src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/05/image001.jpg"
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                    <p>
-                      NÓNG: FPT Aptech mở đơn đăng ký lớp học Lập trình website
-                      miễn phí #2
-                    </p>
-                    <div
-                      className="absolute z-10 bg-white border-blue-600 border-2 w-12 h-12 top-8"
-                      style={{ left: "-1rem" }}
-                    >
-                      <div className="font-bold text-lg text-center text-blue-600">
-                        11
-                      </div>
-                      <div className="font-bold text-xs text-center text-blue-600">
-                        Th5
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col items-start justify-start relative w-80 h-72">
-                    <div className="w-80 h-64">
-                      <img
-                        src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/05/image001.jpg"
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                    <p>
-                      NÓNG: FPT Aptech mở đơn đăng ký lớp học Lập trình website
-                      miễn phí #2
-                    </p>
-                    <div
-                      className="absolute z-10 bg-white border-blue-600 border-2 w-12 h-12 top-8"
-                      style={{ left: "-1rem" }}
-                    >
-                      <div className="font-bold text-lg text-center text-blue-600">
-                        11
-                      </div>
-                      <div className="font-bold text-xs text-center text-blue-600">
-                        Th5
-                      </div>
-                    </div>
-                  </div>
+                    );
+                  })}
                 </Slide>
               </div>
             </div>
           </div>
         </div>
-        <div className="bg-[#fff6ea]">
-          <div className="container mx-auto">
-            <div>
-              <h3 className="flex flex-row items-center justify-center my-12">
-                <b className="flex-1 bg-gray-300 h-1"></b>
-                <span className="mx-4">GƯƠNG MẶT SINH VIÊN TIÊU BIỂU</span>
-                <b className="flex-1 bg-gray-300 h-1"></b>
-              </h3>
-              <div>
-                <Slide
-                  slidesToShow={3}
-                  infinite={true}
-                  indicators={true}
-                  duration={1500}
-                >
-                  <div className="flex flex-col items-start justify-start relative w-80 h-72">
-                    <div className="w-80 h-64">
-                      <img
-                        src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/11/SVSX-Nguyen-Van-Quy-4-2048x1536.jpeg"
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                    <p>Rẽ hướng để theo đuổi ước mở lập trình</p>
-                    <div
-                      className="absolute z-10 bg-white border-blue-600 border-2 w-12 h-12 top-8"
-                      style={{ left: "-1rem" }}
-                    >
-                      <div className="font-bold text-lg text-center text-blue-600">
-                        11
-                      </div>
-                      <div className="font-bold text-xs text-center text-blue-600">
-                        Th5
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-start justify-start relative w-80 h-72">
-                    <div className="w-80 h-64">
-                      <img
-                        src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/11/SVSX-Nguyen-Van-Quy-4-2048x1536.jpeg"
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                    <p>Rẽ hướng để theo đuổi ước mở lập trình</p>
-                    <div
-                      className="absolute z-10 bg-white border-blue-600 border-2 w-12 h-12 top-8"
-                      style={{ left: "-1rem" }}
-                    >
-                      <div className="font-bold text-lg text-center text-blue-600">
-                        11
-                      </div>
-                      <div className="font-bold text-xs text-center text-blue-600">
-                        Th5
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-start justify-start relative w-80 h-72">
-                    <div className="w-80 h-64">
-                      <img
-                        src="https://aptech.fpt.edu.vn/wp-content/uploads/2023/11/SVSX-Nguyen-Van-Quy-4-2048x1536.jpeg"
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                    <p>Rẽ hướng để theo đuổi ước mở lập trình</p>
-                    <div
-                      className="absolute z-10 bg-white border-blue-600 border-2 w-12 h-12 top-8"
-                      style={{ left: "-1rem" }}
-                    >
-                      <div className="font-bold text-lg text-center text-blue-600">
-                        11
-                      </div>
-                      <div className="font-bold text-xs text-center text-blue-600">
-                        Th5
-                      </div>
-                    </div>
-                  </div>
-                </Slide>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div
           className="bg-cover bg-center relative"
           style={{
             height: "33rem",
             backgroundImage: `url(
-              https://aptech.fpt.edu.vn/wp-content/uploads/2022/12/BANNER-CHI-TIEU-TRANG-CHU-DESKTOP-fat.jpg
+              https://kodeforest.net/html/uoe/extra-images/home-gallery3.jpg
             )`,
           }}
         >

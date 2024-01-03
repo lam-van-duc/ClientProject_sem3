@@ -11,6 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.indicators {
+  margin: 0;
+}
 /* ============================ menu navbar ===========================*/
 nav > div > div > div > .navbar-nav > a {
   text-decoration: none;
@@ -91,7 +94,9 @@ nav > div > div > div > .navbar-nav > .active,
 .hoverScale:hover img {
   transform: scale(1.1); /* Scale to lên khi hover */
 }
-
+button.nav.default-nav {
+  z-index: 5;
+}
 /* ======================  pagination ================================*/
 .pagination li a {
   display: block;
