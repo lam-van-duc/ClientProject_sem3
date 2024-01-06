@@ -44,7 +44,6 @@ nav > div > div > div > .navbar-nav > .active,
   color: black;
   text-decoration: none;
   display: block;
-  text-align: center;
 }
 
 .dropDownMenu > ul {
@@ -181,7 +180,7 @@ button.button-app:focus-visible {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .form-input {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .form-input > input:focus-visible,

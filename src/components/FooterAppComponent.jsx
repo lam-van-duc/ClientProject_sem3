@@ -3,7 +3,7 @@ const FooterAppComponent = () => {
 
   return (
     <footer className="bg-[#fb923c] text-white">
-      <div className="flex flex-row flex-wrap  justify-center items-start py-3">
+      <div className="grid gap-3 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
         <div className="flex flex-col flex-1 max-w-xs text-sm  px-2">
           <div className="text-base font-bold uppercase">About ITM College</div>
           <b className="bg-gray-200 h-1 w-10 my-3 rounded-md"></b>
@@ -12,7 +12,7 @@ const FooterAppComponent = () => {
             fostering innovation in technology.
           </div>
         </div>
-        <div className="flex flex-col flex-1 max-w-xs text-sm  px-2">
+        <div className="flex flex-col flex-1 max-w-xs text-sm px-2">
           <div className="text-base font-bold uppercase">Quick link</div>
           <b className="bg-gray-200 h-1 w-10 my-3 rounded-md"></b>
           <a className="text-white pb-2" href="/">

@@ -1,6 +1,6 @@
 import propTypes from "prop-types";
 const ErrorText = ({ text }) => {
-  return <div className="text-red-600 py-2">{text}</div>;
+  return <div className="text-red-600">{text}</div>;
 };
 
 ErrorText.propTypes = {

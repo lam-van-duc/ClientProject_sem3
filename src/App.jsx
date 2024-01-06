@@ -1,5 +1,4 @@
 import "./App.css";
-// import { Nav, Navbar, Modal, Button } from "react-bootstrap";
 import { NavLink, Routes, Route } from "react-router-dom";
 import React, { useState } from "react";
 import Contact from "./pages/Contact";
@@ -15,7 +14,6 @@ import LogoColor from "./assets/image/logoITM-color.png";
 import { ToastContainer } from "react-toastify";
 import LoginComponent from "./components/LoginComponent";
 import Department from "./pages/Department";
-
 import Modal from "./components/Modal";
 import RegisterAccountComponent from "./components/ResgiterAccountComponent";
 import FooterAppComponent from "./components/FooterAppComponent";
@@ -50,7 +48,7 @@ function App() {
                 <span className="h-1 bg-gray-400 my-1 rounded-full"></span>
               </div>
             </div>
-            <div className="">
+            <div>
               <ul
                 className="
                 bg-white
@@ -64,18 +62,14 @@ function App() {
                 <CustomLink to="/StudentRegistration">
                   Student registration
                 </CustomLink>
-                <CustomLinkDropDown displayName={"Department"} to="/Department">
-                  <CustomChildrenDropDown to="/Facilities/canteen">
-                    canteen
-                  </CustomChildrenDropDown>
-                </CustomLinkDropDown>
+                <CustomLink to="/Department">Department</CustomLink>
                 <CustomLink to="/Teachers">Faculty</CustomLink>
                 <CustomLinkDropDown displayName={"Facilities"}>
                   <CustomChildrenDropDown to="/Facilities/canteen">
-                    canteen
+                    Canteen
                   </CustomChildrenDropDown>
                   <CustomChildrenDropDown to="/Facilities/hostel">
-                    hostel
+                    Hostel
                   </CustomChildrenDropDown>
                   <CustomChildrenDropDown to="/Facilities/placement-center">
                     Placement center
@@ -84,7 +78,7 @@ function App() {
                     College library
                   </CustomChildrenDropDown>
                   <CustomChildrenDropDown to="/Facilities/administrator-office">
-                    administrator office
+                    Administrator office
                   </CustomChildrenDropDown>
                 </CustomLinkDropDown>
                 <CustomLink to="/Contact">Contact us</CustomLink>
@@ -178,7 +172,7 @@ function CustomLinkDropDown({ displayName, to, children, ...props }) {
       <a href={to} className="px-4 py-2 cursor-pointer">
         {displayName}
       </a>
-      <ul className="absolute p-0 bg-white z-10 border border-gray-400 top-full block">
+      <ul className="absolute p-0 bg-white z-10 border border-gray-400 top-full block lg:left-10">
         {children}
       </ul>
     </div>

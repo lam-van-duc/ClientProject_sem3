@@ -11,6 +11,10 @@ import { toast } from "react-toastify";
 
 const schema = yup.object({
   name: yup.string().required("please enter your name !"),
+  email: yup
+    .string()
+    .email("email is valid !")
+    .required("please enter your name !"),
   fatherName: yup.string(),
   motherName: yup.string(),
   dob: yup.date().required("Please choice dob !"),
@@ -91,6 +95,11 @@ const RegisterOnline = () => {
                   <ErrorText text={errors.name?.message} />
                 </div>
                 <div className="form-input">
+                  <label className="font-bold">Email(*)</label>
+                  <input type="text" {...register("email")} />
+                  <ErrorText text={errors.email?.message} />
+                </div>
+                <div className="form-input">
                   <label className="font-bold">Father name</label>
                   <input
                     {...register("fatherName")}
@@ -129,17 +138,8 @@ const RegisterOnline = () => {
                   </select>
                   <ErrorText text={errors.gender?.message} />
                 </div>
-                <div className="form-input">
-                  <label className="font-bold">Admission for(*)</label>
-                  <input
-                    {...register("admissionFor")}
-                    type="text"
-                    name="admissionFor"
-                  />
-                  <ErrorText text={errors.admissionFor?.message} />
-                </div>
               </div>
-              <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-3">
+              <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1  grid-cols-1 gap-3">
                 <div className="form-input">
                   <label className="font-bold">Residential address(*)</label>
                   <input
@@ -158,13 +158,33 @@ const RegisterOnline = () => {
                   />
                   <ErrorText text={errors.permanentAddress?.message} />
                 </div>
+                <div className="form-input">
+                  <label className="font-bold">Admission for(*)</label>
+                  <input
+                    {...register("admissionFor")}
+                    type="text"
+                    name="admissionFor"
+                  />
+                  <ErrorText text={errors.admissionFor?.message} />
+                </div>
               </div>
-              <div>
-                <div className="border-[2px] border-solid border-gray-300 p-3 rounded-md mb-3 relative">
+              <div className="form-input">
+                <label className="font-bold">Sport detail(*)</label>
+                <input
+                  as="textarea"
+                  rows={3}
+                  {...register("SportDetail")}
+                  type="text"
+                  name="SportDetail"
+                />
+                <ErrorText text={errors.SportDetail?.message} />
+              </div>
+              <div className="mt-3">
+                <div className="border-[2px] border-solid border-gray-300 px-3 py-4 rounded-md mb-1 relative">
                   <span className="text-xl font-bold absolute top-[-17px] bg-white px-2 left-4">
                     In tabular format
                   </span>
-                  <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3">
+                  <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-3">
                     <div className="form-input">
                       <label className="font-bold">university(*)</label>
                       <input
@@ -232,17 +252,6 @@ const RegisterOnline = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="form-input">
-                <label className="font-bold">Sport detail(*)</label>
-                <input
-                  as="textarea"
-                  rows={3}
-                  {...register("SportDetail")}
-                  type="text"
-                  name="SportDetail"
-                />
-                <ErrorText text={errors.SportDetail?.message} />
               </div>
             </div>
 
