@@ -1,6 +1,6 @@
 import "./App.css";
 import { NavLink, Routes, Route } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Contact from "./pages/Contact";
 import RegisterOnline from "./pages/RegisterOnline";
 import Home from "./pages/Home";
@@ -17,11 +17,31 @@ import Department from "./pages/Department";
 import Modal from "./components/Modal";
 import RegisterAccountComponent from "./components/ResgiterAccountComponent";
 import FooterAppComponent from "./components/FooterAppComponent";
-
+import axiosConfig from "./config/axiosConfig";
+import { toast } from "react-toastify";
 function App() {
   const [openModalLogin, setOpenModalLogin] = useState(false);
   const [showFromType, setShowFromType] = useState("Login");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [ListFacilities, setListFacilities] = useState([]);
+
+  const Func_GetDataFacilities = async () => {
+    try {
+      await axiosConfig
+        .get(`/api/Facility`)
+        .then((res) => {
+          setListFacilities(res.data.response);
+        })
+        .catch((res) => {
+          toast.error(res.message);
+        });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+  useEffect(() => {
+    Func_GetDataFacilities();
+  }, []);
   return (
     <div className="relative h-full">
       <div className="top-0 sticky z-50 bg-white cursor-pointer shadow-md dropDownMenu py-2">
@@ -65,21 +85,13 @@ function App() {
                 <CustomLink to="/Department">Department</CustomLink>
                 <CustomLink to="/Teachers">Faculty</CustomLink>
                 <CustomLinkDropDown displayName={"Facilities"}>
-                  <CustomChildrenDropDown to="/Facilities/canteen">
-                    Canteen
-                  </CustomChildrenDropDown>
-                  <CustomChildrenDropDown to="/Facilities/hostel">
-                    Hostel
-                  </CustomChildrenDropDown>
-                  <CustomChildrenDropDown to="/Facilities/placement-center">
-                    Placement center
-                  </CustomChildrenDropDown>
-                  <CustomChildrenDropDown to="/Facilities/college-library">
-                    College library
-                  </CustomChildrenDropDown>
-                  <CustomChildrenDropDown to="/Facilities/administrator-office">
-                    Administrator office
-                  </CustomChildrenDropDown>
+                  {ListFacilities.map((item, index) => {
+                    return (
+                      <CustomChildrenDropDown to={`/Facilities/${item.id}`}>
+                        {item.name}
+                      </CustomChildrenDropDown>
+                    );
+                  })}
                 </CustomLinkDropDown>
                 <CustomLink to="/Contact">Contact us</CustomLink>
                 <CustomLink to="/Feedback">Feedback</CustomLink>

@@ -78,9 +78,6 @@ const TeacherDetail = () => {
             </div>
           </div>
         </div>
-        <div>
-          <div>Teacher other</div>
-        </div>
       </div>
     </div>
   );

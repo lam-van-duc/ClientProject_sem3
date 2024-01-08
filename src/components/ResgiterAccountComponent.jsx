@@ -9,7 +9,14 @@ import propTypes from "prop-types";
 
 const schema = yup.object({
   email: yup.string().email("Invalid email !").required("please enter email !"),
-  password: yup.string().required("please enter password !"),
+  password: yup
+    .string()
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+      "Password must be 6 characters or more, contain lowercase letters, uppercase letters, numbers and special characters"
+      //1 chữ thường , 1 chữ hoa và 1 ký tự đặc biệt
+    )
+    .required("please enter password !"),
   confirmPassword: yup.string().required("please enter confirm password !"),
   studentCode: yup.string().required("please enter student code !"),
 });
@@ -19,6 +26,7 @@ const RegisterAccountComponent = ({ onMoveRegister }) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -34,7 +42,7 @@ const RegisterAccountComponent = ({ onMoveRegister }) => {
     // await axiosConfig
     //   .post("/api/Feedback", data)
     //   .then((res) => {
-    //     console.log(res.response);
+    // reset();
     //     toast.success("Submit form success");
     //   })
     //   .catch((res) => {

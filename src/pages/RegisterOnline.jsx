@@ -10,33 +10,27 @@ import axiosConfig from "../config/axiosConfig";
 import { toast } from "react-toastify";
 
 const schema = yup.object({
-  name: yup.string().required("please enter your name !"),
+  name: yup.string().required("Please enter your name !"),
   email: yup
     .string()
-    .email("email is valid !")
-    .required("please enter your name !"),
+    .email("Email is valid !")
+    .required("Please enter your email !"),
   fatherName: yup.string(),
   motherName: yup.string(),
   dob: yup.date().required("Please choice dob !"),
-  gender: yup.string().required("Please choice gender !"),
+  gender: yup.number().required("Please choice gender !"),
   // .oneOf(["male", "female"], "Bạn chỉ được chọn Nam or Nữ"),
-  residentialAddress: yup
-    .string()
-    .required("please enter your residential address !"),
-  admissionFor: yup.string().required("please enter your admission for !"),
-  permanentAddress: yup
-    .string()
-    .required("please enter your permanent address !"),
-  university: yup.string().required("please enter university !"),
-  center: yup.string().required("please enter center !"),
-  stream: yup.string().required("please enter stream !"),
-  field: yup.string().required("please enter field !"),
-  markSecured: yup.string().required("please enter markSecured !"),
-  outOf: yup.string().required("please enter outOf !"),
-  dob: yup.string().required("please enter dob !"),
-
-  classObtained: yup.string().required("please enter Class obtained !"),
-  SportDetail: yup.string().required("please enter Sport detail !"),
+  ResAddress: yup.string().required("Please enter your residential address !"),
+  admissionFor: yup.string().required("Please enter your admission for !"),
+  PerAddress: yup.string().required("Please enter your permanent address !"),
+  university: yup.string(),
+  center: yup.string(),
+  stream: yup.string(),
+  field: yup.string(),
+  markSecured: yup.string(),
+  outOf: yup.string(),
+  classObtained: yup.string(),
+  SportDetail: yup.string(),
 
   // passwordConfirm: yup
   //   .string()
@@ -133,8 +127,8 @@ const RegisterOnline = () => {
                     <option selected hidden value={""}>
                       Choice gender
                     </option>
-                    <option value={"0"}>Male</option>
-                    <option value={"1"}>Female</option>
+                    <option value={0}>Male</option>
+                    <option value={1}>Female</option>
                   </select>
                   <ErrorText text={errors.gender?.message} />
                 </div>
@@ -143,20 +137,20 @@ const RegisterOnline = () => {
                 <div className="form-input">
                   <label className="font-bold">Residential address(*)</label>
                   <input
-                    {...register("residentialAddress")}
+                    {...register("ResAddress")}
                     type="text"
-                    name="residentialAddress"
+                    name="ResAddress"
                   />
-                  <ErrorText text={errors.residentialAddress?.message} />
+                  <ErrorText text={errors.ResAddress?.message} />
                 </div>
                 <div className="form-input">
                   <label className="font-bold">Permanent address(*)</label>
                   <input
-                    {...register("permanentAddress")}
+                    {...register("PerAddress")}
                     type="text"
-                    name="permanentAddress"
+                    name="PerAddress"
                   />
-                  <ErrorText text={errors.permanentAddress?.message} />
+                  <ErrorText text={errors.PerAddress?.message} />
                 </div>
                 <div className="form-input">
                   <label className="font-bold">Admission for(*)</label>
@@ -169,7 +163,7 @@ const RegisterOnline = () => {
                 </div>
               </div>
               <div className="form-input">
-                <label className="font-bold">Sport detail(*)</label>
+                <label className="font-bold">Sport detail</label>
                 <input
                   as="textarea"
                   rows={3}
@@ -179,14 +173,14 @@ const RegisterOnline = () => {
                 />
                 <ErrorText text={errors.SportDetail?.message} />
               </div>
-              <div className="mt-3">
+              <div className="mt-4">
                 <div className="border-[2px] border-solid border-gray-300 px-3 py-4 rounded-md mb-1 relative">
                   <span className="text-xl font-bold absolute top-[-17px] bg-white px-2 left-4">
-                    In tabular format
+                    Previous Education
                   </span>
                   <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-3">
                     <div className="form-input">
-                      <label className="font-bold">university(*)</label>
+                      <label className="font-bold">University</label>
                       <input
                         {...register("university")}
                         type="text"
@@ -195,7 +189,7 @@ const RegisterOnline = () => {
                       <ErrorText text={errors.university?.message} />
                     </div>
                     <div className="form-input">
-                      <label className="font-bold">Enrollment number(*)</label>
+                      <label className="font-bold">Enrollment number</label>
                       <input
                         {...register("enrollmentNumber")}
                         type="text"
@@ -204,7 +198,7 @@ const RegisterOnline = () => {
                       <ErrorText text={errors.enrollmentNumber?.message} />
                     </div>
                     <div className="form-input">
-                      <label className="font-bold">Center(*)</label>
+                      <label className="font-bold">Center</label>
                       <input
                         {...register("center")}
                         type="text"
@@ -214,7 +208,7 @@ const RegisterOnline = () => {
                     </div>
 
                     <div className="form-input">
-                      <label className="font-bold">Stream(*)</label>
+                      <label className="font-bold">Stream</label>
                       <input
                         {...register("stream")}
                         type="text"
@@ -223,12 +217,12 @@ const RegisterOnline = () => {
                       <ErrorText text={errors.stream?.message} />
                     </div>
                     <div className="form-input">
-                      <label className="font-bold">Field(*)</label>
+                      <label className="font-bold">Field</label>
                       <input {...register("field")} type="text" name="field" />
                       <ErrorText text={errors.field?.message} />
                     </div>
                     <div className="form-input">
-                      <label className="font-bold">Mark secured(*)</label>
+                      <label className="font-bold">Mark secured</label>
                       <input
                         {...register("markSecured")}
                         type="text"
@@ -237,12 +231,12 @@ const RegisterOnline = () => {
                       <ErrorText text={errors.markSecured?.message} />
                     </div>
                     <div className="form-input">
-                      <label className="font-bold">Out of(*)</label>
+                      <label className="font-bold">Out of</label>
                       <input {...register("outOf")} type="text" name="outOf" />
                       <ErrorText text={errors.outOf?.message} />
                     </div>
                     <div className="form-input">
-                      <label className="font-bold">Class obtained(*)</label>
+                      <label className="font-bold">Class obtained</label>
                       <input
                         {...register("classObtained")}
                         type="text"

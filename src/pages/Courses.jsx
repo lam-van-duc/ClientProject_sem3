@@ -9,17 +9,37 @@ import { toast } from "react-toastify";
 const Courses = () => {
   const [paginationActive, setPaginationActive] = useState(1);
   const [ListCourse, setListCourse] = useState([]);
+  const [ListFaculty, setListFaculty] = useState([]);
+
+  const [totalItem, setTotalItem] = useState(0);
 
   const handleChangePage = (page) => {
     setPaginationActive(page);
+    Func_GetDataCourse(page, 9);
   };
 
-  const Func_GetDataCourse = async () => {
+  const Func_GetDataCourse = async (page, limit) => {
     try {
       await axiosConfig
-        .get("/api/Course")
+        .get(`/api/Course?page=${page}&limit=${limit}`)
         .then((res) => {
-          setListCourse(res.data.response);
+          setListCourse(res.data.response.data);
+          setTotalItem(res.data.response.totalItem);
+        })
+        .catch((res) => {
+          toast.error(res.message);
+        });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const Func_GetDataFaculty = async () => {
+    try {
+      await axiosConfig
+        .get(`/api/Faculty?page=${1}&limit=${4}`)
+        .then((res) => {
+          setListFaculty(res.data.response.data);
         })
         .catch((res) => {
           toast.error(res.message);
@@ -30,81 +50,9 @@ const Courses = () => {
   };
 
   useEffect(() => {
-    Func_GetDataCourse();
+    Func_GetDataCourse(1, 9);
+    Func_GetDataFaculty();
   }, []);
-
-  // const ListCourse = [
-  //   {
-  //     id: 1,
-  //     image:
-  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-1.jpg",
-  //     name: "Biochemistry",
-  //     title:
-  //       "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-  //   },
-  //   {
-  //     id: 2,
-  //     image:
-  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-2.jpg",
-  //     name: "Major in Economics",
-  //     title:
-  //       "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-  //   },
-  //   {
-  //     id: 3,
-  //     image:
-  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-3.jpg",
-  //     name: "Business Media",
-  //     title:
-  //       "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-  //   },
-  //   {
-  //     id: 4,
-  //     image:
-  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-4.jpg",
-  //     name: "Biotechnology",
-  //     title:
-  //       "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-  //   },
-  //   {
-  //     id: 5,
-  //     image:
-  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-6.jpg",
-  //     name: "Corporate Finance",
-  //     title: "Seamlessly visualize quality ",
-  //   },
-  //   {
-  //     id: 2,
-  //     image:
-  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-2.jpg",
-  //     name: "Major in Economics",
-  //     title:
-  //       "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-  //   },
-  //   {
-  //     id: 3,
-  //     image:
-  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-3.jpg",
-  //     name: "Business Media",
-  //     title:
-  //       "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-  //   },
-  //   {
-  //     id: 4,
-  //     image:
-  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-4.jpg",
-  //     name: "Biotechnology",
-  //     title:
-  //       "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-  //   },
-  //   {
-  //     id: 5,
-  //     image:
-  //       "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-6.jpg",
-  //     name: "Corporate Finance",
-  //     title: "Seamlessly visualize quality ",
-  //   },
-  // ];
 
   const ListTeacher = [
     {
@@ -138,19 +86,8 @@ const Courses = () => {
       <div>
         <HeaderTitleComponent name="Course"></HeaderTitleComponent>
       </div>
-      <div className="my-2 container mx-auto">
-        <div className="text-right">
-          <select className="border py-2 px-4 focus-visible:outline-none ">
-            <option selected hidden value="">
-              Sort by
-            </option>
-            <option value="Latest date">Latest date</option>
-            <option value="Oldest date">Oldest date</option>
-          </select>
-        </div>
-      </div>
 
-      <div className="container mx-auto">
+      <div className="container mx-auto mt-3">
         <div className="flex justify-center">
           <div className="grid gap-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
             {ListCourse.map((item, index) => {
@@ -158,7 +95,7 @@ const Courses = () => {
                 <CourseComponent
                   id={item.id}
                   name={item.name}
-                  image={item.image}
+                  image={item.thumbnail}
                   title={item.title}
                 ></CourseComponent>
               );
@@ -170,8 +107,8 @@ const Courses = () => {
             <div>
               <Pagination
                 activePage={paginationActive}
-                itemsCountPerPage={10}
-                totalItemsCount={450}
+                itemsCountPerPage={9}
+                totalItemsCount={totalItem}
                 pageRangeDisplayed={5}
                 onChange={(page) => handleChangePage(page)}
               />
@@ -186,10 +123,10 @@ const Courses = () => {
           <b className="flex-1 bg-gray-300 h-1"></b>
         </h3>
         <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2  gap-4 mb-4">
-          {ListTeacher.map((item, index) => {
+          {ListFaculty.map((item, index) => {
             return (
               <TeacherComponent
-                image={item.image}
+                image={item.thumbnail}
                 name={item.name}
                 Position={item.Position}
                 id={item.id}

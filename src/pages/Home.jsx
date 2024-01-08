@@ -285,7 +285,7 @@ const Home = () => {
             <div className="my-6">
               <h3 className="flex flex-row items-center justify-center mb-6">
                 <b className="flex-1 bg-gray-300 h-1"></b>
-                <span className="mx-4">Faculty memmer</span>
+                <span className="mx-4">Faculty member</span>
                 <b className="flex-1 bg-gray-300 h-1"></b>
               </h3>
               <div>
@@ -317,23 +317,6 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div
-          className="bg-cover bg-center relative"
-          style={{
-            height: "33rem",
-            backgroundImage: `url(
-              https://kodeforest.net/html/uoe/extra-images/home-gallery3.jpg
-            )`,
-          }}
-        >
-          <a
-            className="bg-blue-800 text-xl font-bold py-2 px-4 text-white hover:bg-blue-900 absolute bottom-6 text-center left-[45%]"
-            style={{ textDecoration: "none" }}
-            href="/tuyensinh"
-          >
-            Register now
-          </a>
         </div>
       </div>
       <ButtonOnTopComponent></ButtonOnTopComponent>
