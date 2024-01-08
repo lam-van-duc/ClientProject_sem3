@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import parse from "html-react-parser";
+import React, { useEffect, useState } from "react";
 import HeaderTitleDetailsComponent from "../components/HeaderTitleDetailsComponent";
+import parse from "html-react-parser";
+import { useParams } from "react-router-dom";
 import axiosConfig from "../config/axiosConfig";
 import { toast } from "react-toastify";
-const CourseDetails = () => {
+const DepartmentDetail = () => {
   const { id } = useParams();
-  const [Course, setCourse] = useState({});
+  const [Department, setDepartment] = useState({});
   const [loading, setLoading] = useState(true);
-
-  const Func_GetDataFaculty = async () => {
+  const Func_GetData = async () => {
     try {
       await axiosConfig
-        .get(`/api/Course/GetCourseById?id=${id}`)
+        .get(`/api/Department/${id}`)
         .then((res) => {
           setLoading(false);
 
-          setCourse(res.data.response);
+          setDepartment(res.data.response);
         })
         .catch((res) => {
           setLoading(false);
@@ -29,7 +28,7 @@ const CourseDetails = () => {
 
   useEffect(() => {
     setLoading(true);
-    Func_GetDataFaculty();
+    Func_GetData();
   }, []);
 
   return (
@@ -37,10 +36,12 @@ const CourseDetails = () => {
       {loading == false ? (
         <div>
           <HeaderTitleDetailsComponent
-            name="Course details"
-            imageBackground={Course.thumbnail}
+            name={"Department Detail"}
+            imageBackground={Department.thumbnail}
           ></HeaderTitleDetailsComponent>
-          <div className="container mx-auto my-2">{parse(Course.detail)}</div>
+          <div className="container mx-auto">
+            {parse(Department.description)}
+          </div>
         </div>
       ) : (
         <div className="h-[100vh]"></div>
@@ -48,4 +49,4 @@ const CourseDetails = () => {
     </>
   );
 };
-export default CourseDetails;
+export default DepartmentDetail;

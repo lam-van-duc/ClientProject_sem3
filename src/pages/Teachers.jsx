@@ -1,79 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TeacherComponent from "../components/TeacherComponent";
 import HeaderTitleComponent from "../components/HeaderTitleComponent";
 import CourseComponent from "../components/CourseComponent";
 import Pagination from "react-js-pagination";
-import backgroundImageTitle from "../assets/image/backgroundTitle.jpg";
+import axiosConfig from "../config/axiosConfig";
+import { toast } from "react-toastify";
 const Teachers = () => {
   const [paginationActive, setPaginationActive] = useState(1);
+  const [ListCourse, setListCourse] = useState([]);
+  const [ListFaculty, setListFaculty] = useState([]);
+  const [totalItem, setTotalItem] = useState(0);
   const handleChangePage = (page) => {
     setPaginationActive(page);
-    console.log(page);
+    Func_GetDataFaculty(page, 12);
   };
-  const ListTeacher = [
-    {
-      id: 1,
-      image: "https://ordainit.com/educate/assets/img/team/team-3-2.jpg",
-      name: "Doctor strange",
-      birthday: "29-12-1998",
-      Position: "Manager",
-    },
-    {
-      id: 2,
-      image: "https://ordainit.com/educate/assets/img/team/team-3-1.jpg",
-      name: "julien",
-      birthday: "29-12-1998",
-      Position: "employee",
-    },
-    {
-      id: 3,
-      image: "https://ordainit.com/educate/assets/img/team/team-3-3.jpg",
-      name: "rabit",
-      birthday: "29-12-1998",
-      Position: "employee",
-    },
-    {
-      id: 4,
-      image: "https://ordainit.com/educate/assets/img/team/team-3-4.jpg",
-      name: "puppy po",
-      birthday: "29-12-1998",
-      Position: "Head of Education Department",
-    },
-    {
-      id: 5,
-      image: "https://ordainit.com/educate/assets/img/team/team-1-7.jpg",
-      name: "wan kanda",
-      birthday: "29-12-1998",
-      Position: "employee",
-    },
-  ];
 
-  const ListCourse = [
-    {
-      id: 1,
-      image:
-        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-1.jpg",
-      name: "Biochemistry",
-      title:
-        "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-    },
-    {
-      id: 2,
-      image:
-        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-2.jpg",
-      name: "Major in Economics",
-      title:
-        "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-    },
-    {
-      id: 3,
-      image:
-        "https://htmldemo.zcubethemes.com/qeducato/img/bg/couress-img-3.jpg",
-      name: "Business Media",
-      title:
-        "Seamlessly visualize quality ellectual capital without superior collaboration and idea tically",
-    },
-  ];
+  const Func_GetDataCourse = async () => {
+    try {
+      await axiosConfig
+        .get(`/api/Course?page=${1}&limit=${3}`)
+        .then((res) => {
+          setListCourse(res.data.response.data);
+          setTotalItem(res.data.response.totalItem);
+        })
+        .catch((res) => {
+          toast.error(res.message);
+        });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const Func_GetDataFaculty = async (page, limit) => {
+    try {
+      await axiosConfig
+        .get(`/api/Faculty?page=${page}&limit=${limit}`)
+        .then((res) => {
+          setListFaculty(res.data.response.data);
+        })
+        .catch((res) => {
+          toast.error(res.message);
+        });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    Func_GetDataCourse();
+    Func_GetDataFaculty(1, 12);
+  }, []);
+
   return (
     <div className="text-center">
       <div>
@@ -83,13 +60,14 @@ const Teachers = () => {
       <div className="container mx-auto">
         <div className="container mx-auto flex justify-center mt-3">
           <div className="grid gap-3 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 sm:px-5 md:px-0 lg:px-0">
-            {ListTeacher.map((item, index) => {
+            {ListFaculty.map((item, index) => {
               return (
                 <TeacherComponent
                   image={item.image}
                   name={item.name}
-                  Position={item.Position}
+                  email={item.email}
                   id={item.id}
+                  teacher={item}
                 ></TeacherComponent>
               );
             })}
@@ -99,8 +77,8 @@ const Teachers = () => {
           <div className="flex justify-center mt-3">
             <Pagination
               activePage={paginationActive}
-              itemsCountPerPage={10}
-              totalItemsCount={450}
+              itemsCountPerPage={12}
+              totalItemsCount={totalItem}
               pageRangeDisplayed={5}
               onChange={(page) => handleChangePage(page)}
             />
@@ -118,8 +96,10 @@ const Teachers = () => {
                 <CourseComponent
                   id={item.id}
                   name={item.name}
-                  image={item.image}
+                  image={item.thumbnail}
                   title={item.title}
+                  detail={item.detail}
+                  thumbnail={item.thumbnail}
                 ></CourseComponent>
               );
             })}

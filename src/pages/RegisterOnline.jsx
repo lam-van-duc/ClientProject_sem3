@@ -60,7 +60,6 @@ const RegisterOnline = () => {
           toast.success("Submit form success !");
         })
         .catch((res) => {
-          console.log(res);
           toast.error(res.message);
         });
     } catch (error) {

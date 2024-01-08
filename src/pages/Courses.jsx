@@ -15,7 +15,7 @@ const Courses = () => {
 
   const handleChangePage = (page) => {
     setPaginationActive(page);
-    Func_GetDataCourse(page, 9);
+    Func_GetDataCourse(page, 12);
   };
 
   const Func_GetDataCourse = async (page, limit) => {
@@ -50,36 +50,9 @@ const Courses = () => {
   };
 
   useEffect(() => {
-    Func_GetDataCourse(1, 9);
+    Func_GetDataCourse(1, 12);
     Func_GetDataFaculty();
   }, []);
-
-  const ListTeacher = [
-    {
-      id: 1,
-      image: "https://ordainit.com/educate/assets/img/team/team-3-2.jpg",
-      name: "Doctor strange",
-      Position: "Manager",
-    },
-    {
-      id: 2,
-      image: "https://ordainit.com/educate/assets/img/team/team-3-1.jpg",
-      name: "julien",
-      Position: "employee",
-    },
-    {
-      id: 3,
-      image: "https://ordainit.com/educate/assets/img/team/team-3-3.jpg",
-      name: "rabit",
-      Position: "employee",
-    },
-    {
-      id: 4,
-      image: "https://ordainit.com/educate/assets/img/team/team-3-4.jpg",
-      name: "puppy po",
-      Position: "Head of Education Department",
-    },
-  ];
 
   return (
     <div className="text-center">
@@ -89,7 +62,7 @@ const Courses = () => {
 
       <div className="container mx-auto mt-3">
         <div className="flex justify-center">
-          <div className="grid gap-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
+          <div className="grid gap-3 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
             {ListCourse.map((item, index) => {
               return (
                 <CourseComponent
@@ -97,6 +70,8 @@ const Courses = () => {
                   name={item.name}
                   image={item.thumbnail}
                   title={item.title}
+                  detail={item.detail}
+                  thumbnail={item.thumbnail}
                 ></CourseComponent>
               );
             })}
@@ -107,7 +82,7 @@ const Courses = () => {
             <div>
               <Pagination
                 activePage={paginationActive}
-                itemsCountPerPage={9}
+                itemsCountPerPage={12}
                 totalItemsCount={totalItem}
                 pageRangeDisplayed={5}
                 onChange={(page) => handleChangePage(page)}
@@ -126,10 +101,11 @@ const Courses = () => {
           {ListFaculty.map((item, index) => {
             return (
               <TeacherComponent
-                image={item.thumbnail}
+                image={item.image}
                 name={item.name}
-                Position={item.Position}
+                email={item.email}
                 id={item.id}
+                teacher={item}
               ></TeacherComponent>
             );
           })}

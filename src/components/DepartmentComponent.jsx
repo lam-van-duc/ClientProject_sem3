@@ -8,8 +8,8 @@ const DepartmentComponent = () => {
   const navigator = useNavigate();
   const [ListDepartment, setListDepartment] = useState([]);
 
-  const showDetailDepartment = (id) => {
-    navigator("/TeacherDetails/" + id);
+  const showDetailDepartment = (id, department) => {
+    navigator("/DepartmentDetail/" + id);
   };
 
   const getListDepartment = async () => {
@@ -35,7 +35,7 @@ const DepartmentComponent = () => {
             <div
               className="flex flex-col overflow-hidden rounded-lg border"
               onClick={() => {
-                showDetailDepartment(item.id);
+                showDetailDepartment(item.id, item);
               }}
             >
               <div className="h-[15rem] hoverScale">

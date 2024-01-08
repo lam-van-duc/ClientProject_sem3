@@ -3,18 +3,18 @@ import { useNavigate } from "react-router-dom";
 
 const CourseComponent = (props) => {
   const navigator = useNavigate();
-  const showDetailTeacher = (id) => {
+  const showDetailTeacher = (id, detail, thumbnail) => {
     navigator("/CourseDetails/" + id);
   };
   return (
     <div
       className="courseItem"
       onClick={() => {
-        showDetailTeacher(props.id);
+        showDetailTeacher(props.id, props.detail, props.thumbnail);
       }}
     >
       <div className="h-full w-full bg-[#f0f7ff] courseContent border border-gray-200 rounded-md hover:cursor-pointer">
-        <div className="couseThumnail w-full h-72 overflow-hidden rounded-t-md min-w-[26rem]">
+        <div className="couseThumnail w-full h-60 overflow-hidden rounded-t-md min-w-[26rem]">
           <img src={props.image} className="object-contain w-full" />
         </div>
         <div className="text-left p-3">

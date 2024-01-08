@@ -8,6 +8,8 @@ import Teachers from "./pages/Teachers";
 import Courses from "./pages/Courses";
 import CourseDetails from "./pages/CourseDetails";
 import TeacherDetails from "./pages/TeacherDetails";
+import DepartmentDetail from "./pages/DepartmentDetail";
+
 import Facilities from "./pages/Facilities";
 import FeedBack from "./pages/FeedBack";
 import LogoColor from "./assets/image/logoITM-color.png";
@@ -116,6 +118,7 @@ function App() {
         <Route path="/Department" element={<Department />} />
         <Route path="/Teachers" element={<Teachers />} />
         <Route path="/TeacherDetails/:id" element={<TeacherDetails />} />
+        <Route path="/DepartmentDetail/:id" element={<DepartmentDetail />} />
         <Route path="/Facilities/:id" element={<Facilities />} />
         <Route path="/Contact" element={<Contact />} />
         <Route path="/FeedBack" element={<FeedBack />} />
