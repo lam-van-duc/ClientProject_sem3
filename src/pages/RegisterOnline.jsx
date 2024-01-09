@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Slide } from "react-slideshow-image";
+import React, { useEffect, useState } from "react";
 import "react-slideshow-image/dist/styles.css";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,6 +7,14 @@ import ErrorText from "../components/ErrorText";
 import HeaderTitleComponent from "../components/HeaderTitleComponent";
 import axiosConfig from "../config/axiosConfig";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import {
+  Tab,
+  TabPanel,
+  Tabs,
+  TabsBody,
+  TabsHeader,
+} from "@material-tailwind/react";
 
 const schema = yup.object({
   name: yup.string().required("Please enter your name !"),
@@ -17,11 +24,10 @@ const schema = yup.object({
     .required("Please enter your email !"),
   fatherName: yup.string(),
   motherName: yup.string(),
-  dob: yup.date().required("Please choice dob !"),
+  dob: yup.date().required("Please choice birthday !"),
   gender: yup.number().required("Please choice gender !"),
-  // .oneOf(["male", "female"], "Bạn chỉ được chọn Nam or Nữ"),
   ResAddress: yup.string().required("Please enter your residential address !"),
-  admissionFor: yup.string().required("Please enter your admission for !"),
+  admissionFor: yup.number().required("Please choice your admission for !"),
   PerAddress: yup.string().required("Please enter your permanent address !"),
   university: yup.string(),
   center: yup.string(),
@@ -31,16 +37,11 @@ const schema = yup.object({
   outOf: yup.string(),
   classObtained: yup.string(),
   SportDetail: yup.string(),
-
-  // passwordConfirm: yup
-  //   .string()
-  //   .matches(
-  //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-  //     "Mật khẩu phải chứa ít nhất 1 chữ thường , 1 chữ hoa và 1 ký tự đặc biệt"
-  //   )
-  //   .required("Vui lòng điền xác nhận mật khẩu !"),
 });
 const RegisterOnline = () => {
+  const navigator = useNavigate();
+  const [listDepartment, setListDepartment] = useState([]);
+
   const {
     register,
     handleSubmit,
@@ -57,7 +58,7 @@ const RegisterOnline = () => {
         .post("/api/Admission", data)
         .then((res) => {
           reset();
-          toast.success("Submit form success !");
+          navigator("/SuccessEnrollmentRegistration");
         })
         .catch((res) => {
           toast.error(res.message);
@@ -67,21 +68,34 @@ const RegisterOnline = () => {
     }
   };
 
+  const GetListDepartment = async () => {
+    try {
+      await axiosConfig
+        .get("/api/Department")
+        .then((res) => {
+          setListDepartment(res.data.response);
+        })
+        .catch((res) => {
+          toast.error(res.message);
+        });
+    } catch (error) {
+      toast.error("Submit form error !");
+    }
+  };
+
+  useEffect(() => {
+    GetListDepartment();
+  }, []);
+
   return (
     <div>
       <HeaderTitleComponent name="Register online" />
       <div className="container mx-auto py-3">
         <div className="px-5">
-          <h5 className="font-bold py-4">REGISTER ONLINE</h5>
-          {/* <div className="bg-cover bg-center h-80">
-              <img
-                src="https://aptech.fpt.edu.vn/wp-content/uploads/2022/12/banner.jpg"
-                className="object-cover h-full w-full"
-              />
-            </div> */}
+          <h5 className="font-bold py-4">Enrollment Registration</h5>
           <form onSubmit={handleSubmit(HandleSubmitFrom)}>
             <div className="w-full">
-              <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3">
+              <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3">
                 <div className="form-input">
                   <label className="font-bold">Full name(*)</label>
                   <input type="text" {...register("name")} />
@@ -91,24 +105,6 @@ const RegisterOnline = () => {
                   <label className="font-bold">Email(*)</label>
                   <input type="text" {...register("email")} />
                   <ErrorText text={errors.email?.message} />
-                </div>
-                <div className="form-input">
-                  <label className="font-bold">Father name</label>
-                  <input
-                    {...register("fatherName")}
-                    type="text"
-                    name="fatherName"
-                  />
-                  <ErrorText text={errors.fatherName?.message} />
-                </div>
-                <div className="form-input">
-                  <label className="font-bold">Mother name</label>
-                  <input
-                    {...register("motherName")}
-                    type="text"
-                    name="motherName"
-                  />
-                  <ErrorText text={errors.motherName?.message} />
                 </div>
 
                 <div className="form-input">
@@ -132,7 +128,25 @@ const RegisterOnline = () => {
                   <ErrorText text={errors.gender?.message} />
                 </div>
               </div>
-              <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1  grid-cols-1 gap-3">
+              <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2  grid-cols-1 gap-3">
+                <div className="form-input">
+                  <label className="font-bold">Father name</label>
+                  <input
+                    {...register("fatherName")}
+                    type="text"
+                    name="fatherName"
+                  />
+                  <ErrorText text={errors.fatherName?.message} />
+                </div>
+                <div className="form-input">
+                  <label className="font-bold">Mother name</label>
+                  <input
+                    {...register("motherName")}
+                    type="text"
+                    name="motherName"
+                  />
+                  <ErrorText text={errors.motherName?.message} />
+                </div>
                 <div className="form-input">
                   <label className="font-bold">Residential address(*)</label>
                   <input
@@ -153,11 +167,15 @@ const RegisterOnline = () => {
                 </div>
                 <div className="form-input">
                   <label className="font-bold">Admission for(*)</label>
-                  <input
-                    {...register("admissionFor")}
-                    type="text"
-                    name="admissionFor"
-                  />
+                  <select {...register("admissionFor")}>
+                    <option selected hidden>
+                      Choice admission for
+                    </option>
+                    {listDepartment != undefined &&
+                      listDepartment.map((item) => {
+                        return <option value={item.id}>{item.name}</option>;
+                      })}
+                  </select>
                   <ErrorText text={errors.admissionFor?.message} />
                 </div>
               </div>

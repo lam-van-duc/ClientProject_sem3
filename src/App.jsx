@@ -19,6 +19,8 @@ import Department from "./pages/Department";
 import Modal from "./components/Modal";
 import RegisterAccountComponent from "./components/ResgiterAccountComponent";
 import FooterAppComponent from "./components/FooterAppComponent";
+import SuccessEnrollmentRegistration from "./pages/SuccessEnrollmentRegistration";
+
 import axiosConfig from "./config/axiosConfig";
 import { toast } from "react-toastify";
 import CookieService from "./config/CookieService";
@@ -145,6 +147,10 @@ function App() {
         <Route path="/Contact" element={<Contact />} />
         <Route path="/FeedBack" element={<FeedBack />} />
         <Route path="/StudentRegistration" element={<RegisterOnline />} />
+        <Route
+          path="/SuccessEnrollmentRegistration"
+          element={<SuccessEnrollmentRegistration />}
+        />
       </Routes>
       <FooterAppComponent></FooterAppComponent>
       <ToastContainer />
