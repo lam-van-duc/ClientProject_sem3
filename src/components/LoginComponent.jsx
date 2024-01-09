@@ -6,6 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import propTypes from "prop-types";
+import CookieService from "../config/CookieService";
+import { useLocation } from "react-router-dom";
 
 const schema = yup.object({
   email: yup.string().email("Invalid email !").required("please enter email !"),
@@ -23,16 +25,16 @@ const LoginComponent = ({ onMoveLogin }) => {
     mode: "onChange",
   });
   const HandleSubmitFrom = async (data) => {
-    // await axiosConfig
-    //   .post("/api/Feedback", data)
-    //   .then((res) => {
-    //     console.log(res.response);
-    //     toast.success("Submit form success");
-    //   })
-    //   .catch((res) => {
-    //     toast.error(res.response.data.title);
-    //   });
-    toast.success("Login success");
+    await axiosConfig
+      .post("/api/User/SignIn", data)
+      .then((res) => {
+        CookieService.saveToken("token", res.data.response);
+        toast.success("Submit form success.");
+        window.location.reload();
+      })
+      .catch((res) => {
+        toast.error("Invalid infomation.");
+      });
   };
 
   return (

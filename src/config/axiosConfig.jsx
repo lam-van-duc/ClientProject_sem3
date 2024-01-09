@@ -1,10 +1,11 @@
 import axios, { AxiosInstance } from "axios";
+import CookieService from "./CookieService";
 
 class Http {
   instance: AxiosInstance;
   constructor() {
     this.instance = axios.create({
-      baseURL: "https://localhost:7060",
+      baseURL: "http://localhost:5080",
       headers: {
         "Content-Type": "application/json",
       },
@@ -12,8 +13,8 @@ class Http {
 
     this.instance.interceptors.request.use(
       async (config) => {
-        //const token = await Token.loadToken();
-        // config.headers.Authorization = `Bearer ${token?.accessToken}`;
+        const token = await CookieService.getToken("token");
+        config.headers.Authorization = `Bearer ${token}`;
         return config;
       },
       (error) => {

@@ -21,11 +21,13 @@ import RegisterAccountComponent from "./components/ResgiterAccountComponent";
 import FooterAppComponent from "./components/FooterAppComponent";
 import axiosConfig from "./config/axiosConfig";
 import { toast } from "react-toastify";
+import CookieService from "./config/CookieService";
 function App() {
   const [openModalLogin, setOpenModalLogin] = useState(false);
   const [showFromType, setShowFromType] = useState("Login");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [ListFacilities, setListFacilities] = useState([]);
+  const [userLogin, setUserLogin] = useState({});
 
   const Func_GetDataFacilities = async () => {
     try {
@@ -41,7 +43,21 @@ function App() {
       toast.error(error.message);
     }
   };
+
+  const Func_GetDataUserLogin = async () => {
+    try {
+      const data = CookieService.getToken("token");
+      await axiosConfig
+        .post(`/api/User/DecodeToken`, data)
+        .then((res) => {
+          setUserLogin(res.data.response);
+        })
+        .catch((res) => {});
+    } catch (error) {}
+  };
+
   useEffect(() => {
+    Func_GetDataUserLogin();
     Func_GetDataFacilities();
   }, []);
   return (
@@ -86,25 +102,31 @@ function App() {
                 </CustomLink>
                 <CustomLink to="/Department">Department</CustomLink>
                 <CustomLink to="/Teachers">Faculty</CustomLink>
-                <CustomLinkDropDown displayName={"Facilities"}>
-                  {ListFacilities.map((item, index) => {
-                    return (
-                      <CustomChildrenDropDown to={`/Facilities/${item.id}`}>
-                        {item.name}
-                      </CustomChildrenDropDown>
-                    );
-                  })}
-                </CustomLinkDropDown>
+
                 <CustomLink to="/Contact">Contact us</CustomLink>
                 <CustomLink to="/Feedback">Feedback</CustomLink>
-                <a
-                  className="bg-red-800 text-white cursor-pointer py-2 px-4 font-bold rounded-md hover:shadow-xl ml-0 lg:ml-8 block no-underline"
-                  onClick={() => {
-                    setOpenModalLogin(true);
-                  }}
-                >
-                  Đăng nhập
-                </a>
+                {userLogin[
+                  "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+                ] == undefined ? (
+                  <a
+                    className="bg-red-800 text-white cursor-pointer py-2 px-4 font-bold rounded-md hover:shadow-xl ml-0 lg:ml-8 block no-underline"
+                    onClick={() => {
+                      setOpenModalLogin(true);
+                    }}
+                  >
+                    Đăng nhập
+                  </a>
+                ) : (
+                  <a
+                    className="bg-red-800 text-white cursor-pointer py-2 px-4 font-bold rounded-md hover:shadow-xl ml-0 lg:ml-8 block no-underline"
+                    onClick={() => {
+                      CookieService.removeToken("token");
+                      setUserLogin({});
+                    }}
+                  >
+                    Logout
+                  </a>
+                )}
               </ul>
             </div>
           </div>

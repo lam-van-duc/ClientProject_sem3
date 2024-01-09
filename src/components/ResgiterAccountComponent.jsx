@@ -37,17 +37,16 @@ const RegisterAccountComponent = ({ onMoveRegister }) => {
     if (data.password != data.confirmPassword) {
       return toast.success("password and confirm password do not match.");
     } else {
-      return toast.success("Register success.");
+      await axiosConfig
+        .post("/api/User/SignUp", data)
+        .then((res) => {
+          reset();
+          toast.success("Register success");
+        })
+        .catch((res) => {
+          toast.error(res.response.data.title);
+        });
     }
-    // await axiosConfig
-    //   .post("/api/Feedback", data)
-    //   .then((res) => {
-    // reset();
-    //     toast.success("Submit form success");
-    //   })
-    //   .catch((res) => {
-    //     toast.error(res.response.data.title);
-    //   });
   };
 
   return (

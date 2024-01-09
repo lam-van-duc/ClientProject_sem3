@@ -14,6 +14,9 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const navigator = useNavigate();
   const [HomePage, setHomePage] = useState({});
+  const [course, setListCourse] = useState([]);
+  const [faculty, setListFaculty] = useState([]);
+
   const [loading, setLoading] = useState(true);
 
   const HandleSubmitFrom = async () => {
@@ -22,16 +25,47 @@ const Home = () => {
       .then((res) => {
         setLoading(false);
         setHomePage(res.data.response);
+        console.log(res);
       })
       .catch((res) => {
         setLoading(false);
         toast.error(res.message);
       });
   };
+  const Func_GetDataFaculty = async () => {
+    try {
+      await axiosConfig
+        .get(`/api/Faculty?page=${1}&limit=${4}`)
+        .then((res) => {
+          setListFaculty(res.data.response.data);
+        })
+        .catch((res) => {
+          toast.error(res.message);
+        });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+  const Func_GetDataCourse = async () => {
+    try {
+      await axiosConfig
+        .get(`/api/Course?page=${1}&limit=${5}`)
+        .then((res) => {
+          setListCourse(res.data.response.data);
+        })
+        .catch((res) => {
+          toast.error(res.message);
+        });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   useEffect(() => {
     setLoading(true);
     HandleSubmitFrom();
+    Func_GetDataCourse();
+    Func_GetDataFaculty();
   }, []);
 
   return (
@@ -51,7 +85,7 @@ const Home = () => {
                     <div className="each-slide-effect">
                       <div className="z-10">
                         <img
-                          src={`${item}`}
+                          src={`http://localhost:5080/api/Image/${item}`}
                           className="w-full object-cover select-none z-0"
                           style={{ pointerEvents: "none" }}
                         />
@@ -82,7 +116,7 @@ const Home = () => {
                 <p className="text-center lg:text-3xl md:text-2xl sm:text-xl text-base font-bold text-orange-400 uppercase m-0">
                   Learn about departments
                 </p>
-                <div className="flex justify-center items-center flex-wrap gap-3">
+                <div className="flex justify-center items-center flex-wrap gap-3 mt-2">
                   {HomePage.departments.map((item, index) => {
                     return (
                       <a
@@ -93,7 +127,7 @@ const Home = () => {
                         className="h-56 w-72 no-underline"
                       >
                         <div>
-                          <div className="h-44 ">
+                          <div className="h-36 ">
                             <img
                               className="object-contain h-full mx-auto"
                               src={item.icon}
@@ -127,21 +161,22 @@ const Home = () => {
                     indicators={true}
                     duration={1500}
                   >
-                    {HomePage.courses.map((item, index) => {
-                      return (
-                        <div className="flex flex-col items-start justify-start w-80 h-72 px-3">
-                          <div className="w-80 h-64">
-                            <img
-                              src={item.thumbnail}
-                              className="object-cover h-full mx-auto"
-                            />
+                    {course.length > 0 &&
+                      course.map((item, index) => {
+                        return (
+                          <div className="flex flex-col items-start justify-start w-80 h-72 px-3">
+                            <div className="w-80 h-64">
+                              <img
+                                src={item.thumbnail}
+                                className="object-cover h-full mx-auto"
+                              />
+                            </div>
+                            <p className="m-0 font-bold py-2 line-clamp-2">
+                              {item.name}
+                            </p>
                           </div>
-                          <p className="m-0 font-bold py-2 line-clamp-2">
-                            {item.name}
-                          </p>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
                   </Slide>
                 </div>
               </div>
@@ -161,24 +196,25 @@ const Home = () => {
                       indicators={true}
                       duration={1500}
                     >
-                      {HomePage.faculties.map((item, index) => {
-                        return (
-                          <div className="flex flex-col items-center justify-start p-2">
-                            <div className="min-h-[12rem]">
-                              <img
-                                src={item.thumbnail}
-                                className="object-cover w-full mx-auto"
-                              />
+                      {faculty.length > 0 &&
+                        faculty.map((item, index) => {
+                          return (
+                            <div className="flex flex-col items-center justify-start p-2">
+                              <div className="min-h-[12rem]">
+                                <img
+                                  src={item.thumbnail}
+                                  className="object-cover w-full mx-auto"
+                                />
+                              </div>
+                              <p className="m-0 text-xl font-bold text-orange-400 py-2 line-clamp-2 text-center">
+                                {item.name}
+                              </p>
+                              <p className="m-0 text-base font-[400] line-clamp-2">
+                                {item.email}
+                              </p>
                             </div>
-                            <p className="m-0 text-xl font-bold text-orange-400 py-2 line-clamp-2 text-center">
-                              {item.name}
-                            </p>
-                            <p className="m-0 text-base font-[400] line-clamp-2">
-                              {item.email}
-                            </p>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
                     </Slide>
                   </div>
                 </div>
