@@ -34,18 +34,22 @@ const RegisterAccountComponent = ({ onMoveRegister }) => {
   });
 
   const HandleSubmitFrom = async (data) => {
-    if (data.password != data.confirmPassword) {
-      return toast.success("password and confirm password do not match.");
-    } else {
-      await axiosConfig
-        .post("/api/User/SignUp", data)
-        .then((res) => {
-          reset();
-          toast.success("Register success");
-        })
-        .catch((res) => {
-          toast.error(res.response.data.title);
-        });
+    try {
+      if (data.password != data.confirmPassword) {
+        return toast.success("password and confirm password do not match.");
+      } else {
+        await axiosConfig
+          .post("/api/User/SignUp", data)
+          .then((res) => {
+            reset();
+            toast.success("Register success");
+          })
+          .catch((res) => {
+            toast.error(res.response);
+          });
+      }
+    } catch (e) {
+      toast.error("Resgister account student error !");
     }
   };
 

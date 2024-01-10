@@ -18,6 +18,23 @@ const Home = () => {
   const [faculty, setListFaculty] = useState([]);
 
   const [loading, setLoading] = useState(true);
+  const whyToChoose = [
+    {
+      title: "Industry-Relevant Curriculum",
+      value:
+        "Our programs are designed to align with current industry needs, ensuring you acquire skills that matter in the real world.",
+    },
+    {
+      title: "Global Networking",
+      value:
+        "Connect with a diverse community of students and professionals, fostering a global perspective and opening doors to international opportunities.",
+    },
+    {
+      title: "Innovative Learning Methods",
+      value:
+        "Experience engaging and interactive learning methods that go beyond traditional lectures, promoting creativity and critical thinking.",
+    },
+  ];
 
   const HandleSubmitFrom = async () => {
     await axiosConfig
@@ -96,24 +113,30 @@ const Home = () => {
               </Slide>
             </div>
             <div className="mt-1 pb-4 bg-[#ee661c]">
-              <div className="text-center py-6 lg:text-3xl md:text-2xl sm:text-xl text-base font-bold text-white z">
+              <div className="text-center py-6 lg:text-3xl md:text-2xl sm:text-xl text-base font-bold text-white z bg-[#ee661c]">
                 WHY SHOULD YOU CHOOSE ITM COLLEGE?
               </div>
-              <div className="flex justify-center items-center flex-wrap">
-                {HomePage.whyToChooseUs.map((item) => {
-                  return (
-                    <img
-                      className="h-56 px-4"
-                      src="https://aptech.fpt.edu.vn/wp-content/uploads/2022/12/icon-ma%CC%80u-01.png"
-                    />
-                  );
-                })}
+              <div className="container">
+                <div className="flex justify-between items-center flex-wrap">
+                  {whyToChoose.map((item) => {
+                    return (
+                      <div className="w-96">
+                        <p className="text-ceter w-full lg:text-xl font-bold text-white md:text-xl sm:text-base text-sm">
+                          {item.title}
+                        </p>
+                        <p className="text-start font-[500] lg:text-base md:text-base sm:text-base text-sm">
+                          {item.value}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
             <div className="container mx-auto">
-              <div className="my-6">
-                <p className="text-center lg:text-3xl md:text-2xl sm:text-xl text-base font-bold text-orange-400 uppercase m-0">
+              <div>
+                <p className="text-center lg:text-3xl md:text-2xl sm:text-xl text-base font-bold text-orange-400 uppercase m-0 py-4">
                   Learn about departments
                 </p>
                 <div className="flex justify-center items-center flex-wrap gap-3 mt-2">

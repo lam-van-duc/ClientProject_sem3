@@ -128,25 +128,7 @@ const RegisterOnline = () => {
                   <ErrorText text={errors.gender?.message} />
                 </div>
               </div>
-              <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2  grid-cols-1 gap-3">
-                <div className="form-input">
-                  <label className="font-bold">Father name</label>
-                  <input
-                    {...register("fatherName")}
-                    type="text"
-                    name="fatherName"
-                  />
-                  <ErrorText text={errors.fatherName?.message} />
-                </div>
-                <div className="form-input">
-                  <label className="font-bold">Mother name</label>
-                  <input
-                    {...register("motherName")}
-                    type="text"
-                    name="motherName"
-                  />
-                  <ErrorText text={errors.motherName?.message} />
-                </div>
+              <div className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2  grid-cols-1 gap-3">
                 <div className="form-input">
                   <label className="font-bold">Residential address(*)</label>
                   <input
@@ -177,6 +159,27 @@ const RegisterOnline = () => {
                       })}
                   </select>
                   <ErrorText text={errors.admissionFor?.message} />
+                </div>
+              </div>
+              <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-3">
+                <div className="form-input">
+                  <label className="font-bold">Father name</label>
+                  <input
+                    {...register("fatherName")}
+                    type="text"
+                    name="fatherName"
+                  />
+                  <ErrorText text={errors.fatherName?.message} />
+                </div>
+
+                <div className="form-input">
+                  <label className="font-bold">Mother name</label>
+                  <input
+                    {...register("motherName")}
+                    type="text"
+                    name="motherName"
+                  />
+                  <ErrorText text={errors.motherName?.message} />
                 </div>
               </div>
               <div className="form-input">

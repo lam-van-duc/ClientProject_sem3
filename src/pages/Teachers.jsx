@@ -21,7 +21,6 @@ const Teachers = () => {
         .get(`/api/Course?page=${1}&limit=${3}`)
         .then((res) => {
           setListCourse(res.data.response.data);
-          setTotalItem(res.data.response.totalItem);
         })
         .catch((res) => {
           toast.error(res.message);
@@ -37,6 +36,7 @@ const Teachers = () => {
         .get(`/api/Faculty?page=${page}&limit=${limit}`)
         .then((res) => {
           setListFaculty(res.data.response.data);
+          setTotalItem(res.data.response.totalItem);
         })
         .catch((res) => {
           toast.error(res.message);
@@ -63,7 +63,7 @@ const Teachers = () => {
             {ListFaculty.map((item, index) => {
               return (
                 <TeacherComponent
-                  image={item.image}
+                  image={item.thumbnail}
                   name={item.name}
                   email={item.email}
                   id={item.id}

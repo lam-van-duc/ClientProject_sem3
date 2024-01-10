@@ -94,14 +94,14 @@ const Courses = () => {
       <div className="container mx-auto mb-4">
         <h3 className="flex flex-row items-center justify-center">
           <b className="flex-1 bg-gray-300 h-1"></b>
-          <span className="mx-4">Teacher</span>
+          <span className="mx-4">Faculty</span>
           <b className="flex-1 bg-gray-300 h-1"></b>
         </h3>
         <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2  gap-4 mb-4">
           {ListFaculty.map((item, index) => {
             return (
               <TeacherComponent
-                image={item.image}
+                image={item.thumbnail}
                 name={item.name}
                 email={item.email}
                 id={item.id}

@@ -16,6 +16,7 @@ const DepartmentDetail = () => {
           setLoading(false);
 
           setDepartment(res.data.response);
+          console.log(res.data.response);
         })
         .catch((res) => {
           setLoading(false);
@@ -39,9 +40,7 @@ const DepartmentDetail = () => {
             name={"Department Detail"}
             imageBackground={Department.thumbnail}
           ></HeaderTitleDetailsComponent>
-          <div className="container mx-auto">
-            {parse(Department.description)}
-          </div>
+          <div className="container mx-auto">{parse(Department.response)}</div>
         </div>
       ) : (
         <div className="h-[100vh]"></div>

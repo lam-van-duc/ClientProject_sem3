@@ -11,7 +11,7 @@ const TeacherComponent = (props) => {
       className="border border-gray-300 item-teacher rounded-md hover:bg-orange-400 hover:text-white hover:cursor-pointer"
       onClick={() => showDetailTeacher(props.id, props.teacher)}
     >
-      <div className="h-[15rem] min-w-[20rem] overflow-hidden rounded-t-md">
+      <div className="h-[15rem] overflow-hidden rounded-t-md">
         <img src={props.image} className="object-contain w-full" />
       </div>
       <div className="h-[6rem] p-2">
